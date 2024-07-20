@@ -1,0 +1,48 @@
+<div class="modal-body">
+
+    <div class="form-box">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+        <form class="review-form" *ngIf="currentUser" [formGroup]='formGroup' id="review-form" (ngSubmit)="submitReview()" novalidate>
+            <div class="form-group">
+                <label>Your rating</label>
+                <div class="reviews-counter">
+                    <div class="rate">
+                        <input type="radio" formControlName='rating' id="star5" [checked]="selectedRating==5" name="rating" value="5" />
+                        <label (click)="changeRating(5)" title="Rating 5">5 stars</label>
+                        <input type="radio" id="star4" name="rating" formControlName='rating' value="4" [checked]="selectedRating==4" />
+                        <label (click)="changeRating(4)" title="Rating 4">4 stars</label>
+                        <input type="radio" id="star3" name="rating" formControlName='rating' value="3" [checked]="selectedRating==3" />
+                        <label (click)="changeRating(3)" title="Rating 3">3 stars</label>
+                        <input type="radio" id="star2" name="rating" formControlName='rating' value="2" [checked]="selectedRating==2" />
+                        <label (click)="changeRating(2)" title="Rating 2">2 stars</label>
+                        <input type="radio" id="star1" name="rating" formControlName='rating' value="1" [checked]="selectedRating==1" />
+                        <label (click)="changeRating(1)" title="Rating 1">1 star</label>
+                    </div>
+                    <span class="kd_error d-block" *ngIf="f.rating && f.rating.invalid && f.rating.touched ">Please select rating</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Your message</label>
+                <textarea class="form-control" rows="10" formControlName='comment'></textarea>
+                <span class="kd_error d-block" *ngIf="f.comment && f.comment.invalid && f.comment.touched ">Please write a comment</span>
+                
+            </div>
+            <!-- <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="" class="form-control" placeholder="Name*">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="" class="form-control" placeholder="Email Id*">
+                    </div>
+                </div>
+            </div> -->
+            <button class="round-black-btn" type="submit">Submit Review &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                style="font-size:20px"></i></button>
+        </form>
+    </div>
+</div>

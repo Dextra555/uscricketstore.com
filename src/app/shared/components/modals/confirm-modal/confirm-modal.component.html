@@ -1,0 +1,25 @@
+<div class="modal-body">
+
+    <div class="form-box">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+        <div class="form-group mb-0">
+            <strong for="">Are you sure ?</strong>
+        </div>
+        <p>{{confirmMessage}}</p>
+        <div class="form-footer">
+            <div class="outer">
+                <button type="button" class="btn button" (click)="confirmed(type)" style="padding: 10px 0;">
+                    <span class="color_w">Yes</span>
+                </button>
+            </div>
+            <div class="outer ml-auto">
+                <button type="button" class="btn button bg-dark" (click)="closeModal()" style="padding: 10px 0;">
+                    <span class="color_w">Cancel</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

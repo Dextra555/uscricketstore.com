@@ -1,0 +1,165 @@
+<style>
+  select.form-control:not([size]):not([multiple]) {
+    height: initial;
+  }
+</style>
+<div class="main shop">
+  <molla-page-header [title]="pageTitle" subtitle="Shop"></molla-page-header>
+
+  <section class="kd_product_section">
+    <div class="own_container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="input-group kd_search_input_group">
+            <input
+              type="text"
+              class="form-control"
+              (keyup)="searchChanged($event)"
+              [(ngModel)]="keyword"
+              list="searchedItems"
+              placeholder="Search for the best deal"
+              style="width: 40%"
+            />
+            <datalist id="searchedItems">
+              <option *ngFor="let c of suggestions" [value]="c.name">
+                {{ c.name }}
+              </option>
+            </datalist>
+
+            <ng-select
+              required
+              (change)="getSelectedCat($event)"
+              [items]="AllCategories"
+              bindLabel="name"
+              bindValue="slug"
+              placeholder="All Categories"
+              appendTo="body"
+              [searchable]="true"
+            >
+            </ng-select>
+            <div class="input-group-prepend">
+              <button
+                type="button"
+                class="btn btn_orange color_w font2"
+                (click)="search()"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-4 d-none d-md-block">
+          <div class="page_title">
+            <h3>Clearance Sale</h3>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <nav
+            class="d-flex flex-row-reverse align-items-center h-100"
+            aria-label="breadcrumb"
+          >
+            <ol class="breadcrumb kd_breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Clearance Sale
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-content bkg_img kd_section">
+    <div class="own_container">
+      <div class="row">
+        <div
+          class="col-lg-9 skeleton-body sekl-shop-products"
+          [class.loaded]="loaded"
+        >
+          <div class="card-product-header">
+            <div class="form-inline">
+              <span class="mr-md-auto">
+                Showing
+                <span>{{ products.length }} of {{ totalCount }}</span>
+                Products</span
+              >
+              <select
+                name="sortby"
+                id="sortby"
+                class="form-control"
+                (change)="changeOrderBy($event)"
+                [value]="orderBy"
+              >
+                <option value="popular">Most popular</option>
+                <option value="latest">Latest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="highest_price">Highest price first</option>
+                <option value="lowest_price">Lowest price first</option>
+              </select>
+            </div>
+          </div>
+          <molla-new-collection-shop [products]="products" [loaded]="loaded">
+          </molla-new-collection-shop>
+
+          <div
+            class="loadmore-btn text-center"
+            *ngIf="totalPages > currentPage"
+          >
+            <div class="btn button" (click)="loadMoreData()">
+              <div class="text font1">
+                Load more
+                <i
+                  *ngIf="showmoreloading"
+                  class="fa fa-spinner fa-spin"
+                  style="font-size: 20px"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside
+          class="col-lg-3 skel-shop-sidebar order-lg-first skeleton-body"
+          [class.loaded]="firstLoad"
+        >
+          <div *ngIf="!firstLoad; else sidebarLoaded">
+            <div class="skel-widget"></div>
+            <div class="skel-widget"></div>
+            <div class="skel-widget"></div>
+            <div class="skel-widget"></div>
+          </div>
+          <ng-template #sidebarLoaded>
+            <molla-shop-sidebar-one
+              [minPrice]="minPrice"
+              [maxPrice]="maxPrice"
+              [parentCategory]="parentCategory"
+              [currentCat]="currentCat"
+              [shopData]="shopData"
+              [toggle]="toggle"
+              [totalProducts]="totalProducts"
+              [products]="products"
+            >
+            </molla-shop-sidebar-one>
+
+            <button
+              class="sidebar-fixed-toggler"
+              (click)="toggleSidebar()"
+              *ngIf="toggle"
+            >
+              <i class="icon-cog"></i>
+            </button>
+
+            <div class="sidebar-filter-overlay" (click)="hideSidebar()"></div>
+          </ng-template>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>

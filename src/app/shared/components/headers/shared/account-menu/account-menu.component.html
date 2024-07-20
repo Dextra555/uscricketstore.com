@@ -1,0 +1,100 @@
+<div class="dropdown account-dropdown">
+  <a
+    *ngIf="(currentUser && currentUser?.avatar) || !currentUser"
+    href="javascript:;"
+    class="dropdown-toggle"
+    role="button"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+    data-display="static"
+    class="wishlist-link"
+  >
+    <img
+      src="{{
+        currentUser && currentUser?.avatar
+          ? currentUser?.avatar
+          : assetPath+'assets/images/user.png'
+      }}"
+      width="30"
+    />
+    <i
+      class="fa fa-chevron-down"
+      style="font-size: 14px; margin-left: 10px"
+    ></i>
+  </a>
+
+  <a
+    *ngIf="currentUser && !currentUser?.avatar"
+    href="javascript:;"
+    class="dropdown-toggle"
+    role="button"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+    data-display="static"
+    class="wishlist-link"
+  >
+    <span class="avtarStyle">{{ userName }}</span>
+    <i
+      class="fa fa-chevron-down"
+      style="font-size: 14px; margin-left: 10px"
+    ></i>
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-right kd_dropdown" *ngIf="currentUser">
+    <li class="dropdown-user-info ethe" style="padding: 20px 10px 10px">
+      <div class="d-flex">
+        <img
+          *ngIf="(currentUser && currentUser?.avatar) || !currentUser"
+          _ngcontent-anx-c58=""
+          class="gs_dropdown_profile"
+          src="{{
+            currentUser && currentUser?.avatar
+              ? currentUser?.avatar
+              : assetPath+'assets/images/user.png'
+          }}"
+          width="50"
+        />
+        <span
+          class="dropdownAvtaar"
+          *ngIf="currentUser && !currentUser?.avatar"
+          >{{ userName }}</span
+        >
+        <div>
+          <p
+            style="
+              margin-left: 20px;
+              color: #000;
+              font-size: 20px !important;
+              font-weight: 600;
+              line-height: 0;
+              margin-top: 10px;
+            "
+          >
+            {{ currentUser?.name }}
+          </p>
+          <p style="margin-left: 20px; color: #000">{{ currentUser?.email }}</p>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a class="dropdown-item" routerLink="my-account">
+        <i class="fas fa-tachometer-alt"></i> My Account</a
+      >
+    </li>
+    <!-- <li><a class="dropdown-item" routerLink="my-account">
+        <img src="{{currentUser && currentUser?.avatar ? currentUser?.avatar:'{{assetPath}}assets/images/user.png'}}" class="dowpdown-user-img"/> My Account</a></li> -->
+    <li>
+      <a class="dropdown-item" routerLink="/orders"
+        ><i class="fas fa-shopping-bag"></i> My Orders</a
+      >
+    </li>
+    <li>
+      <a class="dropdown-item" href="javascript:;" (click)="logout()"
+        ><i class="fas fa-sign-out-alt"></i> Logout</a
+      >
+    </li>
+  </ul>
+</div>
+<!-- '{{assetPath}}assets/images/user.png' -->

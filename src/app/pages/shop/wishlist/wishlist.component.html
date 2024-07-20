@@ -1,0 +1,76 @@
+<div class="main">
+<section>
+    <molla-page-header title="Wishlist" subtitle="Shop"></molla-page-header>
+    <div class="own_container">
+        <div class="row">
+            <div class="col-md-4  d-none d-md-block">
+                <div class="page_title">
+                    <h3>Wishlist</h3>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <nav class="d-flex flex-row-reverse align-items-center h-100" aria-label="breadcrumb">
+                    <ol class="breadcrumb kd_breadcrumb">
+                      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div>
+    </div>
+  </section>
+  <style>
+  
+  
+  </style>
+  <section class="bkg_img kd_section">
+     <div class="own_container">
+        <div style="background-color: #fff; padding: 20px;">
+          <div class="row">
+            <div class="col-md-3">
+              <molla-user-sidebar></molla-user-sidebar>
+            </div>
+            <div class="col-md-9 pl50">
+              <div class="row">
+                <div class="col-md-12 wishlist-page">
+                    <!-- <div *ngIf="loaded && wishItems.length == 0 else wishlistBlock">
+                        <div class="heading">
+                            <h2>Wishlist</h2>
+                        </div>
+                        <div class="text-center">
+                            <i class="icon-shopping-cart wishlist-empty d-block" style="font-size: 15rem; line-height: 1"></i>
+                            <span class="d-block mt-2">No products found</span>
+                        </div>
+                    </div>
+                    <ng-template #wishlistBlock> -->
+                        <div class="heading">
+                            <h2>Wishlist</h2>
+                        </div>
+                        <div>
+                            <molla-new-collection-shop [products]="items" [wishEvent]="true" [loaded]="loaded">
+                            </molla-new-collection-shop>
+                            <!-- <div class="wishlist-share">
+                                <div class="social-icons social-icons-sm mb-2">
+                                    <label class="social-label">Share on:</label>
+                                    <a href="javascript:;" class="social-icon" title="Facebook"><i class="icon-facebook-f"></i></a>
+                                    <a href="javascript:;" class="social-icon" title="Twitter"><i class="icon-twitter"></i></a>
+                                    <a href="javascript:;" class="social-icon" title="Instagram"><i class="icon-instagram"></i></a>
+                                    <a href="javascript:;" class="social-icon" title="Youtube"><i class="icon-youtube"></i></a>
+                                    <a href="javascript:;" class="social-icon" title="Pinterest"><i class="icon-pinterest"></i></a>
+                                </div>
+                            </div> -->
+                        </div>
+                    <!-- </ng-template> -->
+                </div>
+  
+  
+              </div>
+            </div>
+          </div>
+        </div>
+     </div>
+  </section>
+  
+  </div>
+  
+

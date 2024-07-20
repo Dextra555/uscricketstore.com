@@ -1,0 +1,16 @@
+<div class="page-wrapper">
+  <molla-header
+    [containerClass]="containerClass"
+    *ngIf="showHeaderFooter"
+  ></molla-header>
+
+  <div [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+
+  <molla-footer
+    *ngIf="showHeaderFooter"
+    [containerClass]="containerClass"
+    [isBottomSticky]="isBottomSticky"
+  ></molla-footer>
+</div>

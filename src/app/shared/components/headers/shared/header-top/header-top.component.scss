@@ -1,0 +1,11 @@
+.container::after {
+  display: none !important;
+}
+
+.kd_top_right {
+  ul {
+    display: flex;
+    align-items: baseline;
+    margin: 0;
+  }
+}

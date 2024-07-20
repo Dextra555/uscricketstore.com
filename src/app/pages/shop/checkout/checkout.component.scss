@@ -1,0 +1,655 @@
+.btn.button-outline {
+  border: 1px solid #eaeaea;
+  min-width: 200px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+.btn.button-outline + img {
+  margin-bottom: 10px;
+}
+
+.ng-touched.ng-invalid {
+  border-color: #ff3c3c;
+}
+
+ng-select.ng-touched.ng-invalid {
+  border-color: #ff3c3c;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#Layer_1 {
+  fill: #fff;
+  background: #000;
+  border-radius: 50px;
+  padding: 5px;
+  margin: auto 10px;
+  width: 94%;
+  cursor: pointer;
+}
+
+#paypal {
+  cursor: pointer;
+  height: 40px;
+  width: 94%;
+  padding: 5px;
+  border: 2px solid #002f84;
+  margin: 15px 10px;
+  border-radius: 50px;
+}
+
+// .paypal-spinner-3 {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 50px;
+//   margin: 0px 8px 14px;
+//   padding: 7px;
+//   background: #ffd041;
+
+//   #paypalLater {
+//     cursor: pointer;
+//     height: 21px;
+//   }
+
+//   span {
+//     color: #000;
+//     font-weight: 600;
+//     padding-left: 5px;
+//   }
+// }
+
+#stripe {
+  cursor: pointer;
+  height: 40px;
+  width: 94%;
+  background: #646fde;
+  fill: #fff;
+  margin: 0 10px 0 10px;
+  border-radius: 50px;
+}
+
+.cardsImg {
+  display: flex;
+  img {
+    margin: 5px;
+    height: 40px;
+  }
+}
+
+.showAddress-box {
+  height: auto;
+  margin: 20px 25px 0;
+  padding: 15px;
+  border: 1px solid #ff3c3c;
+  position: relative;
+
+  .custom-control-input {
+    background-color: #ff3c3c !important;
+    color: #fff !important;
+    accent-color: #ff3c3c;
+    opacity: 1;
+    position: absolute;
+    top: 10px;
+    z-index: 99;
+    right: 10px;
+  }
+}
+
+.paypal-spinner {
+  i.fa.fa-spinner.fa-spin {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    color: #002f84;
+  }
+}
+
+.paypal-spinner-2 {
+  i.fa.fa-spinner.fa-spin {
+    position: absolute;
+    right: 20px;
+    color: #fff;
+    top: 10px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .paypal-spinner,
+  .paypal-spinner-2 {
+    text-align: center;
+  }
+  #Layer_1,
+  #paypal,
+  .paypal-spinner-3 {
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  form .kd_error {
+    margin-top: 0 !important;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .ng-select {
+    margin-bottom: 0 !important;
+  }
+  ::ng-deep .ng-select {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #Layer_1,
+  #paypal,
+  .paypal-spinner-3 {
+    width: 100%;
+  }
+}
+
+.slimscroll-wrapper {
+  height: auto !important;
+}
+// yugendran
+.cart-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 1px solid #ccc;
+}
+
+.cart-img-new {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  object-fit: contain;
+}
+
+.cart-discount-new {
+  max-width: 100%;
+}
+
+.summary-new-cart {
+  padding: 1rem 1rem 1rem;
+  margin-bottom: 2rem;
+  border-radius: 0.25rem;
+  background: #FFF;
+  height: auto !important;
+  position:sticky;
+  top:2rem;
+  box-shadow: 0px 2px 4px 0px rgba(157, 157, 157, 0.10), 0px 7px 7px 0px rgba(157, 157, 157, 0.09), 0px 15px 9px 0px rgba(157, 157, 157, 0.05), 0px 27px 11px 0px rgba(157, 157, 157, 0.01), 0px 42px 12px 0px rgba(157, 157, 157, 0.00);
+}
+
+.summary-new-cart span {
+  font-size: 1.187rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.summary-title{
+  font-weight: 600;
+}
+
+.product-new {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background: #FFF;
+  box-shadow: 0px 2px 4px 0px rgba(157, 157, 157, 0.10), 0px 7px 7px 0px rgba(157, 157, 157, 0.09), 0px 15px 9px 0px rgba(157, 157, 157, 0.05), 0px 27px 11px 0px rgba(157, 157, 157, 0.01), 0px 42px 12px 0px rgba(157, 157, 157, 0.00);
+  position: relative;
+}
+
+.grand-total {
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+
+
+.item-counter {
+  border-radius: 0.25rem;
+  border: 1px solid #FF3C3C;
+  background: rgba(249, 249, 249, 0.50);
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .product-new {
+    padding: 1rem 0rem;
+  }
+
+  .item-counter {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .item-counter .qty {
+    width: 33.3% !important;
+  }
+
+  .item-counter .qtyminus,
+  .item-counter .qtyplus {
+    width: 33.3% !important;
+  }
+
+  .large-text {
+    top: -4rem !important;
+    right: 1rem !important;
+  }
+
+  .paypal-btn-div{
+    display: block !important;
+    text-align: center;
+  }
+
+  .paypal-btn ,.paypal-btn-2{
+    margin-bottom: 1rem;
+    width: 45% !important;
+  }
+
+  .paypal-btn svg ,.paypal-btn-2 svg{
+    width: 80% !important;
+  }
+
+
+}
+
+.item-counter .qty {
+  width: 35%;
+  margin: 0.5rem;
+  border: none;
+}
+
+.item-counter input {
+  text-align: center;
+}
+
+.item-counter .qtyplus,
+.item-counter .qtyminus {
+  padding: 6px 15px;
+  color: #FF3C3C;
+  font-weight:500;
+  margin: 0.5rem;
+  background-color: #ECEFF1;
+  cursor: pointer;
+}
+
+.item-counter .qtyplus:hover {
+  background-color: #FF3C3C;
+  transition: background-color 0.5s ease-out 100ms;
+  color: #fff !important;
+}
+
+
+.item-counter .qtyminus:hover {
+  background-color: #FF3C3C;
+  color: #fff !important;
+  transition: background-color 0.5s ease-out 100ms;
+}
+
+.combinations {
+  margin-top: 1rem;
+}
+
+.product-new .product-title {
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.large-text {
+  color: #333;
+  font-family: Poppins;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.04125rem;
+  position: absolute;
+  top: -5.2rem !important;
+  right: 1rem !important;
+}
+
+.img-container{
+  display:block;
+  height: 102px;
+}
+
+.clear-btn {
+  position: absolute;
+  top: -6.3rem;
+  right: 1.3rem;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  z-index: 2;
+}
+
+
+
+.accordion-box {
+  border: 1px solid #d9d9d9;
+  border-radius: 1.5rem;
+  padding: 1.5rem 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.accordion-title {
+  min-height: 3.5rem !important;
+  border-bottom: 1px solid #D3D7DA;
+  border-width: 2px;
+}
+
+.accordion-title h5 {
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  padding-bottom: 0.5rem;
+}
+
+.accordion-body-title {
+  color: #333;
+  font-family: Poppins;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.0275rem;
+}
+
+.accordion-btn {
+  width: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  border: 1px solid #FF3C3C;
+  background: #F9F9F9;
+  color: #333333 !important;
+  cursor: pointer;
+}
+
+.accordion-btn:hover {
+  background-color: #FF3C3C;
+  color: #fff !important;
+}
+
+.custom-btn {
+  width: 25rem !important;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.cs-hr {
+  height: 1px;
+  border: 1px solid #D9D9D9;
+  width: 50%;
+  margin: 2rem;
+}
+
+.accordion-link {
+  font-family: Poppins;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: underline !important;
+  color: #FF3C3C !important;
+  line-height: normal;
+  letter-spacing: 0.0275rem;
+  cursor: pointer;
+}
+
+.options-new,
+.add-address-new {
+  cursor: pointer;
+}
+
+.address-options {
+  margin-left: 4rem;
+}
+
+.accordion-address-card-active {
+  color: #333;
+  border-radius: 0.5rem;
+  background-color: #FFECEC;
+  font-family: Poppins;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.0275rem;
+  margin: 1rem;
+}
+
+.accordion-address-card {
+  color: #333;
+  border-radius: 0.5rem;
+  background-color: #F9f9f9;
+  font-family: Poppins;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.0275rem;
+  margin: 1rem;
+}
+
+.button-hr-top {
+  border-top: 2px solid #D9D9D9;
+  border-width: 2px;
+  padding: 1rem;
+}
+
+.input-text {
+  color: #333;
+  font-family: Poppins;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.textarea-new.form-control {
+  min-height: 6.5rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+
+
+/* Style the switch container */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* Hide the default checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Style the slider (thumb) */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #F7D0D0;
+  /* Default background color of the switch */
+  transition: .4s;
+  border-radius: 34px;
+  /* Rounded corners */
+}
+
+/* Style the slider when it's checked (on) */
+.slider::before {
+  position: absolute;
+  content: '';
+  padding-left: 1rem;
+  height: 24px;
+  width: 24px;
+  left: 0px;
+  top: 0px;
+  background-color: #fff;
+  transition: .4s;
+  border-radius: 50%;
+  border: 1px solid #F7D0D0;
+  /* Rounded corners for the thumb */
+}
+
+/* Style the switch when it's checked (on) */
+.switch input:checked+.slider {
+  background-color: #FF3C3C;
+  /* Change background color when checked */
+  content: '';
+  text-align: left;
+}
+
+/* Move the thumb to the right when the switch is checked (on) */
+.switch input:checked+.slider::before {
+  transform: translateX(26px);
+  text-align: left;
+  content: '';
+}
+
+.guest-shipping-address {
+  color: #333;
+
+  font-family: Poppins;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.delivery-option-card {
+  margin: 1rem 0rem;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0.5px solid #D9D9D9;
+  background: #FFF;
+  box-shadow: 0px 1px 3px 0px rgba(217, 217, 217, 0.10), 0px 6px 6px 0px rgba(217, 217, 217, 0.09), 0px 13px 8px 0px rgba(217, 217, 217, 0.05), 0px 24px 10px 0px rgba(217, 217, 217, 0.01), 0px 37px 10px 0px rgba(217, 217, 217, 0.00);
+}
+
+
+.delivery-option-card p {
+  color: #333;
+  font-family: Poppins;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.p-red {
+  color: #FF3C3C !important;
+  padding-top: 1rem;
+}
+
+.paypal-btn {
+  width: 25rem;
+  border-radius: 0.25rem;
+  border: 2px solid #002F84;
+  background: rgba(249, 249, 249, 0.98);
+}
+
+.paypal-btn:hover {
+  border: 2px solid #FF3C3C;
+  background-color: #f9f9f9 !important;
+}
+
+.paypal-btn-2 {
+  width: 25rem;
+  border-radius: 0.25rem;
+  border: 0.5px solid #000;
+  background: #000;
+  cursor: pointer;
+}
+
+.paypal-btn-2:hover {
+  border: 2px solid #FF3C3C;
+}
+
+.add-new-address{
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  border: 1px solid #ff3c3c;
+  width: fit-content;
+  margin:1rem;
+  cursor: pointer;
+}
+
+.add-new-address:hover{
+  background-color: #ff3c3c;
+  transition: all 0.5s ease-out;
+  color:#fff;
+}
+
+.add-new-address:hover p, .add-new-address:hover p:hover{
+  transition: all 0.5s ease-out;
+  color:#fff;
+}
+
+.new-address-btn{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 8px;
+  cursor: pointer;
+}
+
+.default-shipping{
+  background-color: #f9f9f9;
+  border:1px solid #ff3c3c;
+  border-radius: 0.5rem;
+  color:#ff3c3c;
+  padding: 3px 8px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.address-modal .checkout-title{
+  font-size: 2rem;
+}
+
+.address-modal label{
+  margin-bottom: 0;
+}
+
+.address-modal form .kd_error{
+  position: relative;
+}
+
+.modal-body .close{
+  z-index: 1;
+}
+
+.delivery-option-card .icon-truck{
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.table.table-summary tbody td{
+  height: 50px;
+}

@@ -1,0 +1,12 @@
+<a *ngIf="loggedin" routerLink="/wishlist" class="wishlist-link" title="Wishlist">
+    <i class="fab fa-heart"></i>
+    <span class="wishlist-count">{{ wishcount }}</span>
+</a>
+<a *ngIf="!loggedin" href="javascript:;" (click)="modalService.showLoginModal()" class="wishlist-link" title="Wishlist">
+    <i class="fab fa-heart"></i>
+    <span class="wishlist-count">0</span>
+</a>
+<!-- <a routerLink="/shop/wishlist" class="wishlist-link" title="Wishlist">
+    <i class="fab fa-heart"></i>
+    <span class="wishlist-count">{{ wishlistService.wishlistQty | async }}</span>
+</a> -->

@@ -1,0 +1,113 @@
+<div class="dropdown cart-dropdown">
+  <a
+    href="javascript:;"
+    class="dropdown-toggle"
+    role="button"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+    data-display="static"
+  >
+    <i class="icon-shopping-cart"></i>
+    <span class="cart-count">{{ count }}</span>
+    <span class="cart-text font-weight-normal">$ {{ total().toFixed(2) }}</span>
+  </a>
+
+  <div
+    class="dropdown-menu dropdown-menu-right"
+    [ngClass]="{ 'text-center': cart && cart.length == 0 }"
+    *ngIf="cart"
+  >
+    <p *ngIf="cart && cart.length.length == 0; else elseBlock">
+      No products in the cart.
+    </p>
+
+    <ng-template #elseBlock>
+      <div class="dropdown-cart-products" *ngIf="cart">
+        <ng-container *ngFor="let product of cart">
+          <div
+            class="product justify-content-between"
+            [ngClass]="{ 'out-of-stock-product': isOutofStock(product) }"
+          >
+            <div class="opacity-div" *ngIf="isOutofStock(product)"></div>
+            <div class="product-cart-details">
+              <h4 class="product-title">
+                <a
+                  href="javascript:;"
+                  (click)="navigate(product)"
+                  >{{ product.name }}</a
+                >
+              </h4>
+
+              <span
+                class="cart-product-info"
+                *ngIf="
+                  product && product.product_type == 'lane';
+                  else elsePrice
+                "
+              >
+                <span class="cart-product-qty">People: {{ product.qty }}</span>
+                Price: ${{ product.lane_price.toFixed(2) }} Date:
+                {{ product.booking_date }}
+              </span>
+              <ng-template #elsePrice>
+                <span class="cart-product-info" *ngIf="product">
+                  <span class="cart-product-qty">{{ product.qty }}</span>
+                  x ${{ addOnTotal(product).toFixed(2) }}
+                </span>
+              </ng-template>
+
+              <ng-container *ngIf="isOutofStock(product)">
+                <div class="out-of-stock-msg">Item not available</div>
+              </ng-container>
+            </div>
+
+            <figure class="product-image-container">
+              <a
+                href="javascript:;"
+                (click)="navigate(product)"
+                class="product-image"
+              >
+                <img
+                  [src]="
+                    product.thumbnail
+                      ? product.thumbnail
+                      : assetPath+'assets/images/placeholder.jpg'
+                  "
+                  class="product-img"
+                  width="50"
+                  height="50"
+                />
+              </a>
+            </figure>
+
+            <a
+              href="javascript:;"
+              class="btn-remove"
+              title="Remove Product"
+              (click)="removeFromCart(product)"
+              ><i class="icon-close"></i
+            ></a>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="dropdown-cart-total">
+        <span>Total</span>
+
+        <span class="cart-total-price">$ {{ total().toFixed(2) }}</span>
+      </div>
+
+      <div class="dropdown-cart-action">
+        <a routerLink="/cart" class="btn btn-primary">View Cart</a>
+        <a
+          *ngIf="cart.length > 0"
+          href="javascript:;"
+          (click)="checkout()"
+          class="btn btn-outline-primary-2"
+          ><span>Checkout</span><i class="icon-long-arrow-right"></i
+        ></a>
+      </div>
+    </ng-template>
+  </div>
+</div>

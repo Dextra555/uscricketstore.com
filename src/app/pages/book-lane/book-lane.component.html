@@ -1,0 +1,182 @@
+<section
+  style="
+    min-height: 150px;
+    background: url('{{assetPath}}assets/images/istockphoto-1276613883-170667a.jpg')
+      no-repeat;
+    background-size: cover;
+  "
+>
+  <div class="bkg_overlay" style="background-color: rgba(0, 0, 0, 0.6)">
+    <div class="page_name">
+      <h2>{{ page?.title }}</h2>
+      <div>
+        <nav class="d-flex justify-content-center" aria-label="breadcrumb">
+          <ol class="breadcrumb kd_breadcrumb_red">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ page?.title }}
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<section
+  class="bkg_img kd_section"
+  *ngIf="booklane?.section_one?.block_1_top_title"
+>
+  <div class="own_container">
+    <div class="">
+      <p
+        class="font2 text-center font_s20 mb20"
+        [innerHtml]="booklane?.section_one?.block_1_top_title"
+      ></p>
+    </div>
+  </div>
+</section>
+<section
+  class="kd_section"
+  style="
+    background-image: url('{{assetPath}}assets/images/istockphoto-1276613883-1706671a.jpg');
+  "
+>
+  <div class="own_container">
+    <div class="section_box">
+      <div
+        class="section_heading section_heading_underline_center text-center"
+        *ngIf="booklane?.section_one?.block_1_title"
+      >
+        <h2 class="color_w">{{ booklane?.section_one?.block_1_title }}</h2>
+      </div>
+      <p
+        class="section_heading_s color_light_w text-center"
+        *ngIf="booklane?.section_one?.block_1_sub_title"
+      >
+        {{ booklane?.section_one?.block_1_sub_title }}
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="book_a_lane1 text-center">
+          <img src="{{assetPath}}assets/images/imgpsh_fullsize_anim (2).jpg" />
+          <h3
+            class="color_w book_lane_type_heading"
+            *ngIf="booklane?.section_one?.product_1_title"
+          >
+            {{ booklane?.section_one?.product_1_title }}
+          </h3>
+          <p *ngIf="booklane?.section_one?.product_1_sub_title">
+            {{ booklane?.section_one?.product_1_sub_title }}
+          </p>
+          <a
+            *ngIf="
+              booklane?.section_one?.product_1_button_title ||
+              booklane?.section_one?.product_1_btn_link
+            "
+            href="{{ booklane?.section_one?.product_1_btn_link }}"
+            class="book_a_lane2 btn btn-orange mt30"
+          >
+            {{ booklane?.section_one?.product_1_button_title }}
+            <img src="{{assetPath}}assets/images/stick-head-right-.svg" width="25px"
+          /></a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="book_lane_or">
+          <p>or</p>
+        </div>
+
+        <div class="book_lane_btn">
+          <a
+            class=""
+            style="float: left"
+            *ngIf="
+              booklane?.section_one?.product_1_button_title ||
+              booklane?.section_one?.product_1_btn_link
+            "
+            href="{{ booklane?.section_one?.product_1_btn_link }}"
+            ><img src="{{assetPath}}assets/images/stick-head-left.svg" width="25px" />
+            {{ booklane?.section_one?.product_1_button_title }}</a
+          >
+          <a
+            class=""
+            style="float: right"
+            *ngIf="
+              booklane?.section_one?.product_2_button_title ||
+              booklane?.section_one?.product_2_btn_link
+            "
+            href="{{ booklane?.section_one?.product_2_btn_link }}"
+          >
+            {{ booklane?.section_one?.product_2_button_title }}
+            <img src="{{assetPath}}assets/images/stick-head-right-.svg" width="25px"
+          /></a>
+          <div class="clearfix"></div>
+
+          <img src="{{assetPath}}assets/images/imgpsh_fullsize_anim (1).png" />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="book_a_lane1 text-center">
+          <img src="{{assetPath}}assets/images/imgpsh_fullsize_anim (1).jpg" />
+          <h3
+            class="color_w book_lane_type_heading"
+            *ngIf="booklane?.section_one?.product_2_title"
+          >
+            {{ booklane?.section_one?.product_2_title }}
+          </h3>
+          <p *ngIf="booklane?.section_one?.product_2_sub_title">
+            {{ booklane?.section_one?.product_2_sub_title }}
+          </p>
+          <a
+            *ngIf="
+              booklane?.section_one?.product_2_button_title ||
+              booklane?.section_one?.product_2_btn_link
+            "
+            href="{{ booklane?.section_one?.product_2_btn_link }}"
+            class="book_a_lane2 btn btn-orange mt30"
+          >
+            {{ booklane?.section_one?.product_2_button_title }}
+            <img src="{{assetPath}}assets/images/stick-head-right-.svg" width="25px"
+          /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="kd_section">
+  <div class="">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-5 d-flex align-items-center">
+        <div class="section_box mb20 p30">
+          <div
+            class="section_heading section_heading_underline_left"
+            *ngIf="booklane?.section_two?.title"
+          >
+            <h2 class=" ">{{ booklane?.section_two?.title }}</h2>
+          </div>
+          <div
+            class="section_description"
+            *ngIf="booklane?.section_two?.description"
+          >
+            <p [innerHtml]="booklane?.section_two?.description"></p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-6 only_desktop_view"
+        *ngIf="booklane?.section_two?.image"
+      >
+        <img style="width: 100%" src="{{ booklane?.section_two?.image }}" />
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .video_section {
+    padding: 150px 0;
+    background: url("{{assetPath}}assets/images/shutterstock_1472680616.webp") no-repeat;
+    background-size: cover;
+  }
+</style>

@@ -1,0 +1,53 @@
+<div class="main">
+    <section>
+      <molla-page-header title="pageTitle" subtitle="Shop"></molla-page-header>
+      <div class="own_container">
+        <div class="row">
+          <div class="col-md-6  d-none d-md-block">
+            <div class="page_title">
+              <h3>Payment Failed</h3>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <nav class="d-flex flex-row-reverse align-items-center h-100" aria-label="breadcrumb">
+              <ol class="breadcrumb kd_breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Payment Failed</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bkg_img kd_section">
+      <div class="own_container">
+        <div style="background-color: #fff; padding: 20px;">
+  
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="account_detail_form">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="cart-empty-page text-center">
+                                <i class=" far fa-frown-o"
+                                    style="line-height: 1; font-size: 15rem"></i>
+                                    <div class="mt-3"><h5>Payment aborted!</h5></div>
+                                <p class="px-3 py-2 cart-empty mb-3" *ngIf="!currentUser">Unable to process the order payment.</p>
+                                <p class="px-3 py-2 cart-empty mb-3" *ngIf="currentUser">If you want to process the payment again for the same order, please <a routerLink="/order/{{orderid}}">click here</a>.</p>
+                                <p class="return-to-shop mb-0" *ngIf="currentUser">
+                                  <a routerLink="/orders" class="btn btn-primary">View all Orders</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>

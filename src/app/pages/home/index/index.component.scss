@@ -1,0 +1,279 @@
+/* Base Styles */
+#myCarousel {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    color: white; 
+}
+.kd_section {
+    padding: 87px 0;
+}
+.josc{
+font-family: Roboto;
+font-size: 18px ;
+font-weight: 400;
+line-height: 27px;
+letter-spacing: 0.5px;
+text-align: left;
+color:#000 !important;
+padding-left:20px !important;
+
+}
+.sectioncontent {
+    padding-bottom: 166px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.bannertext {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0000;
+    margin-bottom: 20px;
+}
+.bannerptext {
+    font-size: 18px;
+    color: #000!important;
+    margin-bottom: 20px;
+    margin-top:42px;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff4500;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.bkg_overlay {
+    /* margin-bottom: 24px; */
+    padding-bottom: 25px;
+}
+.button:hover {
+    background-color: #e03e00;
+}
+img.banner3 {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    padding: 20px;
+}
+.page_name
+{
+    padding-left:20px;
+
+}
+.bannerptext
+{
+    font-family: Roboto;
+font-size: 24px;
+font-weight: 400;
+line-height: 36px;
+letter-spacing: 0.5px;
+text-align: left;
+
+
+}
+
+
+.bannertext
+{
+    text-transform: capitalize !important;
+    color:#000000!important;
+    float:left !important;
+    font-family: Roboto !important;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+    letter-spacing: 0.5px;
+
+}
+.section_heading h2 
+{
+    margin-top: 40px;
+   
+
+}
+.font2 {
+    font-family: Poppins, sans-serif !important;
+    text-transform: capitalize;
+}
+.imgtext {
+    float: right;
+    padding-bottom: 2rem;
+}
+
+
+
+.global_players_right {
+    position: relative; /* Ensure the container is positioned relative */
+  padding: 30px; /* Adjust padding as necessary */
+}
+.global_players_right img {
+   margin-top:0px;
+   margin-bottom: 0px; /* Ensure the image covers the entire container */
+    
+     /* Adjust padding as necessary */
+}
+.global_players_right:before {
+    content: "";
+    position: absolute;
+    width: 100% !important;
+    height: 99.81%;
+    top: 0;
+    left: 7%;
+    transform: skew(18.1deg);
+    background: #000;
+}
+.global_players_right:after {
+    content: "";
+    position: absolute;
+    width: 100% !important;
+    height: 96.9%;
+    top: 0;
+    left: -5%;
+  
+    transform: skew(9.1deg);
+    background: #000;
+   
+   
+}
+.section_box {
+    position: relative; /* Ensure the section box is positioned relative to its parent */
+    z-index: 2; /* Ensure content stays above the pseudo-element */
+}
+
+.section_description,
+.outer {
+    z-index: 3; /* Ensure these elements stay above the pseudo-element */
+}
+
+.global_players_left img {
+    width: 100%; /* Ensure the image covers the entire container */
+    height: auto;
+    top: -100px; 
+    position: relative;
+    margin-top: 0px;
+}
+.section_description p {
+    font-size: 14px;
+    text-align: justify;
+}
+
+.global_players_logo1{
+    width: 135px;
+    height: 135px;
+    position: absolute;
+    margin-top: -75px;
+    inset: 50% 0 0 50%;
+    margin-left: -114px;
+    background-color: #fff;
+    z-index: 99;
+}
+.global_players_logo {
+    width: 135px !important;
+    height: 135px !important;
+    position: absolute;
+    margin-top: -75px;
+    inset: 50% 0 0 50%;
+    margin-left: -22px !important;
+    background-color: #fff;
+    z-index: 99;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .global_players_right:before {
+        width: 70% !important; /* Adjust the width for smaller screens */
+        right: -15%; /* Adjust the position for smaller screens */
+    }
+    .global_players_logo1
+    {
+        display:none;
+    }
+    .josc {
+        padding-top: -85px;
+        margin-top: -23px;
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 27px;
+        letter-spacing: .5px;
+        /* text-align: left; */
+        color: #000 !important;
+        /* padding-left: 20px !important; */
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .bannertext {
+            text-align: center;
+            justify-content: center;
+            text-transform: capitalize !important;
+            color: #000 !important;
+            float: left !important;
+            font-family: Roboto !important;
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 48px;
+            letter-spacing: .5px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top: -58px;
+        }
+    
+    
+        .bannerptext{
+            font-family: Roboto;
+            font-size: 21px;
+            font-weight: 400;
+            margin-top: -44px;
+            line-height: 36px;
+            letter-spacing: .5px;
+            text-align: center;
+            justify-content: center;
+        }
+    .section_description p {
+        font-size: 14px;
+        text-align: justify;
+        width: 100%;
+    }
+    .global_players_left img {
+        display: none; /* Hide the image on smaller screens */
+    }
+
+    .global_players_left.only_mobile_view img {
+        display: block; /* Show the mobile-specific image */
+        width: 100%; /* Ensure the image covers the entire container */
+        height: auto;
+    }
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #myCarousel {
+        height: 70vh; /* Adjust height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #myCarousel {
+        height: 60vh; /* Further adjust height for very small screens */
+    }
+}
+
+
+
+
+
+
+  
+ 

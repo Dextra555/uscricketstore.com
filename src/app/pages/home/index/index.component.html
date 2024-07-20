@@ -1,0 +1,691 @@
+<!-- <section>
+  <div id="myCarousel" *ngIf="!loaded; else sliderBlock" class="carousel slide carousel-fade" data-ride="carousel"
+    style="background-image: url({{assetPath}}assets/images/main-banner.png)">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    </ol>
+    <div class="carousel-inner home-carousel-loading">
+      <div class="carousel-item active">
+        <div class="mask flex-center">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-7 col-12 order-md-1 order-2">
+                 <ngx-shimmer-loading class="heading-loading" [shape]="'square'"></ngx-shimmer-loading>
+                <ngx-shimmer-loading class="heading2-loading" [shape]="'square'"></ngx-shimmer-loading> 
+                <scremer-shimmer class="heading-loading" [shape]="'square'"></scremer-shimmer>
+                <scremer-shimmer class="heading2-loading" [shape]="'square'"></scremer-shimmer>
+                <div class="outer mt30 kd_slider_button">
+                   <ngx-shimmer-loading class="button-loading" [shape]="'square'">
+                  </ngx-shimmer-loading> 
+                  <scremer-shimmer class="button-loading" [shape]="'square'"></scremer-shimmer>
+                </div>
+              </div>
+              <div class="col-md-5 col-12 order-md-2 order-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <ng-template #sliderBlock>
+    <div id="myCarousel" *ngIf="sliders && sliders.length" class="carousel slide carousel-fade" data-ride="carousel"
+      style="background-image: url({{assetPath}}assets/images/main-banner.png)">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" *ngFor="let slider of sliders; let i = index"
+          attr.data-slide-to="{{ i }}" [ngClass]="i == 0 ? 'active' : ''"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let slider of sliders; let i = index" [ngClass]="i == 0 ? 'active' : ''">
+          <div class="mask flex-center">
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-md-7 col-12 order-md-1 order-2">
+                  <h4 class="slider_heading">
+                    {{ slider.slider_title.split("__")[0] }}<br />
+                    <span>{{
+                      substringBetween(slider.slider_title, "__", "__")
+                      }}</span>
+                  </h4>
+                  <div class="outer mt30 kd_slider_button">
+                    <a (click)="navigate(slider.slider_link)" class="btn button slider_button">
+                      <div class="text font2 font_s11">
+                        {{ slider.slider_button_text }}
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                 <div class="col-md-5 col-12 order-md-2 order-1">
+                  <img [src]="slider.customSliderImage" class="mx-auto" alt="slide" />
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </ng-template>
+
+</section> -->
+<section >
+  <div  style="background: url('{{assetPath}}assets/images/homebanner1.webp') no-repeat;background-size: cover;     margin-top: 11rem;
+    padding-top: 21rem; padding-bottom: 23rem;">
+    <div class="bkg_overlay" >
+      <!-- <p class="josc">Join Our Summer Camp</p>
+        <div class="page_name">
+          <h2 class="bannertext">Master Your Cricket Skills this Summer</h2><br>
+        </div>
+        <div class="sectioncontent">
+        <h3 class="bannerptext">CricKingdom presents Cricket Academy by Rohit Sharma</h3> -->
+        <div class="col-sm-6">
+          
+
+      </div>
+   <!-- </div> -->
+  </div>
+  <div class="imgtext">
+    <img src="{{assetPath}}assets/images/homebanright.webp" /> 
+    </div>
+
+    </div>
+</section>
+<main class="main home-page skeleton-body">
+  <section class="kd_product_section">
+    <div class="own_container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="input-group kd_search_input_group">
+            <input type="text" (keydown.enter)="search()" class="form-control" (keyup)="searchChanged($event)" [(ngModel)]="keyword"
+              list="searchedItems" placeholder="Search for the best deal" style="width: 40%" />
+            <datalist id="searchedItems">
+              <option *ngFor="let c of suggestions" [value]="c.name">
+                {{ c.name }}
+              </option>
+            </datalist>
+            <ng-select required (change)="getSelectedCat($event)" [items]="AllCategories" bindLabel="name"
+              bindValue="slug" placeholder="All Categories" appendTo="body" [searchable]="true">
+            </ng-select>
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn_orange color_w font2" (click)="search()">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <section class="bkg_img kd_section cats-loading" *ngIf="!loaded; else elseCatsBlock">
+      <div class="own_container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="section_box">
+              <div class="section_heading section_heading_underline_left">
+                <!-- <ngx-shimmer-loading style="height: 40px; width: 50%; display: block" [shape]="'square'">
+                </ngx-shimmer-loading>
+                <ngx-shimmer-loading style="height: 40px; width: 100%; display: block" [shape]="'square'">
+                </ngx-shimmer-loading> -->
+
+                <scremer-shimmer style="height: 40px; width: 50%; display: block" [shape]="'square'"></scremer-shimmer>
+                <scremer-shimmer style="height: 40px; width: 100%; display: block" [shape]="'square'"></scremer-shimmer>
+              </div>
+              <div class="section_description mt-2">
+                <!-- <ngx-shimmer-loading style="height: 20px; width: 100%; display: block" [shape]="'square'">
+                </ngx-shimmer-loading>
+                <ngx-shimmer-loading style="height: 20px; width: 100%; display: block" [shape]="'square'">
+                </ngx-shimmer-loading>
+                <ngx-shimmer-loading style="height: 20px; width: 100%; display: block" [shape]="'square'">
+                </ngx-shimmer-loading> -->
+                <scremer-shimmer style="height: 20px; width: 100%; display: block" [shape]="'square'"></scremer-shimmer>
+                <scremer-shimmer style="height: 20px; width: 100%; display: block" [shape]="'square'"></scremer-shimmer>
+                <scremer-shimmer style="height: 20px; width: 100%; display: block" [shape]="'square'"></scremer-shimmer>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-sm-3">
+                <div>
+                  <div class="accessories_list">
+                    <div class="accessorie_image">
+                      <!-- <ngx-shimmer-loading class="carousel-home-categories" [shape]="'square'">
+                      </ngx-shimmer-loading> -->
+                      <scremer-shimmer class="carousel-home-categories" [shape]="'square'"></scremer-shimmer>
+                    </div>
+                    <div class="accessorie_detail">
+                      <!-- <ngx-shimmer-loading style="height: 20px; width: 100%; display: block"
+                        [shape]="'square'"></ngx-shimmer-loading> -->
+                        <scremer-shimmer style="height: 20px; width: 100%; display: block" [shape]="'square'"></scremer-shimmer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div>
+                  <div class="accessories_list">
+                    <div class="accessorie_image">
+                      <!-- <ngx-shimmer-loading class="carousel-home-categories" [shape]="'square'">
+                      </ngx-shimmer-loading> -->
+                      <scremer-shimmer class="carousel-home-categories" [shape]="'square'"></scremer-shimmer>
+                    </div>
+                    <div class="accessorie_detail">
+                      <!-- <ngx-shimmer-loading style="height: 20px; width: 100%; display: block"
+                        [shape]="'square'"></ngx-shimmer-loading> -->
+                        <scremer-shimmer style="height: 20px; width: 100%; display: block" [shape]="'square'"></scremer-shimmer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div>
+                  <div class="accessories_list">
+                    <div class="accessorie_image">
+                      <!-- <ngx-shimmer-loading class="carousel-home-categories" [shape]="'square'">
+                      </ngx-shimmer-loading> -->
+                      <scremer-shimmer class="carousel-home-categories" [shape]="'square'"></scremer-shimmer>
+                    </div>
+                    <div class="accessorie_detail">
+                      <!-- <ngx-shimmer-loading style="height: 20px; width: 100%; display: block"
+                        [shape]="'square'"></ngx-shimmer-loading> -->
+                        <scremer-shimmer style="height: 20px; width: 100%; display: block" [shape]="'square'"></scremer-shimmer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div>
+                  <div class="accessories_list">
+                    <div class="accessorie_image">
+                      <!-- <ngx-shimmer-loading class="carousel-home-categories" [shape]="'square'">
+                      </ngx-shimmer-loading> -->
+                      <scremer-shimmer class="carousel-home-categories" [shape]="'square'"></scremer-shimmer>
+                    </div>
+                    <div class="accessorie_detail">
+                      <!-- <ngx-shimmer-loading style="height: 20px; width: 100%; display: block"
+                        [shape]="'square'"></ngx-shimmer-loading> -->
+                        <scremer-shimmer style="height: 20px; width: 100%; display: block" [shape]="'square'"></scremer-shimmer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <ng-template #elseCatsBlock>
+      <section class="bkg_img kd_section" *ngIf="popularCategories && popularCategories?.categories?.data">
+        <div class="own_container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="section_box">
+                <div class="section_heading section_heading_underline_left">
+                  <h2>{{ popularCategories?.title }}</h2>
+                </div>
+                <div class="section_description">
+                  <p>{{ popularCategories?.sub_title }}</p>
+                </div>
+                <!-- <div id="customNav"></div> -->
+                <div id="customNav">
+                  <button (click)="prevSlide()" type="button" role="presentation" class="owl-prev">
+                    <i class="icon-angle-left"></i>
+                  </button>
+                  <button (click)="nextSlide()" type="button" role="presentation" class="owl-next">
+                    <i class="icon-angle-right"></i>
+                    </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <owl-carousel-o #owlCar *ngIf="popularCategories && popularCategories?.categories?.data.length > 0" [options]="iconboxSlider">
+                <ng-template carouselSlide *ngFor="let item of popularCategories?.categories?.data">
+                  <div>
+                    <div class="accessories_list">
+                      <div class="accessorie_image">
+                        <a [routerLink]="['/category/', item.slug]">
+                          <img style="width: 100% !important" [src]="item?.banner ? item?.banner : assetPath + 'assets/images/placeholder.jpg'" />
+                        </a>
+                      </div>
+                      <div class="accessorie_detail">
+                        <a [routerLink]="['/category/', item.slug]">
+                          <h3>{{ item?.name }}</h3>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </owl-carousel-o>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </ng-template>
+
+    <section class="section_lets_play book-lane-loading" *ngIf="!loaded; else elseBookLaneBlock">
+      <div class="own_container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="section_lets_play_left">
+              <div class="section_box align-self-center w-50">
+                <div class="section_heading">
+                  <!-- <ngx-shimmer-loading class="main-heading-loading" [shape]="'square'">
+                  </ngx-shimmer-loading> -->
+                  <scremer-shimmer class="main-heading-loading" [shape]="'square'"></scremer-shimmer>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="section_lets_play_right">
+              <div class="section_box align-self-center w-100">
+                <div class="section_heading d-flex justify-content-end">
+                  <!-- <ngx-shimmer-loading direction="rtl" class="right-heading-loading"
+                    [shape]="'square'"></ngx-shimmer-loading> -->
+                    <scremer-shimmer direction="rtl" class="right-heading-loading" [shape]="'square'"></scremer-shimmer>
+                </div>
+                <div class="section-description d-flex flex-column align-items-end">
+                  <!-- <ngx-shimmer-loading direction="rtl" class="right-subheading-loading"
+                    [shape]="'square'"></ngx-shimmer-loading>
+                  <ngx-shimmer-loading direction="rtl" class="right-subheading-loading"
+                    [shape]="'square'"></ngx-shimmer-loading>
+                  <ngx-shimmer-loading direction="rtl" class="right-subheading-loading"
+                    [shape]="'square'"></ngx-shimmer-loading>
+                  <ngx-shimmer-loading direction="rtl" class="right-subheading-loading"
+                    [shape]="'square'"></ngx-shimmer-loading> -->
+                    <scremer-shimmer direction="rtl" class="right-subheading-loading" [shape]="'square'"></scremer-shimmer>
+                    <scremer-shimmer direction="rtl" class="right-subheading-loading" [shape]="'square'"></scremer-shimmer>
+                    <scremer-shimmer direction="rtl" class="right-subheading-loading" [shape]="'square'"></scremer-shimmer>
+                    <scremer-shimmer direction="rtl" class="right-subheading-loading" [shape]="'square'"></scremer-shimmer>
+                </div>
+                <div class="text-right mt-2 d-flex justify-content-end">
+                  <!-- <ngx-shimmer-loading direction="rtl" class="right-btn-loading" [shape]="'square'">
+                  </ngx-shimmer-loading> -->
+                  <scremer-shimmer direction="rtl" class="right-btn-loading" [shape]="'square'"></scremer-shimmer>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <ng-template #elseBookLaneBlock>
+      <section class="section_lets_play" *ngIf="bookLane"
+        [style.--data-before-image]="'url(' + bookLane?.background_image + ')'">
+        <div class="own_container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="section_lets_play_left">
+                <div class="section_box align-self-center">
+                  <div class="section_heading">
+                    <h2 class="color_w m-0 p-0">
+                      Enroll Now
+                      <img style="cursor: pointer" width="75" src="{{assetPath}}assets/images/play.png"
+                        (click)="showModal($event, bookLane?.embedUrl)" />
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="section_lets_play_right">
+                <div class="section_box align-self-center">
+                  <div class="section_heading">
+                    <h2 class="color_w">{{ bookLane?.title }}</h2>
+                  </div>
+                  <div class="section_description">
+                    <p class="color_w">{{ bookLane?.sub_title }}</p>
+                  </div>
+                  <div class="text-right">
+                    <a class="btn_border" routerLink="{{ bookLane.lane_link }}"><img
+                        src="{{assetPath}}assets/images/schedule-hour.svg" width="20px" />
+                      {{ bookLane?.button_title }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </ng-template>
+
+    <molla-new-collection [sliderOption]="homeProductsSlider" [products]="products ? products : []"
+      [title]="products ? products.title : null" [loaded]="loaded">
+    </molla-new-collection>
+  </div>
+  <section *ngIf="!loaded; else elseBannerBlobk">
+    <div class="row" style="margin: 0 0 0 0">
+      <div class="col-md-12 p-0">
+        <!-- <ngx-shimmer-loading class="home-banner-loading" [shape]="'square'"></ngx-shimmer-loading> -->
+        <scremer-shimmer class="home-banner-loading" [shape]="'square'"></scremer-shimmer>
+      </div>
+    </div>
+  </section>
+  <ng-template #elseBannerBlobk>
+    <section *ngIf="banner && banner.length > 0">
+      <div class="row" style="margin: 0 0 0 0">
+        <div class="col-md-12 p-0">
+          <a routerLink="{{ banner[0].link }}"><img class="w-100" src="{{ banner[0].img }}" /></a>
+        </div>
+      </div>
+    </section>
+  </ng-template>
+
+  <section class="global_players" *ngIf="!loaded; else elseCricketAcademy">
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-end"></div>
+      <div class="col-md-6">
+        <div class="global_players_right">
+          <div class="section_box">
+            <div class="section_heading section_heading_underline_left position-relative">
+              <!-- <ngx-shimmer-loading class="player-heading-loading" [shape]="'square'"></ngx-shimmer-loading>
+              <ngx-shimmer-loading class="player-heading2-loading" [shape]="'square'"></ngx-shimmer-loading> -->
+              <scremer-shimmer class="player-heading-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="player-heading2-loading" [shape]="'square'"></scremer-shimmer>
+            </div>
+            <div class="global_players_left only_mobile_view">
+              <img src="{{assetPath}}/globalsplayers2.png" />
+            </div>
+            <div class="section_description position-relative" style="z-index: 99; margin-top: 50px">
+              <scremer-shimmer class="player-subtitle-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="player-subtitle-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="player-subtitle-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="player-subtitle-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="player-subtitle-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="player-subtitle-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="player-subtitle-loading" [shape]="'square'"></scremer-shimmer>
+            </div>
+            <div class="position-relative" style="z-index: 99; margin-top: 50px">
+              <div class="outer">
+                <scremer-shimmer class="player-button-loading" [shape]="'square'"></scremer-shimmer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="global_players_logo1">
+      <img src="{{assetPath}}/globlaplayers.png" />
+    </div>
+  </section>
+  
+
+  
+
+
+
+  <ng-template #elseCricketAcademy>
+    <section class="global_players" *ngIf="cricketAcademy && cricketAcademy?.title">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="global_players_right">
+           
+            <div class="section_box">
+
+            
+             
+              <div class="section_heading section_heading_underline_left position-relative">
+               <br><br><br>
+                <h2 class="color_w font2">{{ cricketAcademy?.title }}</h2>
+              </div>
+              
+              <div class="section_description position-relative" style="z-index: 99; margin-top: 50px">
+               
+                <p style="color: #ccc">
+                  At our academy, we bring together elite coaching in partnership with CricKingdom Cricket Academy by Rohit Sharma. Our offerings mirror the quality provided by international cricketers and coaches, available through training camps, workshops, clinics, and personalized sessions. Our programs cater to players of all levels—beginners, intermediate, and advanced—ensuring comprehensive development in the technical, tactical, physical, and mental aspects of the game. Our highly experienced coaching team provides focused guidance across all areas of cricket, including batting, bowling, fielding, wicketkeeping, and strategic play. Tailored one-on-one coaching, enhanced with video analysis, helps players identify their strengths, address areas for improvement, and refine their techniques to perfection. Join us at CricKingdom to elevate your cricket skills under the guidance of elite professionals and achieve your full potential.
+                </p>
+              </div>
+              <div class="position-relative" style="z-index: 99; margin-top: 0px">
+                <div class="outer">
+                  <a routerLink="{{ cricketAcademy?.academy_link }}" class="btn button">
+                    <div class="text font2">
+                      Enroll Now
+                      <img src="{{assetPath}}assets/images/right-arrow.svg" width="30px" />
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="global_players_left">
+            <img src="{{assetPath}}/assets/images/global1.webp" />
+
+          </div>
+        </div>
+      </div>
+      <div class="global_players_logo">
+        <img [src]="cricketAcademy?.logo_image" />
+      </div>
+    </section>
+  </ng-template>
+  
+  <section class="global_players" *ngIf="cricketAcademy && cricketAcademy?.title">
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-end">
+        <div class="global_players_left only_desktop_view">
+          <img src="{{assetPath}}/assets/images/global2.webp" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="global_players_right">
+          <div class="section_box">
+            <div class="section_heading section_heading_underline_left position-relative"><br>
+              <h2 class="color_w font2">Summer Camp</h2>
+            </div>
+          
+            <div class="section_description position-relative" style="z-index: 99; margin-top: 50px">
+              <p style="color: #ccc">
+                Enroll your kids in the #1 cricket camp this summer—CricKingdom Cricket Academy by Rohit Sharma at the US Cricket Store. Our specialized program for children aged 6 to 9 and 10 to 14 combines advanced skill-building with fun games and interactive sessions to keep young cricket enthusiasts motivated throughout the summer. Participants will have the opportunity to polish their skills and learn the fundamentals of batting, bowling, fielding, and wicketkeeping under the expert guidance of experienced cricketers. Our camp provides a perfect blend of fun and skill development, ensuring a fantastic experience for all attendees. With a focus on creating a supportive and engaging environment, your kids will enjoy a summer filled with cricket excellence, fun, and new friendships. Enroll now for a memorable cricket adventure!
+              </p>
+            </div>
+            <div class="position-relative" style="z-index: 99; margin-top: 50px">
+              <div class="outer">
+                <a routerLink="{{ cricketAcademy?.academy_link }}" class="btn button">
+                  <div class="text font2">
+                    Enroll Now
+                    <img src="{{assetPath}}assets/images/right-arrow.svg" width="30px" />
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="global_players_logo1">
+      <img [src]="cricketAcademy?.logo_image" />
+    </div>
+  </section>
+  
+
+  <section class="bkg_img kd_section" *ngIf="!loaded; else videosBlock">
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-5 d-flex align-items-center">
+          <div class="section_box mb-2 mb-md-0 w-100 py-5">
+            <div class="section_heading">
+              <!-- <ngx-shimmer-loading class="heading-loading" [shape]="'square'">
+              </ngx-shimmer-loading> -->
+              <scremer-shimmer class="heading-loading" [shape]="'square'"></scremer-shimmer>
+            </div>
+            <div class="section_description">
+              <!-- <ngx-shimmer-loading class="subtitle-loading" [shape]="'square'">
+              </ngx-shimmer-loading>
+              <ngx-shimmer-loading class="subtitle-loading" [shape]="'square'">
+              </ngx-shimmer-loading>
+              <ngx-shimmer-loading class="subtitle-loading" [shape]="'square'">
+              </ngx-shimmer-loading> -->
+              <scremer-shimmer class="subtitle-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="subtitle-loading" [shape]="'square'"></scremer-shimmer>
+              <scremer-shimmer class="subtitle-loading" [shape]="'square'"></scremer-shimmer>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 d-lg-flex d-md-flex align-items-center">
+          <div class="video_list mob_mb50">
+            <!-- <ngx-shimmer-loading class="image-loading" [shape]="'square'">
+            </ngx-shimmer-loading> -->
+            <scremer-shimmer class="image-loading" [shape]="'square'"></scremer-shimmer>
+          </div>
+        </div>
+        <div class="col-md-2 col-12">
+          <div class="row no-gutters">
+            <div class="col-md-12 col-6">
+              <div class="video_list" style="margin-bottom: 50px">
+                <!-- <ngx-shimmer-loading class="image-loading" [shape]="'square'">
+                </ngx-shimmer-loading> -->
+                <scremer-shimmer class="image-loading" [shape]="'square'"></scremer-shimmer>
+              </div>
+            </div>
+            <div class="col-md-12 col-6">
+              <div class="video_list">
+                <!-- <ngx-shimmer-loading class="image-loading" [shape]="'square'">
+                </ngx-shimmer-loading> -->
+                <scremer-shimmer class="image-loading" [shape]="'square'"></scremer-shimmer>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-12">
+          <div class="row no-gutters">
+            <div class="col-md-12 col-6">
+              <div class="video_list" style="margin-bottom: 50px">
+                <!-- <ngx-shimmer-loading class="image-loading" [shape]="'square'">
+                </ngx-shimmer-loading> -->
+                <scremer-shimmer class="image-loading" [shape]="'square'"></scremer-shimmer>
+              </div>
+            </div>
+            <div class="col-md-12 col-6">
+              <div class="video_list">
+                <!-- <ngx-shimmer-loading class="image-loading" [shape]="'square'">
+                </ngx-shimmer-loading> -->
+                <scremer-shimmer class="image-loading" [shape]="'square'"></scremer-shimmer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #videosBlock>
+    <section class="bkg_img kd_section" *ngIf="videos && videos?.videos.length">
+      <div class="own_container">
+        <div class="row">
+          <div class="col-md-5 d-flex align-items-center">
+            <div class="section_box mb-2 mb-md-0">
+              <div class="section_heading">
+                <h2>{{ videos.title }}</h2>
+              </div>
+              <div class="section_description">
+                <p>{{ videos.sub_title }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 d-lg-flex d-md-flex align-items-center" *ngIf="videos?.videos && videos.videos[0]">
+            <div class="video_list mob_mb50">
+              <img [src]="videos.videos[0].customVideoImage" />
+              <div class="video_list_link" (click)="showModal($event, videos.videos[0].embedUrl)">
+                <a href="javascript:;">
+                  <i class="fa fa-play" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-12" *ngIf="videos?.videos && videos.videos[1]">
+            <div class="row no-gutters">
+              <div class="col-md-12 col-6">
+                <div class="video_list" style="margin-bottom: 50px">
+                  <img [src]="videos.videos[1].customVideoImage" />
+                  <div class="video_list_link">
+                    <a href="javascript:;" (click)="showModal($event, videos.videos[1].embedUrl)">
+                      <i class="fa fa-play" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-6">
+                <div class="video_list" *ngIf="videos?.videos && videos.videos[2]">
+                  <img src="{{ videos.videos[2].customVideoImage }}" />
+                  <div class="video_list_link">
+                    <a href="javascript:;" (click)="showModal($event, videos.videos[2].embedUrl)">
+                      <i class="fa fa-play" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-12" *ngIf="videos?.videos && videos.videos[3]">
+            <div class="row no-gutters">
+              <div class="col-md-12 col-6">
+                <div class="video_list" style="margin-bottom: 50px">
+                  <img [src]="videos.videos[3].customVideoImage" />
+                  <div class="video_list_link">
+                    <a href="javascript:;" (click)="showModal($event, videos.videos[3].embedUrl)">
+                      <i class="fa fa-play" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-6">
+                <div class="video_list" *ngIf="videos?.videos && videos.videos[4]">
+                  <img [src]="videos.videos[4].customVideoImage" />
+                  <div class="video_list_link">
+                    <a href="javascript:;" (click)="showModal($event, videos.videos[4].embedUrl)">
+                      <i class="fa fa-play" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-template>
+
+  <section class="kd_section section_newsletter">
+    <div class="own_container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="content">
+            <h2 class="font2"><b>SUBSCRIBE TO OUR NEWSLETTER</b></h2>
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Enter your email" />
+              <span class="input-group-btn">
+                <button class="btn font2" type="submit">Subscribe</button>
+              </span>
+            </div>
+            <p>
+              Subscribe to keep up with fresh news and exciting updates. We
+              promise not to spam you!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"></div>
+</main>
+
+<!-- <h1>Index Component</h1> -->

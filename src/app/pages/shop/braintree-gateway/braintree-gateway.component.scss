@@ -1,0 +1,42 @@
+.btnStyle {
+  text-align: end;
+}
+.margins {
+  margin-top: 130px;
+}
+
+.header_style {
+  background-color: #fff;
+  padding: 15px;
+  width: 100%;
+}
+
+.svg_style {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 150px;
+  svg {
+    fill: #000;
+    height: 30px;
+    width: 30px;
+  }
+}
+
+.order_div {
+  background-color: white;
+  border: 1px solid #b5b5b5;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  padding: 15px;
+  max-width: 545px !important;
+
+  span {
+    float: right;
+  }
+}
+
+.payment_div {
+  margin-bottom: 30px;
+}

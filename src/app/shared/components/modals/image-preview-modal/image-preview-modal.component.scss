@@ -1,0 +1,111 @@
+.form-box {
+  max-width: 750px;
+  background-color: #fff;
+  padding: 2.2rem 2rem 1.4rem;
+  box-shadow: 0 3px 16px #3333331a;
+}
+
+.imageDownload {
+  height: 25px;
+  position: absolute;
+  top: 7px;
+  cursor: pointer;
+  width: 25px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  width: 50px;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  filter: brightness(0);
+}
+.carousel-control-next {
+  right: -30px;
+}
+.carousel-control-prev {
+  left: -30px;
+}
+
+#myCarousel .carousel-item .mask img {
+  height: 440px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.outer {
+  justify-content: flex-end;
+  display: flex;
+  margin-top: 15px;
+  padding-right: 23px;
+  cursor: pointer;
+}
+
+.carousalImg {
+  justify-content: flex-end;
+  display: flex;
+  margin-top: 15px;
+  padding-right: 25px;
+  cursor: pointer;
+}
+
+.singleImg {
+  justify-content: flex-end;
+  display: flex;
+
+  margin-top: 0px;
+  padding-right: 25px;
+
+  cursor: pointer;
+}
+
+.form-footer {
+  display: grid;
+  align-items: center;
+  padding-top: 0.6rem;
+}
+.horizontal img {
+  height: 440px;
+  width: 100%;
+  object-fit: contain;
+  justify-content: center;
+  display: flex;
+}
+
+@media screen and (max-width: 767px) {
+  .horizontal img {
+    height: auto;
+  }
+  .modal-body .close {
+    right: 12px;
+    top: 12px;
+  }
+  .singleImg {
+    padding-right: 10px;
+  }
+  .product-details-top {
+    margin-bottom: 3px;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .carousel-inner {
+    padding-top: 0 !important;
+    height: 230px;
+  }
+  #myCarousel .carousel-item .mask img {
+    height: 230px;
+    width: 100%;
+    object-fit: contain;
+    padding: 0;
+  }
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    display: block !important;
+  }
+  .carousalImg {
+    padding-right: 10px;
+  }
+}

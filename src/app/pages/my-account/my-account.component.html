@@ -1,0 +1,226 @@
+<div class="main">
+  <section>
+    <molla-page-header title="My Account" subtitle="Info"></molla-page-header>
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-4 d-none d-md-block">
+          <div class="page_title">
+            <h3>My Account</h3>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <nav
+            class="d-flex flex-row-reverse align-items-center h-100"
+            aria-label="breadcrumb"
+          >
+            <ol class="breadcrumb kd_breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                My Account
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style></style>
+  <section class="bkg_img kd_section">
+    <div class="own_container">
+      <div style="background-color: #fff; padding: 20px">
+        <div class="row" *ngIf="currentUser">
+          <div class="col-md-3">
+            <molla-user-sidebar></molla-user-sidebar>
+          </div>
+          <div class="col-md-9 pl50">
+            <div class="row">
+              <div class="col-md-12">
+                <!-- <p>Hello John Doe (not John Doe? <a href="">Log out</a>)</p> -->
+                <p>Hello {{ currentUser.name }}</p>
+                <p>
+                  From your account dashboard you can view your
+                  <a routerLink="/orders">recent orders</a>, manage your
+                  <a routerLink="/shipping-address"
+                    >shipping and billing addresses</a
+                  >, and
+                  <a routerLink="/account-details"
+                    >edit your password and account details.</a
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="row mt30 account-rows">
+              <div class="col-md-4">
+                <div class="mb20 account_list">
+                  <a routerLink="/orders">
+                    <div class="account_list_icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 59.14 64"
+                      >
+                        <g data-name="Layer 2">
+                          <g data-name="to do list">
+                            <path
+                              d="M16.11 17.38H8.9a1 1 0 0 0-1 1v7.2a1 1 0 0 0 1 1h7.21a1 1 0 0 0 1-1v-7.2a1 1 0 0 0-1-1zm-1 7.2H9.9v-5.2h5.21zM22.59 20.13h11.56a1 1 0 0 0 0-2H22.59a1 1 0 0 0 0 2zM22.59 25.65h6.73a1 1 0 0 0 0-2h-6.73a1 1 0 0 0 0 2zM16.11 32.58H8.9a1 1 0 0 0-1 1v7.21a1 1 0 0 0 1 1h7.21a1 1 0 0 0 1-1v-7.21a1 1 0 0 0-1-1zm-1 7.21H9.9v-5.21h5.21zM22.59 35.32h6.31a1 1 0 0 0 0-2h-6.31a1 1 0 1 0 0 2zM34.15 38.86H22.59a1 1 0 1 0 0 2h11.56a1 1 0 0 0 0-2zM16.11 47H8.9a1 1 0 0 0-1 1v7.2a1 1 0 0 0 1 1h7.21a1 1 0 0 0 1-1V48a1 1 0 0 0-1-1zm-1 7.2H9.9V49h5.21zM34.15 47.77H22.59a1 1 0 1 0 0 2h11.56a1 1 0 0 0 0-2zM34.15 53.29H22.59a1 1 0 0 0 0 2h11.56a1 1 0 0 0 0-2z"
+                            />
+                            <path
+                              d="M58.26 51.74 47.7 36.06V8.58a3.83 3.83 0 0 0-3.82-3.82h-2.8v-.61a4.15 4.15 0 0 0-8.3 0v.61H15.72v-.61a4.15 4.15 0 0 0-8.3 0v.61h-3.6A3.83 3.83 0 0 0 0 8.58v51.6A3.83 3.83 0 0 0 3.82 64h40.06a3.83 3.83 0 0 0 3.82-3.82v-5.56l2 2.91a5.13 5.13 0 0 0 3.3 2.19 5.26 5.26 0 0 0 1 .1 5.19 5.19 0 0 0 4.29-8.08zm-7.5 3.84L37.55 35.89l5.25-3.54L56 52zM36 27.93 41.2 31l-4.29 2.89zM34.78 4.15a2.15 2.15 0 0 1 4.3 0v.61h-4.3zm-25.36 0a2.15 2.15 0 0 1 4.3 0v.61h-4.3zm36.28 56A1.82 1.82 0 0 1 43.88 62H3.82A1.82 1.82 0 0 1 2 60.18V8.58a1.82 1.82 0 0 1 1.82-1.82h9.9v2.69a2.15 2.15 0 0 1-4.3 0 1 1 0 0 0-2 0 4.15 4.15 0 0 0 8.3 0V6.76h23.36v2.69a2.15 2.15 0 0 1-4.3 0 1 1 0 0 0-2 0 4.15 4.15 0 0 0 8.3 0V6.76h2.8a1.82 1.82 0 0 1 1.82 1.82v24.51l-1.8-2.68a1 1 0 0 0-.23-.22l-8.17-4.86-.71-1.12a1 1 0 1 0-1.79.98l.73 1.15 1.44 9.43v.08a1 1 0 0 0 .12.29l10.41 15.5zm11.38-4.93A3.17 3.17 0 0 1 52 57.14l5-3.36a3.17 3.17 0 0 1 .08 1.46z"
+                            />
+                          </g>
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="account_list_content">
+                      <p class="text-uppercase mt30">Orders</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb20 account_list">
+                  <a routerLink="/shipping-address">
+                    <div class="account_list_icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 32 32"
+                      >
+                        <defs>
+                          <style>
+                            .cls-1 {
+                              fill: #231f20;
+                            }
+                          </style>
+                        </defs>
+                        <g id="location">
+                          <path
+                            class="cls-1"
+                            d="M22.37 21.09a1 1 0 0 0-1.3.56 1 1 0 0 0 .56 1.3C23.09 23.53 24 24.32 24 25c0 1.22-3.12 3-8 3s-8-1.78-8-3c0-.68.91-1.47 2.37-2.05a1 1 0 0 0 .56-1.3 1 1 0 0 0-1.3-.56C7.29 22 6 23.41 6 25c0 2.85 4.3 5 10 5s10-2.15 10-5c0-1.59-1.29-3-3.63-3.91z"
+                          />
+                          <path
+                            class="cls-1"
+                            d="M16 25a1 1 0 0 0 .68-.27C24 17.82 25.47 9.4 22.59 5.26a7.5 7.5 0 0 0-2.74-2.33 8.43 8.43 0 0 0-7.7 0 7.5 7.5 0 0 0-2.74 2.33C6.53 9.4 8 17.82 15.32 24.73A1 1 0 0 0 16 25zM11.05 6.4a5.5 5.5 0 0 1 2-1.69 6.4 6.4 0 0 1 5.86 0A5.5 5.5 0 0 1 21 6.4c2.2 3.25.9 10.25-5 16.2-5.9-5.95-7.2-12.95-4.95-16.2z"
+                          />
+                          <path
+                            class="cls-1"
+                            d="M19 9a3 3 0 1 0-3 3 3 3 0 0 0 3-3zm-4 0a1 1 0 1 1 1 1 1 1 0 0 1-1-1z"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="account_list_content">
+                      <p class="text-uppercase mt30">Addresses</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb20 account_list">
+                  <a routerLink="/account-details">
+                    <div class="account_list_icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 32 32"
+                        style="enable-background: new 0 0 32 32"
+                        xml:space="preserve"
+                      >
+                        <path
+                          d="M16 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM27 32a1 1 0 0 1-1-1v-6.115a6.95 6.95 0 0 0-6.942-6.943h-6.116A6.95 6.95 0 0 0 6 24.885V31a1 1 0 1 1-2 0v-6.115c0-4.93 4.012-8.943 8.942-8.943h6.116c4.93 0 8.942 4.012 8.942 8.943V31a1 1 0 0 1-1 1z"
+                        />
+                      </svg>
+                    </div>
+                    <div class="account_list_content">
+                      <p class="text-uppercase mt30">Account Details</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb20 account_list">
+                  <a routerLink="/wishlist">
+                    <div class="account_list_icon">
+                      <svg
+                        data-name="Layer 3"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 128 128"
+                      >
+                        <path
+                          d="M84.828 33.794a24.55 24.55 0 0 0-4.813-.474A29.792 29.792 0 0 0 64 38.369a29.789 29.789 0 0 0-16.015-5.049 24.55 24.55 0 0 0-4.813.474 15.966 15.966 0 0 0-11.648 10.213c-3.241 8.2-1.281 18.544 5.241 27.674C48.311 87.844 62.55 94.237 63.15 94.5a2.1 2.1 0 0 0 1.7 0c.6-.264 14.839-6.657 26.385-22.819 6.522-9.131 8.481-19.478 5.24-27.674a15.966 15.966 0 0 0-11.647-10.213zM87.8 69.228A69.657 69.657 0 0 1 64 90.223a69.387 69.387 0 0 1-23.8-20.995c-5.687-7.962-7.462-16.81-4.751-23.669A11.821 11.821 0 0 1 44 37.934a20.409 20.409 0 0 1 3.984-.392 25.983 25.983 0 0 1 14.684 5.065 2.108 2.108 0 0 0 2.662 0 25.745 25.745 0 0 1 14.684-5.065 20.409 20.409 0 0 1 3.986.392 11.821 11.821 0 0 1 8.55 7.626c2.71 6.858.935 15.706-4.75 23.668z"
+                        />
+                      </svg>
+                    </div>
+                    <div class="account_list_content">
+                      <p class="text-uppercase mt30">Wishlist</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb20 account_list">
+                  <a href="javascript:;" (click)="logout()">
+                    <div class="account_list_icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 32 32"
+                      >
+                        <g data-name="check out">
+                          <path
+                            d="M27.9 2.58a.86.86 0 0 0-.07-.1.71.71 0 0 0-.19-.23h-.09a1.12 1.12 0 0 0-.25-.11L27.1 2H12a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0V4h7.19l-3.48 1A1 1 0 0 0 16 6v19h-3v-3a1 1 0 0 0-2 0v4a1 1 0 0 0 1 1h4v2a1 1 0 0 0 .4.8 1 1 0 0 0 .6.2 1 1 0 0 0 .29 0l10-3a1 1 0 0 0 .71-1V3a1 1 0 0 0-.1-.42zM26 25.26l-8 2.4V6.74l8-2.4z"
+                          />
+                          <path
+                            d="M7.41 17H14a1 1 0 0 0 0-2H7.41l1.3-1.29a1 1 0 0 0-1.42-1.42l-3 3a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l3 3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM20 17a1 1 0 0 0 0-2 1 1 0 1 0 0 2z"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="account_list_content">
+                      <p class="text-uppercase mt30">Logout</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="mb20 account_list">
+                  <a routerLink="/cart">
+                    <div class="account_list_icon">
+                      {{ productsInCart() }}
+                    </div>
+                    <div class="account_list_content">
+                      <p class="text-uppercase mt30">Products in Cart</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="mb20 account_list">
+                  <a routerLink="/wishlist">
+                    <div class="account_list_icon">
+                      {{ productsInWishlist() }}
+                    </div>
+                    <div class="account_list_content">
+                      <p class="text-uppercase mt30">Products in Wishlist</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="mb20 account_list">
+                  <a href="javascript:;">
+                    <div class="account_list_icon">
+                      {{ total_order_products }}
+                    </div>
+                    <div class="account_list_content">
+                      <p class="text-uppercase mt30">Products Ordered</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

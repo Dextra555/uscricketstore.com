@@ -1,0 +1,1245 @@
+<main class="main">
+  <!-- HEADING SECTION -->
+  <section>
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-4 d-none d-md-block">
+          <div class="page_title">
+            <h3>Checkout</h3>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <nav class="d-flex flex-row-reverse align-items-center h-100" aria-label="breadcrumb">
+            <ol class="breadcrumb kd_breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Checkout
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW MAIN SECTION -->
+  <section>
+    <div class="page-content bkg_img kd_section">
+      <div class="container"> <!-- own_container  -->
+        <div class="checkout card-area" style="background: transparent;">
+          <div class="container">
+            <!-- Shipping Address Form -->
+            <div class="row" *ngIf="cartItems">
+              <div class="col-lg-8">
+                <!-- Guest User Form -->
+                <div class="product-col" *ngIf="!loggedin">
+                  <div class="product-new d-flex">
+                    <div class="col-lg-12">
+                      <div class="accordion-title mt-1 mb-0">
+                          <h4 class="mb-0">Checkout</h4>
+                      </div>
+                      <div class="accordion-box mt-1" *ngIf="openPanel=='checkoutAs'">
+                        <div class="accordion-title">
+                          <h5>Checkout options</h5>
+                        </div>
+                        <p class="accordion-body-title text-center p-4">Checkout as Guest" is a feature on an e-commerce website that allows users to make a purchase without creating an account.</p>
+                        <a href="javascript:;" class="btn accordion-btn button text-white mx-auto" (click)="gotoNext('checkoutAs')">Checkout as Guest</a>
+                        <div class="d-flex align-items-center">
+                          <div class="cs-hr"></div>
+                          <div>or</div>
+                          <div class="cs-hr"></div>
+                        </div>
+                        <p class="accordion-body-title text-center p-4">Log in if you are already a member. Or Sign Up to register as a New User</p>
+                        <div class="d-flex mb-2">
+                          <a href="javascript:;" class="btn button custom-btn text-white mx-auto" (click)="showLoginModal($event)">Sign In</a>
+                          <a href="javascript:;" class="btn button custom-btn text-white mx-auto" (click)="showLoginModal($event, true)">Register</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- address accordion -->
+                <div class="product-col" *ngIf="openPanel=='address' && (!allLaneProducts || !loggedin)">
+                  <div class="product-new d-flex">
+                    <div class="col-lg-12">
+                      <div class="accordion-title mt-1 mb-0 d-flex justify-content-between align-items-center">
+                        <h4 *ngIf="loggedin || !allLaneProducts" class="mb-0">
+                          Shipping Address
+                        </h4>
+                        <h4 *ngIf="!loggedin && allLaneProducts" class="mb-0">Guest Checkout</h4>
+                        <div class="text-right" *ngIf="!this.allLaneProducts">
+                          <label class="switch mb-0 pr-lg-4">
+                            <input type="checkbox" (change)="collectFromStoreChanged()" type="checkbox" id="collect_from_store" name="collect_from_store" class="collect_from_store" [(ngModel)]="collect_from_store">
+                            <span class="slider"></span>
+                            <!-- <span class="label"></span> -->
+                          </label>
+                          <label for="collect_from_store" style="font-weight: 600 !important; color:#ff0000;" class="pl-2">Collect Products From Store</label>
+                        </div>
+                      </div>
+                      <div class="accordion-box mt-1" *ngIf="!allLaneProducts && loggedin">
+                        <div class="accordion-title">
+                          <h5>Select shipping address</h5>
+                        </div>
+                        <div class="accordion-address-card-active text-center p-3" *ngFor="let item of addresses"
+                        [ngClass]="selectedAddress && selectedAddress.id == item.id?'selected':''">
+                          <div class="checkbox-div custom-input-check d-flex" (click)="selectAddress(item)">
+                            <input type="checkbox" readonly="" class="custom-control-input pr-2" [id]="'address-' + item.id"
+                            [checked]="selectedAddress && selectedAddress.id == item.id">
+                            <p class="accordion-body-title">
+                              <span class="label-address">Address:</span>
+                              {{ item.firstname }} {{ item.lastname }},
+                              {{ item.address }}, {{ item.city }},
+                              {{ item.state }}, {{ item.country }},
+                              {{ item.postal_code }}.
+                            </p>
+                            <p class="accordion-body-title" (click)="selectAddress(item)"><span class="label-address">Phone:</span>{{ item.phone }}</p>
+                          </div>
+                          <p class="text-left address-options">
+                            <a class="accordion-link" (click)="setChangeAddress($event, addressForm, item)">Edit Address</a>
+                            <a class="accordion-link ml-4" (click)="deleteAddress($event, item)">Delete</a>
+                            <a class="accordion-link ml-4" *ngIf="item.default_shipping == 0" (click)="defaultShippingAddress(item)">Make as default</a>
+                            <span class="label-address default-shipping float-right" *ngIf="item.default_shipping > 0">Default</span>
+                          </p>
+                        </div>
+
+                        <div class="accordion-address-card-active text-center p-3 selected" *ngIf="!loggedin && showAddress && guestAddress" (click)="onAddressGuestChange()">
+                          <div class="checkbox-div custom-input-check d-flex">
+                            <input type="checkbox" readonly="" class="custom-control-input pr-2" id="address-guest"
+                            checked>
+                            <p class="accordion-body-title">
+                              <span class="label-address">Address:</span>
+                              {{ guestAddress.firstname }} {{ guestAddress.lastname }},
+                              {{ guestAddress.address }}, {{ guestCity?.name }},
+                              {{ guestStates?.name }}, {{ guestCountry?.name }},
+                              {{ guestAddress?.postal_code }}.
+                            </p>
+                            <p class="accordion-body-title"><span class="label-address">Phone:</span>{{ guestAddress.phone }}</p>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-12 d-flex align-items-center add-new-address">
+                          <i class="icon-plus pr-2"></i>
+                          <p class="accordion-body-title" (click)="openAddressModal(addressForm)">Add a New Address</p>
+                        </div>
+                        <div class="d-flex button-hr-top">
+                          <a href="javascript:;" class="btn button custom-btn text-white mx-auto" (click)="gotoNext('address')">Use Selected Address</a>
+                        </div>
+                      </div>
+
+                      <div class="accordion-box mt-1 address-modal" *ngIf="allLaneProducts || !loggedin">
+                        <div class="accordion-title">
+                          <h5>Guest Shipping Address</h5>
+                        </div>
+                        <form action="#" [formGroup]="formGroupGuest" id="form-guest-1" novalidate>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label>Email *</label>
+                              <input type="text" class="form-control mb-0" name="email" (change)="setGuestUser()"
+                                formControlName="email" required />
+                              <span class="kd_error d-block" *ngIf="
+                                  formGroupGuest.controls['email'].errors &&
+                                  formGroupGuest.controls['email'].touched
+                                ">
+                                <span *ngIf="
+                                    formGroupGuest.controls['email'].errors.required
+                                  ">Please enter your email</span>
+                                <span *ngIf="
+                                    formGroupGuest.controls['email'].errors.email
+                                  ">Please enter a valid email</span>
+                              </span>
+                            </div>
+
+                            <div class="col-sm-6" *ngIf="allLaneProducts || collect_from_store">
+                              <label>Name *</label>
+                              <input type="text" class="form-control mb-0" name="name"
+                                formControlName="name" required />
+                              <span class="kd_error d-block" *ngIf="
+                                  formGroupGuest.controls['name'].errors &&
+                                  formGroupGuest.controls['name'].touched
+                                ">
+                                <span *ngIf="
+                                    formGroupGuest.controls['name'].errors.required
+                                  ">Please enter your name</span>
+                                <span *ngIf="
+                                    formGroupGuest.controls['name']?.errors.pattern;
+                                    else nameLength
+                                  ">Please enter a valid name</span>
+                                <ng-template #nameLength>
+                                  <span *ngIf="
+                                      formGroupGuest.controls['name']?.errors
+                                        .maxlength
+                                    ">Name is too long</span>
+                                </ng-template>
+                              </span>
+                            </div>
+
+                            <div class="col-sm-6" *ngIf="allLaneProducts || collect_from_store">
+                              <label>Mobile *</label>
+                              <input type="text" class="form-control mb-0"
+                                (keyup)="getvalue($event)" (keypress)="commonService.numberOnly($event)" name="phone"
+                                formControlName="phone" required />
+                              <span class="kd_error d-block" *ngIf="
+                                  formGroupGuest.controls['phone'].errors &&
+                                  formGroupGuest.controls['phone'].touched
+                                ">
+                                <span *ngIf="
+                                    formGroupGuest.controls['phone'].errors.required
+                                  ">Please enter your phone number</span>
+                                <span *ngIf="
+                                    formGroupGuest.controls['phone'].errors
+                                      .pattern || nullValidator;
+                                    else phoneLength
+                                  ">Please enter a valid phone number</span>
+                                <ng-template #phoneLength>
+                                  <span *ngIf="
+                                      formGroupGuest.controls['phone'].errors
+                                        .maxlength ||
+                                      formGroupGuest.controls['phone'].errors
+                                        .minlength
+                                    ">Phone number length should be 10</span>
+                                </ng-template>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="outer d-flex justify-content-between mb-2 mt-2" *ngIf="allLaneProducts || collect_from_store">
+                            <button type="submit" class="btn button" (click)="saveAddress('guest')" *ngIf="showUpdateBtn">
+                              <div *ngIf="!changeAddress" class="text font2 font_cap">
+                                Save &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                                  style="font-size: 20px"></i><i *ngIf="!submittingForm" class="fa fa-paper-plane"
+                                  aria-hidden="true"></i>
+                              </div>
+                              <div *ngIf="changeAddress" class="text font2 font_cap">
+                                Update &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                                  style="font-size: 20px"></i>
+                              </div>
+                            </button>
+                          </div>
+                        </form>
+
+                        <div *ngIf="!allLaneProducts && !collect_from_store">
+                          <div class="address-modal">
+                            <form action="#" [formGroup]="formGroup" id="form-shipping" (ngSubmit)="submitForm()" novalidate>
+                              <div class="row">
+                                <div class="col-sm-12" *ngIf="loggedin">
+                                  <h2 class="checkout-title" *ngIf="!changeAddress">
+                                    Add new address
+                                  </h2>
+                                  <h2 class="checkout-title" *ngIf="changeAddress">
+                                    Update address
+                                  </h2>
+                                </div>
+                                <div class="col-sm-6">
+                                  <label>First Name *</label>
+                                  <input type="text" class="form-control mb-0" name="firstname" formControlName="firstname" required />
+                                  <span class="kd_error d-block" *ngIf="
+                                      formGroup.controls['firstname'].errors &&
+                                      formGroup.controls['firstname'].touched
+                                    ">
+                                    <span *ngIf="
+                                        formGroup.controls['firstname'].errors.required
+                                      ">Please enter your first name</span>
+                                    <span *ngIf="
+                                        formGroup.controls['firstname']?.errors.pattern;
+                                        else firstnameLength
+                                      ">Please enter a valid first name</span>
+                                    <ng-template #firstnameLength>
+                                      <span *ngIf="
+                                          formGroup.controls['firstname']?.errors
+                                            .maxlength
+                                        ">First name is too long</span>
+                                    </ng-template>
+                                  </span>
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <label>Last Name *</label>
+                                  <input type="text" class="form-control mb-0" name="lastname" formControlName="lastname" required />
+                                  <span class="kd_error d-block" *ngIf="
+                                      formGroup.controls['lastname'].errors &&
+                                      formGroup.controls['lastname'].touched
+                                    ">
+                                    <span *ngIf="
+                                        formGroup.controls['lastname'].errors.required
+                                      ">Please enter your last name</span>
+                                    <span *ngIf="
+                                        formGroup.controls['lastname']?.errors.pattern;
+                                        else lastnameLength
+                                      ">Please enter a valid last name</span>
+                                    <ng-template #lastnameLength>
+                                      <span *ngIf="
+                                          formGroup.controls['lastname']?.errors
+                                            .maxlength
+                                        ">Last name is too long</span>
+                                    </ng-template>
+                                  </span>
+                                </div>
+                                <div class="col-sm-12">
+                                  <label>Phone *</label>
+                                  <input type="tel" name="phone" class="form-control mb-0" formControlName="phone" required
+                                    (keyup)="getvalue($event)" (keypress)="commonService.numberOnly($event)" />
+                                  <span class="kd_error d-block" *ngIf="
+                                      formGroup.controls['phone'].errors &&
+                                      formGroup.controls['phone'].touched
+                                    ">
+                                    <span *ngIf="
+                                        formGroup.controls['phone'].errors.required
+                                      ">Please enter your phone number</span>
+                                    <span *ngIf="
+                                        formGroup.controls['phone'].errors.pattern ||
+                                          nullValidator;
+                                        else phone1Length
+                                      ">Please enter a valid phone number</span>
+                                    <ng-template #phone1Length>
+                                      <span *ngIf="
+                                          formGroup.controls['phone'].errors
+                                            .maxlength ||
+                                          formGroup.controls['phone'].errors.minlength
+                                        ">Phone number length should be 10</span>
+                                    </ng-template>
+                                  </span>
+                                </div>
+                                <div class="col-sm-12">
+                                  <label>Address</label>
+                                  <textarea class="form-control textarea mb-0" cols="8" rows="2" formControlName="address"
+                                    placeholder=""></textarea>
+
+                                  <span class="kd_error d-block" *ngIf="
+                                      formGroup.controls['address'].errors &&
+                                      formGroup.controls['address'].touched
+                                    ">
+                                    <span *ngIf="
+                                        formGroup.controls['address'].errors.required
+                                      ">Please enter your address</span>
+                                    <span *ngIf="
+                                        formGroup.controls['address']?.errors.pattern
+                                      ">Please enter a valid address</span>
+                                  </span>
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <label>Country *</label>
+                                  <ng-select formControlName="country" required (change)="getStates()" [items]="countries"
+                                    bindLabel="name" bindValue="id" placeholder="Select Country" appendTo="body"
+                                    [searchable]="true">
+                                  </ng-select>
+                                  <span class="kd_error d-block" *ngIf="
+                                      formGroup.controls['country'].errors &&
+                                      formGroup.controls['country'].touched
+                                    ">
+                                    <span *ngIf="
+                                        formGroup.controls['country'].errors.required
+                                      ">Please select your country</span>
+                                  </span>
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <label>State *</label>
+                                  <ng-select formControlName="state" required (change)="getCities()" [items]="states"
+                                    bindLabel="name" bindValue="id" placeholder="Select State" [searchable]="true">
+                                  </ng-select>
+                                  <span class="kd_error d-block" *ngIf="
+                                      formGroup.controls['state'].errors &&
+                                      formGroup.controls['state'].touched
+                                    ">
+                                    <span *ngIf="
+                                        formGroup.controls['state'].errors.required
+                                      ">Please select your state</span>
+                                  </span>
+                                </div>
+                                <div class="col-sm-6">
+                                  <label>City *</label>
+                                  <ng-select formControlName="city" required [items]="cities" bindLabel="name" bindValue="id" placeholder="Select City" appendTo="body"
+                                    [searchable]="true">
+                                  </ng-select>
+                                  <span class="kd_error d-block" *ngIf="
+                                      formGroup.controls['city'].errors &&
+                                      formGroup.controls['city'].touched
+                                    ">
+                                    <span *ngIf="formGroup.controls['city'].errors.required">Please select your city</span>
+                                  </span>
+                                </div>
+                                <div class="col-sm-6">
+                                  <label>Zip Code *</label>
+                                  <input type="text" name="postcode" class="form-control mb-0"
+                                    formControlName="postal_code" required />
+
+                                  <span class="kd_error d-block" *ngIf="
+                                      formGroup.controls['postal_code'].errors &&
+                                      formGroup.controls['postal_code'].touched
+                                    ">
+                                    <span *ngIf="
+                                        formGroup.controls['postal_code'].errors
+                                          .required
+                                      ">Please enter your zip code</span>
+                                    <span *ngIf="
+                                        formGroup.controls['postal_code'].errors
+                                          .pattern;
+                                        else postal_codeLength
+                                      ">Please enter a valid zip code</span>
+                                    <ng-template #postal_codeLength>
+                                      <span *ngIf="
+                                          formGroup.controls['postal_code'].errors
+                                            .maxlength
+                                        ">Zip Code length should be 12</span>
+                                      <span *ngIf="
+                                          formGroup.controls['postal_code'].errors
+                                            .minlength
+                                        ">Zip Code length should be 4</span>
+                                    </ng-template>
+                                  </span>
+                                </div>
+                              </div>
+
+                              <!-- Guest User -->
+                              <div *ngIf="!loggedin">
+                                <div class="outer d-flex justify-content-between mb-2 mt-2">
+                                  <button type="submit" class="btn button" (click)="saveAddress('guest')" *ngIf="showUpdateBtn">
+                                    <div *ngIf="!changeAddress" class="text font2 font_cap">
+                                      Save &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                                        style="font-size: 20px"></i><i *ngIf="!submittingForm" class="fa fa-paper-plane"
+                                        aria-hidden="true"></i>
+                                    </div>
+                                    <div *ngIf="changeAddress" class="text font2 font_cap">
+                                      Update &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                                        style="font-size: 20px"></i>
+                                    </div>
+                                  </button>
+                                </div>
+                              </div>
+                              <!-- End -->
+
+                              <!--Grid row-->
+                              <div *ngIf="loggedin">
+                                <div class="outer d-flex justify-content-between mb-2 mt-2">
+                                  <button type="submit" class="btn button" *ngIf="showUpdateBtn">
+                                    <div *ngIf="!changeAddress" class="text font2 font_cap">
+                                      Save &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                                        style="font-size: 20px"></i><i *ngIf="!submittingForm" class="fa fa-paper-plane"
+                                        aria-hidden="true"></i>
+                                    </div>
+                                    <div *ngIf="changeAddress" class="text font2 font_cap">
+                                      Update &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                                        style="font-size: 20px"></i><i *ngIf="!submittingForm" class="fa fa-paper-plane"
+                                        aria-hidden="true"></i>
+                                    </div>
+                                  </button>
+
+                                  <button *ngIf="changeAddress" (click)="cancelEdit()" type="button" class="btn button">
+                                    <div *ngIf="changeAddress" class="text font2 font_cap">
+                                      Cancel
+                                    </div>
+                                  </button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="product-col" *ngIf="openPanel != 'address' && (!allLaneProducts || !loggedin)">
+                  <div class="product-new d-flex">
+                    <div class="col-lg-12">
+                      <div class="accordion-title mt-1 mb-0 d-flex justify-content-between align-items-center">
+                        <h4 *ngIf="loggedin || !allLaneProducts" class="mb-0">Shipping Address</h4>
+                        <h4 *ngIf="!loggedin && allLaneProducts" class="mb-0">Guest Checkout</h4>
+                        <div class="text-right" *ngIf="!this.allLaneProducts && this.openPanel != 'checkoutAs'">
+                          <label class="switch mb-0 pr-lg-4">
+                            <input type="checkbox" (change)="collectFromStoreChanged()" type="checkbox" id="collect_from_store" name="collect_from_store" class="collect_from_store" [(ngModel)]="collect_from_store">
+                            <span class="slider"></span>
+                            <!-- <span class="label"></span> -->
+                          </label>
+                          <label for="collect_from_store" style="font-weight: 600 !important; color:#ff0000;" class="pl-2">Collect Products From Store</label>
+                        </div>
+                      </div>
+                      <div class="accordion-box mt-1" *ngIf="selectedAddress || guestAddress">
+                        <div class="accordion-title d-flex align-items-center justify-content-between">
+                          <div class="col-lg-9">
+                            <h5 *ngIf="loggedin || !allLaneProducts">Shipping Address</h5>
+                            <h5 *ngIf="!loggedin && allLaneProducts">Guest Checkout</h5>
+                          </div>
+                          <div class="col-lg-3 d-flex justify-content-end align-items-right">
+                            <div class="add-new-address new-address-btn" *ngIf="selectedAddress">
+                              <i class="icon-refresh pr-2"></i>
+                              <p class="accordion-body-title" (click)="resetSelectedAddress()">Change</p>
+                            </div>
+
+                            <div class="add-new-address new-address-btn" *ngIf="guestAddress || selectedAddress">
+                              <i class="icon-edit pr-2"></i>
+                              <p *ngIf="guestAddress && (!allLaneProducts && !collect_from_store)" class="accordion-body-title" (click)="openGuestEdit()">Edit</p>
+                              <p *ngIf="guestAddress && (allLaneProducts || collect_from_store)" class="accordion-body-title" (click)="setGustLaneEdit()">Edit</p>
+                              <p *ngIf="selectedAddress" class="accordion-body-title" (click)="setChangeAddress($event, addressForm)">Edit</p>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="accordion-address-card text-center p-3 m-0">
+                          <div class="checkbox-div custom-input-check d-flex">
+                            <div class="accordion-body-title">
+                              <ul class="text-left guest-shipping-address" *ngIf="selectedAddress">
+                                <li>{{ selectedAddress?.firstname }} {{ selectedAddress?.lastname }},</li>
+                                <li>{{ selectedAddress?.address }},</li>
+                                <li>{{ selectedAddress?.city }},</li>
+                                <li>{{ selectedAddress?.state }},</li>
+                                <li>{{ selectedAddress?.country }},</li>
+                                <li>{{ selectedAddress?.postal_code }}.</li>
+                                <li>{{ selectedAddress?.phone }}</li>
+                              </ul>
+                              <ul class="text-left guest-shipping-address" *ngIf="guestAddress && (!allLaneProducts && !collect_from_store)">
+                                <li>{{ guestAddress?.firstname }} {{ guestAddress?.lastname }},</li>
+                                <li>{{ guestAddress?.address }},</li>
+                                <li>{{ guestCity?.name }},</li>
+                                <li>{{ guestStates?.name }},</li>
+                                <li>{{ guestCountry?.name }},</li>
+                                <li>{{ guestAddress?.postal_code }}.</li>
+                                <li>{{ guestAddress?.phone }}</li>
+                              </ul>
+                              <ul class="text-left guest-shipping-address" *ngIf="guestAddress && (allLaneProducts || collect_from_store)">
+                                <li>{{ guestAddress?.name }} ,</li>
+                                <li>{{ guestAddress?.email }},</li>
+                                <li>{{ guestAddress?.phone }}.</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Delivery Option accordion -->
+                <div class="product-col" *ngIf="!allLaneProducts" [hidden]="collect_from_store">
+                  <div class="product-new d-flex">
+                    <div class="col-lg-12">
+                      <div class="accordion-title mt-1 mb-0">
+                        <h4 class="mb-0">Delivery Option
+                          <i *ngIf="deliverySpinner" class="fa fa-spinner fa-spin" style="font-size: 20px; float: right"></i>
+                        </h4>
+                      </div>
+                      <div class="accordion-box mt-1" *ngIf="(selectedAddress || guestAddress) && openPanel=='shipping'">
+                        <div class="accordion-title">
+                          <h5>Delivery Option</h5>
+                        </div>
+                        <div *ngIf="!shipping && (selectedAddress || guestAddress)" class="no-shipping">
+                          {{ shippingmsg }}
+                        </div>
+                        <div *ngIf="shipping">
+                          <div>
+                            <div class="delivery-option-card d-flex" *ngFor="let shipment of shipping" (click)="selectDeliveryType(shipment.id, shipment.amount, shipment.name)">
+                              <div class="col-md-1 text-center">
+                                <div class="checkbox-div custom-input-check d-flex mt-0">
+                                  <input type="checkbox" readonly="" class="custom-control-input pr-2" [checked]="dType == shipment.id">
+                                </div>
+                              </div>
+                              <div class="col-md-4 text-center">
+                                <i class="icon-truck pr-2 text-primary"></i>
+                                <p>{{ shipment.name }}</p>
+                              </div>
+                              <div class="col-md-3 text-center">
+                                <p>Delivery Cost</p>
+                                <p class="p-red">${{ shipment.amount.toFixed(2) }}</p>
+                              </div>
+                              <div class="col-md-4 text-center">
+                                <p>Expected Delivery Time</p>
+                                <p class="p-red">{{ shipment.days }} Days</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="d-flex button-hr-top">
+                            <a href="javascript:;" class="btn button custom-btn text-white mx-auto" (click)="gotoNext('shipping')">Next</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-box mt-1" *ngIf="shipping && dType && openPanel!='shipping'">
+                        <div class="accordion-title d-flex align-items-center justify-content-between">
+                          <div class="col-lg-9">
+                            <h5>Delivery Option</h5>
+                          </div>
+                          <div class="col-lg-3 d-flex justify-content-end align-items-right">
+                            <div class="add-new-address new-address-btn">
+                              <i class="icon-refresh pr-2"></i>
+                              <p class="accordion-body-title" (click)="gotoNext('address')">Change</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="delivery-option-card d-flex" *ngFor="let shipment of shipping">
+                          <div class="col-md-1 text-center">
+                            <div class="checkbox-div custom-input-check d-flex mt-0">
+                              <input type="checkbox" readonly="" class="custom-control-input pr-2" [checked]="dType == shipment.id">
+                            </div>
+                          </div>
+                          <div class="col-md-4 text-center">
+                            <i class="icon-truck pr-2 text-primary"></i>
+                            <p>{{ shipment.name }}</p>
+                          </div>
+                          <div class="col-md-3 text-center">
+                            <p>Delivery Cost</p>
+                            <p class="p-red">${{ shipment.amount.toFixed(2) }}</p>
+                          </div>
+                          <div class="col-md-4 text-center">
+                            <p>Expected Delivery Time</p>
+                            <p class="p-red">{{ shipment.days }} Days</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Payment Option accordion -->
+                <div class="product-col">
+                  <div class="product-new d-flex">
+                    <div class="col-lg-12">
+                      <div class="accordion-title mt-1 mb-0">
+                        <h4 class="mb-0">Payment Method</h4>
+                      </div>
+                      <div class="accordion-box mt-1" [hidden]="openPanel != 'payment'">
+                        <div class="accordion-title">
+                          <h5>Payment Method</h5>
+                        </div>
+                        <!-- <div class="cardsImg d-flex justify-content-center align-items-center mb-2 mt-2">
+                          <img src="{{assetPath}}assets/images/logo/mastercard.png" alt="Pay Now" />
+                          <img src="{{assetPath}}assets/images/logo/visa.png" alt="Pay Now" />
+                          <img src="{{assetPath}}assets/images/logo/payment.png" alt="Pay Now" />
+                          <img src="{{assetPath}}assets/images/logo/apple-pay.png" alt="Pay Now" />
+                          <img src="{{assetPath}}assets/images/logo/google-pay.png" alt="Pay Now" />
+                        </div>
+
+                        <div class="d-flex mb-2">
+                          <div class="btn button paypal-btn text-white mx-auto position-relative paypal-spinner">
+                            <svg (click)="placeOrder(null, 'paypal')" style="cursor: pointer" width="238px"
+                            height="32px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-11.153 -13.144 326.05 105.914" id="paypal-btn">
+                              <g transform="matrix(2.07675 0 0 -2.07675 -11.153 92.77)">
+                                <defs>
+                                  <path id="a" d="M-84.525-27.457h326.05V78.457h-326.05z"></path>
+                                </defs>
+                                <clipPath id="b">
+                                  <use overflow="visible" xlink:href="#a"></use>
+                                </clipPath>
+                                <g clip-path="url(#b)">
+                                  <path fill="#003087"
+                                    d="M32.419 40.982c-1.674 1.908-4.7 2.726-8.571 2.726H12.613a1.609 1.609 0 0 1-1.59-1.357L6.347 12.68a.964.964 0 0 1 .953-1.114h6.936l1.742 11.049-.054-.346a1.604 1.604 0 0 0 1.583 1.357h3.296c6.475 0 11.545 2.63 13.026 10.238.044.225.082.444.115.658.44 2.812-.003 4.726-1.524 6.459">
+                                  </path>
+                                  <path fill="#009cde"
+                                    d="M117.331 26.863c-.424-2.784-2.55-2.784-4.606-2.784h-1.17l.821 5.198c.05.314.32.545.638.545h.537c1.4 0 2.722 0 3.404-.797.407-.477.53-1.185.376-2.162m-.895 7.264h-7.756a1.08 1.08 0 0 1-1.066-.91L104.48 13.33a.647.647 0 0 1 .638-.747h3.98c.371 0 .687.27.745.636l.89 5.64c.082.523.534.91 1.064.91h2.454c5.11 0 8.058 2.471 8.828 7.372.347 2.142.014 3.826-.989 5.005-1.103 1.296-3.058 1.982-5.653 1.982">
+                                  </path>
+                                  <path fill="#003087"
+                                    d="M62.011 26.863c-.424-2.784-2.55-2.784-4.607-2.784h-1.17l.821 5.198c.05.314.32.545.638.545h.537c1.4 0 2.722 0 3.404-.797.408-.477.531-1.185.377-2.162m-.895 7.264H53.36c-.53 0-.982-.386-1.065-.91L49.16 13.33a.646.646 0 0 1 .638-.747h3.704c.53 0 .981.386 1.064.91l.847 5.365c.082.524.534.91 1.064.91h2.454c5.11 0 8.058 2.472 8.828 7.373.347 2.142.014 3.826-.989 5.005-1.103 1.296-3.058 1.982-5.653 1.982M79.123 19.723c-.36-2.122-2.043-3.547-4.192-3.547-1.077 0-1.94.347-2.494 1.003-.55.65-.756 1.577-.582 2.608.334 2.104 2.046 3.574 4.162 3.574 1.055 0 1.91-.35 2.476-1.012.569-.667.793-1.599.63-2.626m5.176 7.23h-3.714a.647.647 0 0 1-.64-.547l-.162-1.038-.26.376c-.804 1.167-2.597 1.558-4.387 1.558-4.103 0-7.608-3.11-8.29-7.47-.355-2.177.149-4.256 1.383-5.707 1.133-1.333 2.75-1.888 4.677-1.888 3.308 0 5.142 2.124 5.142 2.124l-.166-1.032a.646.646 0 0 1 .639-.747h3.344c.53 0 .982.385 1.065.91l2.008 12.713a.647.647 0 0 1-.64.747">
+                                  </path>
+                                  <path fill="#009cde"
+                                    d="M134.443 19.723c-.36-2.122-2.043-3.547-4.192-3.547-1.077 0-1.94.347-2.494 1.003-.55.65-.756 1.577-.582 2.608.334 2.104 2.045 3.574 4.162 3.574 1.055 0 1.91-.35 2.476-1.012.569-.667.793-1.599.63-2.626m5.176 7.23h-3.714a.647.647 0 0 1-.64-.547l-.162-1.038-.26.376c-.804 1.167-2.597 1.558-4.387 1.558-4.102 0-7.607-3.11-8.29-7.47-.355-2.177.15-4.256 1.384-5.707 1.133-1.333 2.75-1.888 4.677-1.888 3.309 0 5.143 2.124 5.143 2.124l-.166-1.032a.644.644 0 0 1 .637-.747h3.343c.53 0 .982.385 1.066.91l2.008 12.713a.647.647 0 0 1-.64.747">
+                                  </path>
+                                  <path fill="#003087"
+                                    d="M104.08 26.952h-3.734c-.357 0-.69-.177-.89-.473l-5.15-7.584-2.183 7.288a1.08 1.08 0 0 1-1.033.77h-3.669a.647.647 0 0 1-.612-.856l4.11-12.066-3.866-5.455a.647.647 0 0 1 .528-1.02h3.73c.352 0 .683.173.885.463l12.414 17.918a.646.646 0 0 1-.53 1.015">
+                                  </path>
+                                  <path fill="#009cde"
+                                    d="M143.996 33.58l-3.184-20.251a.647.647 0 0 1 .639-.747h3.201c.53 0 .982.386 1.065.91l3.139 19.888a.646.646 0 0 1-.639.747h-3.582a.645.645 0 0 1-.639-.546">
+                                  </path>
+                                  <path fill="#003087"
+                                    d="M32.419 40.982c-1.674 1.908-4.7 2.726-8.571 2.726H12.613a1.609 1.609 0 0 1-1.59-1.357L6.347 12.68a.964.964 0 0 1 .953-1.114h6.936l1.742 11.049-.054-.346a1.604 1.604 0 0 0 1.583 1.357h3.296c6.475 0 11.545 2.63 13.026 10.238.044.225.082.444.115.658.44 2.812-.003 4.726-1.524 6.459">
+                                  </path>
+                                  <path fill="#003087"
+                                    d="M17.849 34.485a1.408 1.408 0 0 0 1.389 1.187h8.808c1.043 0 2.016-.068 2.905-.21a12.206 12.206 0 0 0 1.44-.322 7.957 7.957 0 0 0 1.551-.618c.442 2.813-.002 4.726-1.523 6.46-1.675 1.907-4.7 2.725-8.571 2.725H12.612a1.609 1.609 0 0 1-1.588-1.357L6.346 12.682a.964.964 0 0 1 .952-1.115h6.937l1.742 11.05 1.872 11.868z">
+                                  </path>
+                                  <path fill="#009cde"
+                                    d="M33.943 34.523a18.294 18.294 0 0 0-.115-.658c-1.481-7.607-6.551-10.238-13.026-10.238h-3.297a1.602 1.602 0 0 1-1.582-1.357l-1.688-10.702-.48-3.036a.844.844 0 0 1 .834-.976h5.847c.692 0 1.28.504 1.389 1.187l.057.298 1.102 6.984.07.386a1.407 1.407 0 0 0 1.39 1.187h.875c5.664 0 10.099 2.3 11.395 8.956.54 2.78.26 5.103-1.17 6.734a5.584 5.584 0 0 1-1.601 1.235">
+                                  </path>
+                                  <path fill="#012169"
+                                    d="M32.392 35.14c-.226.067-.459.127-.699.18-.24.053-.488.1-.742.14-.89.145-1.862.213-2.906.213h-8.807a1.404 1.404 0 0 1-1.389-1.188l-1.872-11.87-.054-.345a1.602 1.602 0 0 0 1.582 1.357h3.297c6.475 0 11.545 2.63 13.026 10.238.044.225.081.443.115.658a7.998 7.998 0 0 1-1.218.514c-.109.036-.22.07-.333.104">
+                                  </path>
+                                </g>
+                              </g>
+                            </svg>
+                            <i *ngIf="placingOrder && clicktype == 'paypal'" class="fa fa-spinner fa-spin" style="font-size: 20px"></i>
+                          </div>
+
+                          <div class="btn button paypal-btn-2 text-white mx-auto position-relative paypal-spinner-2">
+                            <svg (click)="placeOrder(null, 'braintree')" version="1.1" id="braintree-btn"
+                              xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 518.28 106.97" width="238px"
+                              height="32px" fill="#fff">
+                              <g>
+                                <g>
+                                  <path class="st0" d="M286.05,72.43h10.81c7.24,0,15.57-1.68,15.57-11.08c0-5.89-4.33-8.7-7.62-9.68c2.97-0.97,5.84-3.78,5.84-8.32
+                              c0-7.57-5.62-9.57-16.65-9.57h-7.95c-0.81,0-1.24,0.43-1.24,1.24v36.16C284.81,72,285.24,72.43,286.05,72.43z M291.57,49.35v-9.57
+                              h4.7c4.43,0,7.51,0.65,7.51,4.59c0,3.68-2.27,4.76-6.54,4.97H291.57z M291.57,66.49V55.24h6c4.54,0,8,1.35,8,5.57
+                              c0,4.97-4.38,5.68-9.95,5.68H291.57z"></path>
+                                    <path class="st0"
+                                      d="M317.66,72.43h4.11c0.81,0,1.24-0.43,1.24-1.24V59.03c0-5.84,1.19-9.51,5.4-9.51c0.86,0,1.3,0.16,1.73,0.16
+                              c0.65,0,0.92-0.49,0.92-1.14v-3.89c0-0.97-0.65-1.3-1.68-1.3c-3.24,0-5.89,1.62-6.86,4.49c0.05-0.59,0.05-1.24,0.05-1.89V45.3
+                              c0-0.81-0.43-1.24-1.24-1.24h-3.73c-0.81,0-1.19,0.43-1.19,1.24v25.89C316.42,72,316.85,72.43,317.66,72.43z"></path>
+                                    <path class="st0" d="M341.42,72.97c4.6,0,7.84-2,9.41-4.32c0,1.03,0.05,1.95,0.16,2.65c0.05,0.76,0.54,1.14,1.3,1.14h3.57
+                              c0.76,0,1.19-0.22,1.19-0.81c0-0.27-0.11-0.7-0.16-1.08c-0.22-1.89-0.33-3.78-0.33-6.92v-7.95c0-9.68-4.81-12.54-11.73-12.54
+                              c-6.43,0-10.54,3.19-11.78,7.51c-0.11,0.38-0.27,0.97-0.27,1.35c0,0.59,0.33,0.92,1.19,0.92h3.84c0.76,0,1.14-0.38,1.35-1.14
+                              c0.6-2.11,2.32-3.51,5.51-3.51c3.73,0,5.41,1.78,5.51,6.49c-0.33,0.05-4.11,0.38-6.49,0.76c-6.05,0.86-12.38,3.08-12.38,9.03
+                              C331.31,69.89,335.53,72.97,341.42,72.97z M343.26,68.27c-2.97,0-4.92-1.3-4.92-3.89c0-3.03,3.3-4.05,10.49-4.87l1.46-0.16
+                              c-0.05,0.54-0.05,1.14-0.05,1.19C350.23,65.35,348.02,68.27,343.26,68.27z"></path>
+                                    <path class="st0"
+                                      d="M362.91,39.94h4.27c0.81,0,1.24-0.43,1.24-1.24v-3.68c0-0.81-0.43-1.24-1.24-1.24h-4.27
+                              c-0.81,0-1.24,0.43-1.24,1.24v3.68C361.66,39.51,362.1,39.94,362.91,39.94z M363.02,72.43h4.11c0.81,0,1.24-0.43,1.24-1.24V45.3
+                              c0-0.81-0.43-1.24-1.24-1.24h-4.11c-0.81,0-1.24,0.43-1.24,1.24v25.89C361.77,72,362.21,72.43,363.02,72.43z"></path>
+                                    <path class="st0" d="M375.11,72.43h4.11c0.81,0,1.24-0.43,1.24-1.24v-14.6c0-4.43,1.95-7.95,6.43-7.95c4.43,0,5.78,3.57,5.78,9.14
+                              v13.41c0,0.81,0.43,1.24,1.24,1.24h4.11c0.81,0,1.24-0.43,1.24-1.24V54.81c0-7.3-3.78-11.68-10.27-11.68
+                              c-4.38,0-7.14,1.89-8.86,4.49c-0.05,0-0.05,0-0.05-0.05c0-0.59,0.05-1.19,0.05-1.78V45.3c0-0.81-0.43-1.24-1.24-1.24h-3.84
+                              c-0.81,0-1.24,0.43-1.19,1.24v25.89C373.87,72,374.3,72.43,375.11,72.43z"></path>
+                                    <path class="st0" d="M414.92,72.97c1.51,0,2.49-0.05,2.49-1.41v-2.54c0-0.97-0.38-1.3-1.08-1.3c-0.38,0-0.54,0.05-1.08,0.05
+                              c-1.95,0-2.76-0.86-2.76-3.51v-15.3h4.05c0.81,0,1.24-0.43,1.24-1.24V45.3c0-0.81-0.43-1.24-1.24-1.24h-4.05v-6.43
+                              c0-0.81-0.43-1.24-1.24-1.24h-4.11c-0.81,0-1.24,0.43-1.24,1.24v6.43h-3.03c-0.81,0-1.24,0.43-1.24,1.24v2.43
+                              c0,0.81,0.43,1.24,1.24,1.24h3.03V65.3C405.89,71.24,409.19,72.97,414.92,72.97z"></path>
+                                    <path class="st0"
+                                      d="M422.16,72.43h4.11c0.81,0,1.24-0.43,1.24-1.24V59.03c0-5.84,1.19-9.51,5.41-9.51c0.86,0,1.3,0.16,1.73,0.16
+                              c0.65,0,0.92-0.49,0.92-1.14v-3.89c0-0.97-0.65-1.3-1.68-1.3c-3.24,0-5.89,1.62-6.86,4.49c0.05-0.59,0.05-1.24,0.05-1.89V45.3
+                              c0-0.81-0.43-1.24-1.24-1.24h-3.73c-0.81,0-1.19,0.43-1.19,1.24v25.89C420.91,72,421.34,72.43,422.16,72.43z"></path>
+                                    <path class="st0" d="M450.57,73.3c6.33,0,10.6-3.24,12.54-7.14c0.38-0.76,0.38-0.92,0.38-1.08c0-0.43-0.49-0.76-1.19-0.76h-4.11
+                              c-0.65,0-1.08,0.27-1.51,0.81c-1.24,1.68-3.19,2.7-5.95,2.7c-4.6,0-7.73-3.35-8.16-8l20.49,0.05c0.76,0,1.3-0.43,1.3-1.24v-0.54
+                              c0-8.27-4.81-15.03-13.89-15.03c-8.65,0-14.49,6.43-14.49,15.08C435.97,67.03,441.7,73.3,450.57,73.3z M442.78,55.13
+                              c0.54-4.49,3.51-6.92,7.62-6.92c4.22,0,6.92,3.03,7.35,6.92H442.78z"></path>
+                                    <path class="st0" d="M480.61,73.3c6.32,0,10.6-3.24,12.54-7.14c0.38-0.76,0.38-0.92,0.38-1.08c0-0.43-0.49-0.76-1.19-0.76h-4.11
+                              c-0.65,0-1.08,0.27-1.51,0.81c-1.24,1.68-3.19,2.7-5.95,2.7c-4.6,0-7.73-3.35-8.16-8l20.49,0.05c0.76,0,1.3-0.43,1.3-1.24v-0.54
+                              c0-8.27-4.81-15.03-13.89-15.03c-8.65,0-14.49,6.43-14.49,15.08C466.01,67.03,471.74,73.3,480.61,73.3z M472.83,55.13
+                              c0.54-4.49,3.51-6.92,7.62-6.92c4.22,0,6.92,3.03,7.35,6.92H472.83z"></path>
+                                  </g>
+                                  <g>
+                                    <path class="st0"
+                                      d="M117.85,47.23c-0.42,2.68-2.49,4.65-6.45,4.65h-5.06l1.53-9.73h4.97C116.94,42.15,118.27,44.56,117.85,47.23
+                              M112.13,60.03c7.26,0,13.42-5.3,14.55-12.47c1.14-7.24-4.52-13.55-12.53-13.57h-12.91c-0.5,0-0.92,0.36-1,0.85l-5.76,36.54
+                              c-0.09,0.57,0.35,1.08,0.92,1.08h6.83c0.5,0,0.92-0.36,1-0.85l1.69-10.73c0.08-0.49,0.5-0.85,1-0.85H112.13z"></path>
+                                    <path class="st0" d="M146.76,59.34c-0.57,3.59-3.51,6.23-7.29,6.23c-0.74,0-1.43-0.1-2.04-0.3v0c-2.8-0.9-4.39-3.59-3.94-6.5
+                              c0.57-3.59,3.52-6.23,7.29-6.23c0.75,0,1.43,0.1,2.04,0.3v0C145.63,53.73,147.22,56.42,146.76,59.34 M156.29,45.51h-6.49
+                              c-0.5,0-0.92,0.36-1,0.85l-0.21,1.35c0,0-5.04-5.5-13.95-1.79c-5.11,2.13-7.57,6.54-8.61,9.75c0,0-3.32,9.8,4.18,15.18
+                              c0,0,6.95,5.18,14.78-0.32l-0.14,0.86c-0.09,0.57,0.35,1.08,0.92,1.08h6.49c0.5,0,0.92-0.36,1-0.85l3.95-25.03
+                              C157.3,46.02,156.86,45.51,156.29,45.51"></path>
+                                    <path class="st0"
+                                      d="M211.27,47.23c-0.42,2.68-2.49,4.65-6.45,4.65h-5.06l1.53-9.73h4.97C210.36,42.15,211.7,44.56,211.27,47.23
+                              M205.56,60.03c7.26,0,13.42-5.3,14.55-12.47c1.14-7.24-4.52-13.55-12.53-13.57h-12.91c-0.5,0-0.92,0.36-1,0.85l-5.76,36.54
+                              c-0.09,0.57,0.35,1.08,0.92,1.08h6.83c0.5,0,0.92-0.36,1-0.85l1.69-10.73c0.08-0.49,0.5-0.85,1-0.85H205.56z"></path>
+                                    <path class="st0" d="M240.18,59.34c-0.57,3.59-3.51,6.23-7.29,6.23c-0.74,0-1.43-0.1-2.04-0.3v0c-2.8-0.9-4.39-3.59-3.94-6.5
+                              c0.57-3.59,3.52-6.23,7.29-6.23c0.75,0,1.43,0.1,2.04,0.3v0C239.05,53.73,240.64,56.42,240.18,59.34 M249.71,45.51h-6.49
+                              c-0.5,0-0.92,0.36-1,0.85l-0.21,1.35c0,0-5.04-5.5-13.95-1.79c-5.11,2.13-7.57,6.54-8.61,9.75c0,0-3.32,9.8,4.18,15.18
+                              c0,0,6.95,5.18,14.78-0.32l-0.14,0.86c-0.09,0.57,0.35,1.08,0.92,1.08h6.49c0.5,0,0.92-0.36,1-0.85l3.95-25.03
+                              C250.73,46.02,250.29,45.51,249.71,45.51"></path>
+                                    <path class="st0" d="M180.1,46.12l-7.82,13.2l-3.97-13.1c-0.13-0.43-0.52-0.72-0.97-0.72h-7.06c-0.51,0-0.88,0.5-0.72,0.99
+                              l7.11,22.07l-6.43,10.4c-0.31,0.5,0.05,1.16,0.65,1.16h7.6c0.44,0,0.85-0.23,1.08-0.61l19.86-32.86c0.31-0.5-0.06-1.15-0.65-1.15
+                              h-7.6C180.74,45.51,180.33,45.74,180.1,46.12"></path>
+                                    <path class="st0" d="M257.01,34.84l-5.76,36.54c-0.09,0.57,0.35,1.08,0.92,1.08h6.83c0.5,0,0.92-0.36,1-0.85l5.76-36.54
+                              c0.09-0.57-0.35-1.08-0.92-1.08h-6.83C257.51,33.99,257.09,34.35,257.01,34.84"></path>
+                                    <g>
+                                      <path class="st0" d="M41.87,35.35c0.13-0.84,0.85-1.45,1.7-1.45h14.98c2.72,0,5.32,0.19,7.34,1.23
+                                  c0.03-7.59-6.73-13.21-14.56-13.17H33.2c-0.84,0.04-1.61,0.66-1.75,1.58l-7.54,47.73c-0.19,0.98,0.56,1.8,1.47,1.8H35.9
+                                  L41.87,35.35z"></path>
+                                      <path class="st0" d="M42.41,53.02l2.26-14.32c0.12-0.76,0.55-1.52,1.54-1.52h12.64c2.4,0.02,4.94,0.24,6.81,1.22
+                                  c-0.01,0.54-0.06,1.41-0.14,1.97c-1.14,7.28-7.39,12.65-14.76,12.65H42.41z"></path>
+                                      <path class="st0"
+                                        d="M68.74,40.13c-0.03,0.65-0.07,1.23-0.16,1.86c-1.29,8.24-8.46,14.32-16.8,14.32H43.5
+                                  c-0.92,0-1.71,0.67-1.85,1.58l-4.02,25.36c-0.15,0.92,0.57,1.76,1.5,1.76l8.86,0c0.95,0,1.69-0.7,1.85-1.55l2.19-13.75
+                                  c0.13-0.84,0.85-1.45,1.7-1.45H59c8.34,0,15.51-6.08,16.8-14.32C76.72,48.09,73.77,42.77,68.74,40.13"></path>
+                                      <path class="st0" d="M41.87,35.35c0.13-0.84,0.85-1.45,1.7-1.45h14.98c2.72,0,5.32,0.19,7.34,1.23
+                                  c0.03-7.59-6.73-13.21-14.56-13.17H33.2c-0.84,0.04-1.61,0.66-1.75,1.58l-7.54,47.73c-0.19,0.98,0.56,1.8,1.47,1.8H35.9
+                                  L41.87,35.35z"></path>
+                                    </g>
+                                  </g>
+                                </g>
+                            </svg>
+                            <i *ngIf="placingOrder && clicktype == 'braintree'" class="fa fa-spinner fa-spin" style="font-size: 20px"></i>
+                          </div>
+                        </div> -->
+                        <div class="col-md-12 mb-2 mt-2 mx-auto d-md-block">
+                          <div id="dropin-container"></div>
+                          <div class="btnStyle" *ngIf="enableButton">
+                            <button
+                              class="button btn"
+                              (click)="placeOrder(null, 'inline')"
+                            >
+                            <i *ngIf="placingOrder && clicktype == 'inline'" class="fa fa-spinner fa-spin" style="font-size: 20px"></i>
+                            Submit Payment
+                            </button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="col-lg-4 bg-white" *ngIf="cartItems.length">
+                <div class="product-col">
+                  <div class="px-2">
+                    <h3 class="summary-title mb-0 text-center pt-1 bg-white">Order Detail</h3>
+                  </div>
+                  <ng-container *ngFor="let product of cartItems; trackBy: trackByFn">
+                    <div class="product-new d-flex py-1 mb-0" [ngClass]="{
+                      'out-of-stock-product': isOutofStock(product)
+                    }">
+                      <div class="opacity-div" *ngIf="isOutofStock(product)"></div>
+                      <div class="col-md-3 p-0">
+                        <a href="javascript:;" class="img-container" (click)="
+                            navigate(product)
+                          ">
+                          <img [src]="
+                              product.thumbnail
+                                ? product.thumbnail
+                                : assetPath+'assets/images/placeholder.jpg'
+                            " alt="Product" class="cart-img-new" />
+                        </a>
+                      </div>
+                      <div class="col-md-9">
+                        <h3 class="product-title mb-0">
+                          <a href="javascript:;" (click)="
+                            navigate(product)
+                          ">{{ product.name }}</a>
+                          <div class="combinations" *ngIf="product && product.combinations">
+                            <div class="combination-val" *ngFor="let addon of product.combinations">
+                              <span class="combination-title">{{ addon.attribute }}:</span>
+                              <span class="combination-value">{{
+                                addon.value
+                                }}</span>
+                            </div>
+                          </div>
+
+                          <div class="addons" *ngIf="
+                              product && product.product_type == 'lane'
+                            ">
+                            <!-- <div>People: {{ product.qty }}</div> -->
+                            <div>Date: {{ product.booking_date }}</div>
+
+                            <span class="addon-val">
+                              <span class="addon-title" *ngFor="
+                                  let bookedslot of product.slotDetails;
+                                  let i = index
+                                ">
+                                <span *ngIf="i == 0">{{
+                                  bookedslot.slot_start_time
+                                  }}</span><span *ngIf="
+                                    i + 1 == product.slotDetails.length
+                                  ">
+                                  - {{ bookedslot.slot_end_time }}</span></span>
+                            </span>
+                          </div>
+                          <div class="addons" *ngIf="product && product.product_addons">
+                            <span class="addon-val" *ngFor="let addon of product.product_addons">
+                              <span class="addon-title">{{ addon.name }} (+${{
+                                addon.price
+                                }})</span>
+                            </span>
+                          </div>
+                        </h3>
+                        <div class="d-flex" *ngIf="product && product.product_type == 'product'">
+                          <div class="col-md-6 product-title mb-0 pl-0">
+                            Qty: {{ product.qty }}
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <span class="large-text position-static"> {{
+                              (product.qty * itemTotal(product)).toFixed(2)
+                              | currency
+                              }}</span>
+                          </div>
+                        </div>
+                        <div class="d-flex" *ngIf="product && product.product_type == 'lane'">
+                          <div class="col-md-6 product-title mb-0 pl-0">
+                            People: {{ product.qty }}
+                          </div>
+                          <div class="col-md-6 text-right">
+                            <span class="large-text position-static"> {{
+                              product.lane_price.toFixed(2) | currency
+                              }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="col-md-3">
+                        <span class="large-text" *ngIf="product && product.product_type == 'product'">{{
+                          (product.qty * itemTotal(product)).toFixed(2)
+                          | currency
+                          }}</span>
+                        <span class="large-text" *ngIf="product && product.product_type == 'lane'">{{
+                          product.lane_price.toFixed(2) | currency
+                          }}</span>
+                      </div> -->
+                    </div>
+                  </ng-container>
+                </div>
+
+                <div class="summary-new-cart summary-cart h-100 d-flex flex-column">
+                  <h3 class="summary-title mb-0 text-center pt-1">Order Summary</h3>
+                  <table class="table table-summary">
+                    <tbody>
+                      <tr class="summary-subtotal">
+                        <td>Subtotal:</td>
+                        <td>${{ total().toFixed(2) }}</td>
+                      </tr>
+                      <tr class="summary-subtotal" *ngIf="appliedDiscount">
+                        <td>Discount:</td>
+                        <td>${{ appliedDiscount }}</td>
+                      </tr>
+                      <tr class="summary-subtotal">
+                        <td>Tax:</td>
+                        <td>${{ totalTax().toFixed(2) }}</td>
+                      </tr>
+                      <tr class="summary-subtotal" *ngIf="getShippingCharges()">
+                        <td>Shipping:</td>
+                        <td>${{ getShippingCharges().toFixed(2) }}</td>
+                      </tr>
+                      <tr class="grand-total">
+                        <td class="no-border">Grand Total:</td>
+                        <td class="no-border"> ${{
+                          (
+                          totalTax() +
+                          total() +
+                          getShippingCharges() -
+                          appliedDiscount
+                          ).toFixed(2)
+                          }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="cart-bottom mt-2">
+                    <div class="cart-discount-new w-100">
+                      <form action="#">
+                        <div class="input-group d-flex">
+                          <input
+                            type="text"
+                            placeholder="Coupon code"
+                            class="form-control mr-0 mb-0" value="{{ coupon }}"
+                            (change)="onChangeCoupon($event)" [disabled]="couponApplied"
+                          />
+                          <div class="input-group-append">
+                            <button
+                              type="button" *ngIf="!coupon_details"
+                              class="btn btn-white border px-2 mt-0" (click)="applyCoupon()"
+                            >
+                              Apply Coupon
+                              <i *ngIf="applyingCoupon" class="fa fa-spinner fa-spin ml-2" style="font-size: 20px"></i>
+                              <i *ngIf="!applyingCoupon" class="icon-long-arrow-right ml-2"></i>
+                            </button>
+                            <button class="btn btn-white border px-2" *ngIf="coupon_details" type="button"
+                              (click)="removeCoupon()">
+                              Change<i class="icon-long-arrow-right ml-2"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<ng-template #addressForm>
+  <div class="modal-body address-modal">
+    <div class="bg-white p-4">
+      <button type="button" class="close" (click)="closeModal()">
+        <span aria-hidden="true"><i class="icon-close"></i></span>
+      </button>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Guest User Form -->
+          <div class="row" *ngIf="cartItems && !loggedin">
+            <div class="col-lg-12">
+              <h2 class="checkout-title mt-0 mb-1">
+                Guest Shipping Address
+              </h2>
+              <form action="#" [formGroup]="formGroupGuest" id="form-guest" novalidate>
+                <div class="row">
+                  <div class="col-sm-12 mb-1">
+                    <label>Email *</label>
+                    <input type="text" class="form-control mb-0" name="email" (change)="setGuestUser()"
+                      formControlName="email" required />
+                    <span class="kd_error d-block" *ngIf="
+                        formGroupGuest.controls['email'].errors &&
+                        formGroupGuest.controls['email'].touched
+                      ">
+                      <span *ngIf="
+                          formGroupGuest.controls['email'].errors.required
+                        ">Please enter your email</span>
+                      <span *ngIf="
+                          formGroupGuest.controls['email'].errors.email
+                        ">Please enter a valid email</span>
+                    </span>
+                  </div>
+
+                  <div class="col-sm-4 mb-1" *ngIf="allLaneProducts">
+                    <label>Name *</label>
+                    <input type="text" class="form-control mb-0" name="name"
+                      formControlName="name" required />
+                    <span class="kd_error d-block" *ngIf="
+                        formGroupGuest.controls['name'].errors &&
+                        formGroupGuest.controls['name'].touched
+                      ">
+                      <span *ngIf="
+                          formGroupGuest.controls['name'].errors.required
+                        ">Please enter your name</span>
+                      <span *ngIf="
+                          formGroupGuest.controls['name']?.errors.pattern;
+                          else nameLength
+                        ">Please enter a valid name</span>
+                      <ng-template #nameLength>
+                        <span *ngIf="
+                            formGroupGuest.controls['name']?.errors
+                              .maxlength
+                          ">Name is too long</span>
+                      </ng-template>
+                    </span>
+                  </div>
+
+                  <div class="col-sm-4 mb-1" *ngIf="allLaneProducts">
+                    <label>Mobile *</label>
+                    <input type="text" class="form-control mb-0"
+                      (keyup)="getvalue($event)" (keypress)="commonService.numberOnly($event)" name="phone"
+                      formControlName="phone" required />
+                    <span class="kd_error d-block" *ngIf="
+                        formGroupGuest.controls['phone'].errors &&
+                        formGroupGuest.controls['phone'].touched
+                      ">
+                      <span *ngIf="
+                          formGroupGuest.controls['phone'].errors.required
+                        ">Please enter your phone number</span>
+                      <span *ngIf="
+                          formGroupGuest.controls['phone'].errors
+                            .pattern || nullValidator;
+                          else phoneLength
+                        ">Please enter a valid phone number</span>
+                      <ng-template #phoneLength>
+                        <span *ngIf="
+                            formGroupGuest.controls['phone'].errors
+                              .maxlength ||
+                            formGroupGuest.controls['phone'].errors
+                              .minlength
+                          ">Phone number length should be 10</span>
+                      </ng-template>
+                    </span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div *ngIf="!allLaneProducts;">
+            <div>
+              <form action="#" [formGroup]="formGroup" id="form-shipping" (ngSubmit)="submitForm()" novalidate>
+                <div class="row">
+                  <div class="col-sm-12 mb-1" *ngIf="loggedin">
+                    <h2 class="checkout-title mt-0 mb-1" *ngIf="!changeAddress">
+                      Add new address
+                    </h2>
+                    <h2 class="checkout-title mt-0 mb-1" *ngIf="changeAddress">
+                      Update address
+                    </h2>
+                  </div>
+                  <div class="col-sm-6 mb-1">
+                    <label>First Name *</label>
+                    <input type="text" class="form-control mb-0" name="firstname" formControlName="firstname" required />
+                    <span class="kd_error d-block" *ngIf="
+                        formGroup.controls['firstname'].errors &&
+                        formGroup.controls['firstname'].touched
+                      ">
+                      <span *ngIf="
+                          formGroup.controls['firstname'].errors.required
+                        ">Please enter your first name</span>
+                      <span *ngIf="
+                          formGroup.controls['firstname']?.errors.pattern;
+                          else firstnameLength
+                        ">Please enter a valid first name</span>
+                      <ng-template #firstnameLength>
+                        <span *ngIf="
+                            formGroup.controls['firstname']?.errors
+                              .maxlength
+                          ">First name is too long</span>
+                      </ng-template>
+                    </span>
+                  </div>
+
+                  <div class="col-sm-6 mb-1">
+                    <label>Last Name *</label>
+                    <input type="text" class="form-control mb-0" name="lastname" formControlName="lastname" required />
+                    <span class="kd_error d-block" *ngIf="
+                        formGroup.controls['lastname'].errors &&
+                        formGroup.controls['lastname'].touched
+                      ">
+                      <span *ngIf="
+                          formGroup.controls['lastname'].errors.required
+                        ">Please enter your last name</span>
+                      <span *ngIf="
+                          formGroup.controls['lastname']?.errors.pattern;
+                          else lastnameLength
+                        ">Please enter a valid last name</span>
+                      <ng-template #lastnameLength>
+                        <span *ngIf="
+                            formGroup.controls['lastname']?.errors
+                              .maxlength
+                          ">Last name is too long</span>
+                      </ng-template>
+                    </span>
+                  </div>
+                  <div class="col-sm-12 mb-1">
+                    <label>Phone *</label>
+                    <input type="tel" name="phone" class="form-control mb-0" formControlName="phone" required
+                      (keyup)="getvalue($event)" (keypress)="commonService.numberOnly($event)" />
+                    <span class="kd_error d-block" *ngIf="
+                        formGroup.controls['phone'].errors &&
+                        formGroup.controls['phone'].touched
+                      ">
+                      <span *ngIf="
+                          formGroup.controls['phone'].errors.required
+                        ">Please enter your phone number</span>
+                      <span *ngIf="
+                          formGroup.controls['phone'].errors.pattern ||
+                            nullValidator;
+                          else phone1Length
+                        ">Please enter a valid phone number</span>
+                      <ng-template #phone1Length>
+                        <span *ngIf="
+                            formGroup.controls['phone'].errors
+                              .maxlength ||
+                            formGroup.controls['phone'].errors.minlength
+                          ">Phone number length should be 10</span>
+                      </ng-template>
+                    </span>
+                  </div>
+                  <div class="col-sm-12 mb-1">
+                    <label>Address</label>
+                    <textarea class="form-control textarea mb-0" cols="8" rows="2" formControlName="address"
+                      placeholder=""></textarea>
+
+                    <span class="kd_error d-block" *ngIf="
+                        formGroup.controls['address'].errors &&
+                        formGroup.controls['address'].touched
+                      ">
+                      <span *ngIf="
+                          formGroup.controls['address'].errors.required
+                        ">Please enter your address</span>
+                      <span *ngIf="
+                          formGroup.controls['address']?.errors.pattern
+                        ">Please enter a valid address</span>
+                    </span>
+                  </div>
+
+                  <div class="col-sm-6 mb-1">
+                    <label>Country *</label>
+                    <ng-select formControlName="country" required (change)="getStates()" [items]="countries"
+                      bindLabel="name" bindValue="id" placeholder="Select Country" appendTo="body"
+                      [searchable]="true">
+                    </ng-select>
+                    <span class="kd_error d-block" *ngIf="
+                        formGroup.controls['country'].errors &&
+                        formGroup.controls['country'].touched
+                      ">
+                      <span *ngIf="
+                          formGroup.controls['country'].errors.required
+                        ">Please select your country</span>
+                    </span>
+                  </div>
+
+                  <div class="col-sm-6 mb-1">
+                    <label>State *</label>
+                    <ng-select formControlName="state" required (change)="getCities()" [items]="states"
+                      bindLabel="name" bindValue="id" placeholder="Select State" [searchable]="true">
+                    </ng-select>
+                    <span class="kd_error d-block" *ngIf="
+                        formGroup.controls['state'].errors &&
+                        formGroup.controls['state'].touched
+                      ">
+                      <span *ngIf="
+                          formGroup.controls['state'].errors.required
+                        ">Please select your state</span>
+                    </span>
+                  </div>
+                  <div class="col-sm-6 mb-1">
+                    <label>City *</label>
+                    <ng-select formControlName="city" required [items]="cities" bindLabel="name" bindValue="id" placeholder="Select City" appendTo="body"
+                      [searchable]="true">
+                    </ng-select>
+                    <span class="kd_error d-block" *ngIf="
+                        formGroup.controls['city'].errors &&
+                        formGroup.controls['city'].touched
+                      ">
+                      <span *ngIf="formGroup.controls['city'].errors.required">Please select your city</span>
+                    </span>
+                  </div>
+                  <div class="col-sm-6 mb-1">
+                    <label>Zip Code *</label>
+                    <input type="text" name="postcode" class="form-control mb-0"
+                      formControlName="postal_code" required />
+
+                    <span class="kd_error d-block" *ngIf="
+                        formGroup.controls['postal_code'].errors &&
+                        formGroup.controls['postal_code'].touched
+                      ">
+                      <span *ngIf="
+                          formGroup.controls['postal_code'].errors
+                            .required
+                        ">Please enter your zip code</span>
+                      <span *ngIf="
+                          formGroup.controls['postal_code'].errors
+                            .pattern;
+                          else postal_codeLength
+                        ">Please enter a valid zip code</span>
+                      <ng-template #postal_codeLength>
+                        <span *ngIf="
+                            formGroup.controls['postal_code'].errors
+                              .maxlength
+                          ">Zip Code length should be 12</span>
+                        <span *ngIf="
+                            formGroup.controls['postal_code'].errors
+                              .minlength
+                          ">Zip Code length should be 4</span>
+                      </ng-template>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Guest User -->
+                <div *ngIf="!loggedin">
+                  <div class="outer d-flex justify-content-between mt-1">
+                    <button type="submit" class="btn button" (click)="saveAddress('guest')" *ngIf="showUpdateBtn">
+                      <div *ngIf="!changeAddress" class="text font2 font_cap">
+                        Save &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                          style="font-size: 20px"></i><i *ngIf="!submittingForm" class="fa fa-paper-plane"
+                          aria-hidden="true"></i>
+                      </div>
+                      <div *ngIf="changeAddress" class="text font2 font_cap">
+                        Update &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                          style="font-size: 20px"></i>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <!-- End -->
+
+                <!--Grid row-->
+                <div *ngIf="loggedin">
+                  <div class="outer d-flex justify-content-between mt-1">
+                    <button type="submit" class="btn button" *ngIf="showUpdateBtn">
+                      <div *ngIf="!changeAddress" class="text font2 font_cap">
+                        Save &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                          style="font-size: 20px"></i><i *ngIf="!submittingForm" class="fa fa-paper-plane"
+                          aria-hidden="true"></i>
+                      </div>
+                      <div *ngIf="changeAddress" class="text font2 font_cap">
+                        Update &nbsp;&nbsp;<i *ngIf="submittingForm" class="fa fa-spinner fa-spin"
+                          style="font-size: 20px"></i><i *ngIf="!submittingForm" class="fa fa-paper-plane"
+                          aria-hidden="true"></i>
+                      </div>
+                    </button>
+
+                    <button *ngIf="changeAddress" (click)="cancelEdit()" type="button" class="btn button">
+                      <div *ngIf="changeAddress" class="text font2 font_cap">
+                        Cancel
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

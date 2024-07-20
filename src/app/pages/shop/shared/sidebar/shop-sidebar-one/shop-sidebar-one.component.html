@@ -1,0 +1,255 @@
+<div
+  class="sidebar-shop"
+  [ngClass]="toggle ? 'sidebar-filter' : 'sidebar'"
+><!-- *ngIf="totalProducts != 0" -->
+  <div [class.sidebar-filter-wrapper]="toggle">
+    <div class="widget widget-clean">
+      <label>FILTER BY</label>
+      <button (click)="clearFilter('all')" type="button" class="ml-auto small clear-filter-btn" *ngIf="queryParams?.brand_ids || queryParams?.min_price || queryParams?.max_price || queryParams?.attribute_values">Clear All<i class="fa fa-close ml-2 mr-0"></i></button>
+      <!-- <a [routerLink]="" class="sidebar-filter-clear">Clean All</a> -->
+    </div>
+    <div class="widget row px-4 pt-1 pb-0" *ngIf="queryParams?.brand_ids || queryParams?.min_price || queryParams?.max_price || queryParams?.attribute_values">
+      <div class="filter-section mx-1" *ngIf="queryParams?.brand_ids">
+        <button (click)="clearFilter('brand')" type="button" class="clear-filter-btn small" data-category="widget-4">Brand<i class="fa fa-close ml-2 mr-0"></i></button>
+      </div>
+      @for (item of shopData.attributes; track item.id; let index = $index) {
+      <div class="filter-section mx-1" *ngIf="displayAttributeFilter(item.values.data)">
+        <button (click)="clearFilter('attribute',item.values.data)" type="button" class="clear-filter-btn small" [attr.data-category]="'widgetatt-' + index">
+          {{ (item.filter_name !== '' && item.filter_name !== null) ? item.filter_name : item.name }}
+          <i class="fa fa-close ml-2 mr-0"></i>
+        </button>
+      </div>
+      }
+      <div class="filter-section mx-1" *ngIf="queryParams?.min_price || queryParams?.max_price">
+        <button (click)="clearFilter('price')" type="button" class="clear-filter-btn small" data-category="widget-5">Price<i class="fa fa-close ml-2 mr-0"></i></button>
+      </div>
+    </div>
+
+    <!-- <div class="widget widget-collapsible">
+            <h3 class="widget-title">
+                <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                    Category
+                </a>
+            </h3>
+
+            <div class="collapse show" id="widget-1">
+                <div class="scrolldiv" slimScroll [options]="opts" [scrollEvents]="scrollEvents">
+                    <div class="widget-body pt-0">
+                        <div class="filter-items filter-items-count">
+                            <div class="filter-item" *ngIf="currentCat && currentCat.name">
+                                <a href="javascript:;" [routerLink]="'/category'">
+                                    <i class="fa fa-chevron-left mr-2"></i>All Categories</a>
+                            </div>
+                            <div class="filter-item" *ngIf="parentCategory && parentCategory.name">
+                                <a href="javascript:;" [routerLink]="'/category/'+parentCategory.slug" class="d-flex align-items-center" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                                    {{parentCategory.name}}<i class="fa fa-chevron-down ml-auto"></i></a>
+                            </div>
+                            <div class="filter-item {{parentCategory && parentCategory.name ? 'pl-4':''}}" *ngIf="currentCat && currentCat.name">
+                                <a href="javascript:;" [routerLink]="'/category/'+currentCat.slug" class="d-flex align-items-center" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                                    {{currentCat.name}} <i class="fa fa-chevron-down ml-auto"></i>
+                                </a>
+                            </div>
+                            <div class="filter-item {{parentCategory && parentCategory.name ? 'pl-5':''}}" *ngFor="let item of shopData.categories">
+                                <a href="javascript:;" [routerLink]="'/category/'+item.slug" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{
+                                    item.name }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+    <!-- <div class="widget widget-collapsible">
+            <h3 class="widget-title mb-2">
+                <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
+                    Size
+                </a>
+            </h3>
+
+            <div class="collapse show" id="widget-2">
+                <div class="widget-body pt-0">
+                    <div class="filter-items">
+                        <div class="filter-item" *ngFor="let item of shopData.sizes; let index = index;">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" [id]="'size-' + index"
+                                    [checked]="containsAttrInUrl('size', item.slug)"
+                                    (change)="onAttrClick('size', item.slug)">
+                                <label class="custom-control-label" [for]="'size-' + index">{{ item.size }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+    <!-- <div class="widget widget-collapsible">
+            <h3 class="widget-title mb-2">
+                <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true" aria-controls="widget-3">
+                    Colour
+                </a>
+            </h3>
+
+            <div class="collapse show" id="widget-3">
+                <div class="widget-body pt-0">
+                    <div class="filter-colors">
+                        <a [routerLink]="" [queryParams]="{color: getUrlForAttrs('color', item.color_name), page: 1}"
+                            queryParamsHandling="merge" [style.background-color]="item.color"
+                            [class.selected]="containsAttrInUrl('color', item.color_name)"
+                            *ngFor="let item of shopData.colors">
+                            <span class="sr-only">Color Name</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+    <div class="widget widget-collapsible">
+      <h3 class="widget-title">
+        <a
+          data-toggle="collapse"
+          href="#widget-4"
+          role="button"
+          aria-expanded="true"
+          aria-controls="widget-4"
+        >
+          Brand
+        </a>
+      </h3>
+
+      <div class="collapse show" id="widget-4">
+        <div
+          class="scrolldiv"
+          slimScroll
+          [options]="opts"
+          [scrollEvents]="scrollEvents"
+        >
+          <div class="widget-body pt-0">
+            <div class="filter-items">
+              <div
+                class="filter-item"
+                *ngFor="let item of shopData.brands; let id = index"
+              >
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    [id]="'brand-' + id"
+                    (click)="onAttrClick('brand_ids', item.id)"
+                    [checked]="containsAttrInUrl('brand_ids', item.id)"
+                  />
+                  <label class="custom-control-label" [for]="'brand-' + id">{{
+                    item.name
+                  }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="widget widget-collapsible"
+      *ngFor="let item of shopData.attributes; let index = index"
+    >
+      <h3 class="widget-title">
+        <a
+          data-toggle="collapse"
+          href="#widgetatt-{{ index }}"
+          role="button"
+          aria-expanded="true"
+        >
+          {{
+            item.filter_name != "" && item.filter_name != null
+              ? item.filter_name
+              : item.name
+          }}
+        </a>
+      </h3>
+
+      <div class="collapse show" id="widgetatt-{{ index }}">
+        <div
+          class="scrolldiv"
+          slimScroll
+          [options]="opts"
+          [scrollEvents]="scrollEvents"
+        >
+          <div class="widget-body pt-0">
+            <div class="filter-items">
+              <div
+                class="filter-item"
+                *ngFor="let itemnest of item.values.data; let id = index"
+              >
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    [id]="'att-' + index + '' + id"
+                    (click)="onAttrClick('attribute_values', itemnest.id)"
+                    [checked]="
+                      containsAttrInUrl('attribute_values', itemnest.id)
+                    "
+                  />
+                  <label
+                    class="custom-control-label"
+                    [for]="'att-' + index + '' + id"
+                    >{{ itemnest.name }}</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget widget-collapsible">
+      <h3 class="widget-title">
+        <a
+          data-toggle="collapse"
+          href="#widget-5"
+          role="button"
+          aria-expanded="true"
+          aria-controls="widget-5"
+        >
+          Price
+        </a>
+      </h3>
+
+      <div class="collapse show" id="widget-5">
+        <div class="scrolldiv">
+          <div class="widget-body not-this pt-0 px-3">
+            <div class="filter-price pb-0">
+              <div class="filter-price-text d-flex justify-content-between">
+                <span>
+                  Price Range:&nbsp;
+                  <span class="filter-price-range"
+                    >${{ priceRange[0] }} - ${{ priceRange[1] }}</span
+                  >
+                </span>
+
+                <button class="pr-2" (click)="filterPrice()">Filter</button>
+              </div>
+
+              <div class="price-slider">
+                <!-- <nouislider #priceSlider [connect]="[true, true, true]" [ngModel]="priceRange" [min]="0"
+                                    [max]="100" [step]="1" [pageSteps]="10" (change)="changeFilterPrice($event)"
+                                    style="padding: 0 1.5rem;">
+                                </nouislider> -->
+              </div>
+
+              <div class="custom-slider">
+                <ngx-slider
+                  #priceSliderNew
+                  [(value)]="minValue"
+                  [(highValue)]="maxValue"
+                  [options]="options"
+                  (userChangeEnd)="changeFilterPrice($event)"
+                ></ngx-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

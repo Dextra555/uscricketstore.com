@@ -1,0 +1,458 @@
+<div class="main">
+  <section>
+    <molla-page-header title="pageTitle" subtitle="Shop"></molla-page-header>
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-6 col-12 m-auto">
+          <div class="page_title text-center">
+            <h3>
+              Rohit Sharma Lights Up US Cricket Store with Launch of CricKingdom
+              Cricket Academy: A Gallery of Unforgettable Moments”
+            </h3>
+          </div>
+        </div>
+        <div class="col-md-6 col-12 order-md-2 order-1">
+          <img
+            src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/banner.png"
+            class="mx-auto"
+            alt="slide"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="kd_section custom-kd_section">
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-6 d-flex align-items-center text-padding">
+          <div class="section_box">
+            <div class="section_description">
+              <p>
+                {{ contentData?.content1 }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-center mobile-css">
+          <div class="row w-100">
+            <div class="col-md-6 col-6 d-lg-flex d-md-flex align-items-center">
+              <div class="download-btn-div">
+                <img
+                  title="Download Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imageDownload"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+                  alt=""
+                  (click)="
+                    downloadImg(
+                      contentData?.image1,
+                      assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                    )
+                  "
+                />
+              </div>
+              <div class="preview-btn-div">
+                <img
+                  title="Preview Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imagePreview"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+                  alt=""
+                  (click)="showPreviewModal(contentData?.image1)"
+                />
+              </div>
+              <div class="video_list mob_mb50">
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    contentData?.image1
+                  }}"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-6 d-lg-flex d-md-flex align-items-center">
+              <div class="download-btn-div">
+                <img
+                  title="Download Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imageDownload"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+                  alt=""
+                  (click)="
+                    downloadImg(
+                      contentData?.image2,
+                      assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                    )
+                  "
+                />
+              </div>
+              <div class="preview-btn-div">
+                <img
+                  title="Preview Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imagePreview"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+                  alt=""
+                  (click)="showPreviewModal(contentData?.image2)"
+                />
+              </div>
+              <div class="video_list">
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    contentData?.image2
+                  }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd_section custom-kd_section Reverse">
+    <div class="own_container">
+      <div class="row Reverse">
+        <div class="col-md-6 d-flex align-items-center mobile-css">
+          <div class="row w-100">
+            <div
+              class="col-md-6 d-lg-flex d-md-flex align-items-center width-50-767"
+            >
+              <div class="video_list mob_mb50">
+                <div class="download-btn-div">
+                  <img
+                    title="Download Image"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    class="imageDownload"
+                    src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+                    alt=""
+                    (click)="
+                      downloadImg(
+                        contentData?.image3,
+                        assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                      )
+                    "
+                  />
+                </div>
+                <div class="preview-btn-div">
+                  <img
+                    title="Preview Image"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    class="imagePreview"
+                    src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+                    alt=""
+                    (click)="showPreviewModal(contentData?.image3)"
+                  />
+                </div>
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    contentData?.image3
+                  }}"
+                />
+              </div>
+            </div>
+            <div
+              class="col-md-6 d-lg-flex d-md-flex align-items-center width-50-767"
+            >
+              <div class="download-btn-div">
+                <img
+                  title="Download Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imageDownload"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+                  alt=""
+                  (click)="
+                    downloadImg(
+                      contentData?.image4,
+                      assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                    )
+                  "
+                />
+              </div>
+              <div class="preview-btn-div">
+                <img
+                  title="Preview Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imagePreview"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+                  alt=""
+                  (click)="showPreviewModal(contentData?.image4)"
+                />
+              </div>
+              <div class="video_list">
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    contentData?.image4
+                  }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-center text-padding">
+          <div class="section_box">
+            <div class="section_description">
+              <p>
+                {{ contentData?.content2 }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd_section custom-kd_section">
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-6 d-flex align-items-center text-padding">
+          <div class="section_box">
+            <div class="section_description">
+              <p>
+                {{ contentData?.content3 }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-center mobile-css">
+          <div class="row w-100">
+            <div class="col-md-6 col-6 d-lg-flex d-md-flex align-items-center">
+              <div class="download-btn-div">
+                <img
+                  title="Download Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imageDownload"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+                  alt=""
+                  (click)="
+                    downloadImg(
+                      contentData?.image5,
+                      assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                    )
+                  "
+                />
+              </div>
+              <div class="preview-btn-div">
+                <img
+                  title="Preview Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imagePreview"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+                  alt=""
+                  (click)="showPreviewModal(contentData?.image5)"
+                />
+              </div>
+              <div class="video_list mob_mb50">
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    contentData?.image5
+                  }}"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-6 d-lg-flex d-md-flex align-items-center">
+              <div class="download-btn-div">
+                <img
+                  title="Download Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imageDownload"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+                  alt=""
+                  (click)="
+                    downloadImg(
+                      contentData?.image6,
+                      assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                    )
+                  "
+                />
+              </div>
+              <div class="preview-btn-div">
+                <img
+                  title="Preview Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imagePreview"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+                  alt=""
+                  (click)="showPreviewModal(contentData?.image6)"
+                />
+              </div>
+              <div class="video_list">
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    contentData?.image6
+                  }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd_section custom-kd_section Reverse">
+    <div class="own_container">
+      <div class="row Reverse">
+        <div class="col-md-6 d-flex align-items-center mobile-css">
+          <div class="row w-100">
+            <div
+              class="col-md-6 d-lg-flex d-md-flex align-items-center width-50-767"
+            >
+              <div class="download-btn-div">
+                <img
+                  title="Download Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imageDownload"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+                  alt=""
+                  (click)="
+                    downloadImg(
+                      contentData?.image7,
+                      assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                    )
+                  "
+                />
+              </div>
+              <div class="preview-btn-div">
+                <img
+                  title="Preview Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imagePreview"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+                  alt=""
+                  (click)="showPreviewModal(contentData?.image7)"
+                />
+              </div>
+              <div class="video_list mob_mb50">
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    contentData?.image7
+                  }}"
+                />
+              </div>
+            </div>
+            <div
+              class="col-md-6 d-lg-flex d-md-flex align-items-center width-50-767"
+            >
+              <div class="download-btn-div">
+                <img
+                  title="Download Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imageDownload"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+                  alt=""
+                  (click)="
+                    downloadImg(
+                      contentData?.image8,
+                      assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                    )
+                  "
+                />
+              </div>
+              <div class="preview-btn-div">
+                <img
+                  title="Preview Image"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  class="imagePreview"
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+                  alt=""
+                  (click)="showPreviewModal(contentData?.image8)"
+                />
+              </div>
+              <div class="video_list">
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    contentData?.image8
+                  }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-center text-padding">
+          <div class="section_box">
+            <div class="section_description">
+              <p>
+                {{ contentData?.content4 }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="own_container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page_title text-center pb-0">
+          <h3>Photo Gallery</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="kd_section">
+    <div class="own_container">
+      <div class="row">
+        <div
+          *ngFor="let img of galleryData"
+          class="col-md-3 d-lg-flex my-5 d-md-flex justify-content-center align-items-center custom-width-767"
+        >
+          <div class="download-btn-div">
+            <img
+              title="Download Image"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              class="imageDownload"
+              src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/download.png"
+              alt=""
+              (click)="
+                downloadImg(
+                  img.image,
+                  assetPath+'assets/images/Rohit_Sharma_Event_Pictures/'
+                )
+              "
+            />
+          </div>
+          <div class="preview-btn-div">
+            <img
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Preview Image"
+              class="imagePreview"
+              src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/preview.png"
+              alt=""
+              (click)="showPreviewModal(img)"
+            />
+          </div>
+          <div class="video_list mob_mb50">
+            <img
+              src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                img.image
+              }}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

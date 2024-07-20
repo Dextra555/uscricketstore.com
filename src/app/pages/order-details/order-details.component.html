@@ -1,0 +1,583 @@
+<div class="main">
+  <section>
+    <molla-page-header title="pageTitle" subtitle="Shop"></molla-page-header>
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-6  d-none d-md-block">
+          <div class="page_title">
+            <h3>My Orders</h3>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <nav class="d-flex flex-row-reverse align-items-center h-100" aria-label="breadcrumb">
+            <ol class="breadcrumb kd_breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">My Orders</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bkg_img kd_section">
+    <div class="own_container">
+      <div style="background-color: #fff; padding: 20px;">
+
+        <div class="row">
+          <div class="col-md-3">
+            <molla-user-sidebar></molla-user-sidebar>
+          </div>
+          <div class="col-md-9 pl50">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="account_detail_form">
+                  <div class="form">
+                    <form>
+                      <div class="heading">
+                        <h2>Order Summary</h2>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div *ngIf="order">
+                  <div *ngFor="let innerOrder of order.orders">
+                    <!-- <div class="grey lighten-4 border border-gray-200 rounded fs-18 fw-500 lh-1 p-3">Order Summary
+                </div> -->
+                    <div class="row mb-3">
+                      <div class="pb-md-0 pb-md-3 col-md-6 col-12">
+                        <div role="list" class="v-list v-sheet theme--light v-list--dense">
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light">
+                            <div class="v-list-item__content fw-500">Order code
+                              :</div>
+                            <div class="v-list-item__content align-end">{{order.code}}</div>
+                          </div>
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light">
+                            <div class="v-list-item__content fw-500">Name
+                              :</div>
+                            <div class="v-list-item__content align-end">{{order.user.name}}</div>
+                          </div>
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light">
+                            <div class="v-list-item__content fw-500">Email
+                              :</div>
+                            <div class="v-list-item__content align-end">{{order.user.email}}</div>
+                          </div>
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light" *ngIf="order?.shipping_address?.firstname">
+                            <div class="v-list-item__content fw-500 align-self-baseline">Shipping Address
+                              :</div>
+                            <div class="v-list-item__content align-end"><span
+                                class="d-block lh-1-6">{{order.shipping_address.firstname}}
+                                {{order.shipping_address.lastname}}
+                              </span> <span class="d-block lh-1-6">{{order.shipping_address.address}},
+                                {{order.shipping_address.postal_code}}</span> <span
+                                class="d-block lh-1-6">{{order.shipping_address.city}},
+                                {{order.shipping_address.state}},
+                                {{order.shipping_address.country}}</span> <span
+                                class="lh-1-6">{{order.shipping_address.phone}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pt-md-0 col-md-6 col-12">
+                        <div role="list" class="v-list v-sheet theme--light v-list--dense">
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light">
+                            <div class="v-list-item__content fw-500">Total Order Amount
+                              :</div>
+                            <div class="v-list-item__content align-end">${{order.grand_total}}</div>
+                          </div>
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light">
+                            <div class="v-list-item__content fw-500">Payment Method
+                              :</div>
+                            <div class="v-list-item__content align-end text-capitalize">
+                              {{innerOrder.payment_type.replaceAll('_',' ')}}</div>
+                          </div>
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light">
+                            <div class="v-list-item__content fw-500">Payment Status
+                              :</div>
+                            <div class="v-list-item__content align-end text-capitalize">
+                              {{order.payment_status}} &nbsp;<a *ngIf="order.payment_status=='' || order.payment_status=='Initiated' || order.payment_status=='Failed'" (click)="payNow()" href="javascript:void(0)">Pay Now</a>
+                              <!-- <a href="{{order.payment_link}}" *ngIf="order.payment_status=='' || order.payment_status=='Initiated' || order.payment_status=='Failed'" target="_blank" class="d-block fw-600 ml-auto">Pay Now</a> -->
+                            </div>
+                          </div>
+
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light">
+                            <div class="v-list-item__content fw-500">Delivery type
+                              :</div>
+                            <div class="v-list-item__content align-end text-capitalize">standard</div>
+                          </div>
+                          <div tabindex="-1" role="listitem" class="v-list-item theme--light" *ngIf="order?.billing_address?.firstname">
+                            <div class="v-list-item__content fw-500 align-self-baseline">Billing Address
+                              :</div>
+                            <div class="v-list-item__content align-end"><span
+                                class="d-block lh-1-6">{{order.billing_address.firstname}}
+                                {{order.billing_address.lastname}}
+                              </span> <span class="d-block lh-1-6">{{order.billing_address.address}},
+                                {{order.billing_address.postal_code}}</span> <span
+                                class="d-block lh-1-6">{{order.billing_address.city}}, {{order.billing_address.state}},
+                                {{order.billing_address.country}}</span> <span
+                                class="lh-1-6">{{order.billing_address.phone}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="v-sheet theme--light elevation-0 white">
+                      <div>
+                        <ng-container *ngIf="!onlyLane && order.payment_status!='' && order.payment_status!='Initiated'">
+                          <div
+                            class="grey lighten-4 border border-gray-200 p-3 rounded d-flex justify-space-between align-center">
+                            <span class="fs-16 fw-500 lh-1">Order Details
+                            </span>
+                          </div>
+                          <div
+                            class="v-stepper order-steps mb-4 mb-sm-0 v-stepper--alt-labels v-sheet theme--light elevation-0">
+                            <div class="v-stepper__header">
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='order_placed' || innerOrder.delivery_status=='confirmed' || innerOrder.delivery_status=='processed' || innerOrder.delivery_status=='shipped' || innerOrder.delivery_status=='delivered')">
+                                <span class="v-stepper__step__step green"><i aria-hidden="true"
+                                    class="v-icon notranslate fa fa-check theme--light"></i></span>
+                                <div class="v-stepper__label">
+                                  Order Placed
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--error error-text"
+                                *ngIf="innerOrder.delivery_status=='cancelled'">
+                                <span class="v-stepper__step__step"></span>
+                                <div class="v-stepper__label">
+                                  Cancelled
+                                </div>
+                              </div>
+
+                              <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='order_placed' || innerOrder.delivery_status=='confirmed' || innerOrder.delivery_status=='processed' || innerOrder.delivery_status=='shipped' || innerOrder.delivery_status=='delivered')">
+                              <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light"
+                                *ngIf="innerOrder.delivery_status=='cancelled'">
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--error error-text"
+                                *ngIf="innerOrder.delivery_status=='cancelled'"><span
+                                  class="v-stepper__step__step">2</span>
+                                <div class="v-stepper__label">
+                                  Cancelled
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--active"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && innerOrder.delivery_status=='order_placed'">
+                                <span class="v-stepper__step__step green">2</span>
+                                <div class="v-stepper__label">
+                                  Confirmed
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='confirmed' || innerOrder.delivery_status=='processed' || innerOrder.delivery_status=='shipped' || innerOrder.delivery_status=='delivered')">
+                                <span class="v-stepper__step__step green"><i aria-hidden="true"
+                                    class="v-icon notranslate fa fa-check theme--light"></i></span>
+                                <div class="v-stepper__label">
+                                  Confirmed
+                                </div>
+                              </div>
+
+                              <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='confirmed' || innerOrder.delivery_status=='processed' || innerOrder.delivery_status=='shipped' || innerOrder.delivery_status=='delivered')">
+                              <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light"
+                                *ngIf="innerOrder.delivery_status=='cancelled' || (innerOrder.delivery_status!='confirmed' && innerOrder.delivery_status!='processed' && innerOrder.delivery_status!='shipped' && innerOrder.delivery_status!='delivered')">
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--error error-text"
+                                *ngIf="innerOrder.delivery_status=='cancelled'"><span
+                                  class="v-stepper__step__step">3</span>
+                                <div class="v-stepper__label">
+                                  Cancelled
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--active"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='confirmed')">
+                                <span class="v-stepper__step__step green">3</span>
+                                <div class="v-stepper__label">
+                                  Processed
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--inactive"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='order_placed')">
+                                <span class="v-stepper__step__step">3</span>
+                                <div class="v-stepper__label">
+                                  Processed
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='processed' || innerOrder.delivery_status=='shipped' || innerOrder.delivery_status=='delivered')">
+                                <span class="v-stepper__step__step green"><i aria-hidden="true"
+                                    class="v-icon notranslate fa fa-check theme--light"></i></span>
+                                <div class="v-stepper__label">
+                                  Processed
+                                </div>
+                              </div>
+
+                              <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='processed' || innerOrder.delivery_status=='shipped' || innerOrder.delivery_status=='delivered')">
+                              <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light"
+                                *ngIf="innerOrder.delivery_status=='cancelled' || ( innerOrder.delivery_status!='processed' && innerOrder.delivery_status!='shipped' && innerOrder.delivery_status!='delivered')">
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--error error-text"
+                                *ngIf="innerOrder.delivery_status=='cancelled'"><span
+                                  class="v-stepper__step__step">4</span>
+                                <div class="v-stepper__label">
+                                  Cancelled
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--active"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='processed')">
+                                <span class="v-stepper__step__step green">4</span>
+                                <div class="v-stepper__label">
+                                  Shipped
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--inactive"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='order_placed' || innerOrder.delivery_status=='confirmed')">
+                                <span class="v-stepper__step__step">4</span>
+                                <div class="v-stepper__label">
+                                  Shipped
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='shipped' || innerOrder.delivery_status=='delivered')">
+                                <span class="v-stepper__step__step green"><i aria-hidden="true"
+                                    class="v-icon notranslate fa fa-check theme--light"></i></span>
+                                <div class="v-stepper__label">
+                                  Shipped
+                                </div>
+                              </div>
+
+                              <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='shipped' || innerOrder.delivery_status=='delivered')">
+                              <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light"
+                                *ngIf="innerOrder.delivery_status=='cancelled' || (innerOrder.delivery_status!='shipped' && innerOrder.delivery_status!='delivered')">
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--error error-text"
+                                *ngIf="innerOrder.delivery_status=='cancelled'"><span
+                                  class="v-stepper__step__step">5</span>
+                                <div class="v-stepper__label">
+                                  Cancelled
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--active"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='shipped')">
+                                <span class="v-stepper__step__step green">5</span>
+                                <div class="v-stepper__label">
+                                  Delivered
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--inactive"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && (innerOrder.delivery_status=='order_placed' || innerOrder.delivery_status=='confirmed' || innerOrder.delivery_status=='processed')">
+                                <span class="v-stepper__step__step">5</span>
+                                <div class="v-stepper__label">
+                                  Delivered
+                                </div>
+                              </div>
+                              <div tabindex="-1" class="v-stepper__step v-stepper__step--complete"
+                                *ngIf="innerOrder.delivery_status!='cancelled' && ( innerOrder.delivery_status=='delivered')">
+                                <span class="v-stepper__step__step green"><i aria-hidden="true"
+                                    class="v-icon notranslate fa fa-check theme--light"></i></span>
+                                <div class="v-stepper__label">
+                                  Delivered
+                                </div>
+                              </div>
+                              <!---->
+                            </div>
+                          </div>
+                        </ng-container>
+                        <!---->
+                        <div class="grey lighten-4 p-4" *ngIf="innerOrder.courier_name">
+                          <div class="fw-700 fs-17 mb-3 text-center">Tracking information
+                          </div>
+                          <div class="row border-top border-gray-300 border-end no-gutters">
+                            <div class="border-bottom border-start border-gray-300 col-md-4 col-12">
+                              <div class="px-3 py-2 border-bottom border-gray-300 fw-500">Courier name
+                              </div>
+                              <div class="p-3">{{innerOrder.courier_name}}</div>
+                            </div>
+                            <div class="border-bottom border-start border-gray-300 col-md-4 col-12">
+                              <div class="px-3 py-2 border-bottom border-gray-300 fw-500">Tracking number
+                              </div>
+                              <div class="p-3">{{innerOrder.tracking_number}}</div>
+                            </div>
+                            <div class="border-bottom border-start border-gray-300 col-md-4 col-12">
+                              <div class="px-3 py-2 border-bottom border-gray-300 fw-500">Tracking url
+                              </div>
+                              <div class="p-3"><a href="{{innerOrder.tracking_url}}" target="_blank">Track
+                                </a></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="py-md-5">
+                          <div class="v-data-table theme--light">
+                            <div class="v-data-table__wrapper" *ngIf="hasProductType(innerOrder,'product')">
+                              <table class="table">
+                                <thead class="v-data-table-header">
+                                  <tr>
+                                    <th role="columnheader" scope="col" aria-label="#" class="text-start"><span>#</span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Product" class="text-start">
+                                      <span>Product
+                                      </span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Quantity" class="text-start">
+                                      <span>Quantity
+                                      </span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Unit price" class="text-start">
+                                      <span>Unit price
+                                      </span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Total" class="text-end"><span>Total
+                                      </span></th>
+                                    <th role="columnheader" *ngIf="innerOrder.delivery_status=='delivered'" scope="col"
+                                      aria-label="Total" class="text-end"><span>
+                                      </span></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <ng-container *ngFor="let product of innerOrder.products.data; let i = index">
+                                    <tr class="" *ngIf="!product.booked_slots || !product?.booked_slots?.booking_date">
+                                      <td class="text-start">
+                                        <div class="mobile-row-header">#</div><span class="d-block fw-600">{{i+1}}</span>
+                                      </td>
+                                      <td class="text-start">
+                                        <div class="mobile-row-header">Product</div>
+                                        <div class="d-flex align-center pb-1"><img src="{{product.thumbnail}}"
+                                            alt="Nike bat" class="size-70px mr-2 flex-shrink-0">
+                                          <div class="flex-grow-1 ms-4">
+                                            <div class="text-truncate-2">{{product.name}}</div>
+                                            <div><span class="me-4 py-1 fs-12"
+                                                *ngFor="let cobination of product.combinations"><span
+                                                  class="opacity-70">{{cobination.attribute}}</span> : <span
+                                                  class="fw-500">{{cobination.value}}</span></span></div>
+                                            <div class="addons" *ngIf="product && product.product_addons">
+                                              <span class="addon-val" *ngFor="let addon of product.product_addons">
+                                                <span class="addon-title">{{addon.name}}
+                                                  (+${{addon.price}})</span>
+                                              </span>
+                                            </div>
+                                            <div class="addons" *ngIf="product && product.booked_slots">
+                                              <div>Booking Date: {{product.booked_slots?.booking_date}}</div>
+                                              <div>People: {{product.booked_slots?.people}}</div>
+                                              <span class="addon-val">
+                                                <span class="addon-title" *ngFor="let bookedslot of product.booked_slots?.items; let i=index;">
+                                                  <span *ngIf="i==0">{{bookedslot.slot_start_time}}</span><span *ngIf="i+1==product.booked_slots?.items.length"> - {{bookedslot.slot_end_time}}</span></span>
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td class="text-start">
+                                        <div class="mobile-row-header">Quantity</div><span *ngIf="!product?.booked_slots?.booking_date"
+                                          class="d-block fw-600">{{product.quantity}}</span>
+                                      </td>
+                                      <td class="text-start">
+                                        <div class="mobile-row-header">Unit Price</div><span
+                                          class="d-block fw-600">${{itemTotal(product)}}</span>
+                                      </td>
+                                      <td class="text-end">
+                                        <div class="mobile-row-header">Total</div><span
+                                          class="d-block fw-600">${{product.total_with_addons}}</span>
+                                      </td>
+                                      <td class="text-start" *ngIf="innerOrder.delivery_status=='delivered'">
+                                        <a href="javascript:;" class="d-block fw-600 ml-auto"
+                                          (click)="addReview(product)">Write a Review</a>
+                                      </td>
+
+                                    </tr>
+                                  </ng-container>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="v-data-table__wrapper" *ngIf="hasProductType(innerOrder,'lane')">
+                              <table class="table">
+                                <thead class="v-data-table-header">
+                                  <tr>
+                                    <th role="columnheader" scope="col" aria-label="#" class="text-start"><span>#</span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Product" class="text-start">
+                                      <span>Service
+                                      </span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Price" class="text-start">
+                                      <span>Price
+                                      </span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Total" class="text-end"><span>Total
+                                      </span></th>
+                                    <th role="columnheader" *ngIf="innerOrder.delivery_status=='delivered'" scope="col"
+                                      aria-label="Total" class="text-end"><span>
+                                      </span></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <ng-container *ngFor="let product of innerOrder.products.data; let i = index">
+                                    <tr class="" *ngIf="product.booked_slots && product?.booked_slots?.booking_date">
+                                      <td class="text-start">
+                                        <div class="mobile-row-header">#</div><span class="d-block fw-600">{{i+1}}</span>
+                                      </td>
+                                      <td class="text-start">
+                                        <div class="mobile-row-header">Service</div>
+                                        <div class="d-flex align-center pb-1"><img src="{{product.thumbnail}}"
+                                            alt="Nike bat" class="size-70px mr-2 flex-shrink-0">
+                                          <div class="flex-grow-1 ms-4">
+                                            <div class="text-truncate-2">{{product.name}}</div>
+                                            <div><span class="me-4 py-1 fs-12"
+                                                *ngFor="let cobination of product.combinations"><span
+                                                  class="opacity-70">{{cobination.attribute}}</span> : <span
+                                                  class="fw-500">{{cobination.value}}</span></span></div>
+                                            <div class="addons" *ngIf="product && product.product_addons">
+                                              <span class="addon-val" *ngFor="let addon of product.product_addons">
+                                                <span class="addon-title">{{addon.name}}
+                                                  (+${{addon.price}})</span>
+                                              </span>
+                                            </div>
+                                            <div class="addons" *ngIf="product && product.booked_slots">
+                                              <div>Booking Date: {{product.booked_slots?.booking_date}}</div>
+                                              <div>People: {{product.booked_slots?.people}}</div>
+                                              <span class="addon-val">
+                                                <span class="addon-title" *ngFor="let bookedslot of product.booked_slots?.items; let i=index">
+                                                  <span *ngIf="i==0">{{bookedslot.slot_start_time}}</span><span *ngIf="i+1==product.booked_slots?.items.length"> - {{bookedslot.slot_end_time}}</span></span>
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td class="text-start">
+                                        <div class="mobile-row-header">Price</div><span
+                                          class="d-block fw-600">${{itemTotal(product)}}</span>
+                                      </td>
+                                      <td class="text-end">
+                                        <div class="mobile-row-header">Total</div><span
+                                          class="d-block fw-600">${{product.total_with_addons}}</span>
+                                      </td>
+                                      <td class="text-start" *ngIf="innerOrder.delivery_status=='delivered'">
+                                        <a href="javascript:;" class="d-block fw-600 ml-auto"
+                                          (click)="addReview(product)">Write a Review</a>
+                                      </td>
+                                    </tr>
+                                  </ng-container>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-md-5">
+                          <div class="col-md-6 col-xl-7 order-md-1 col-12 order-2">
+                            <div class="mt-5 ms-lg-5" *ngIf="innerOrder.payment_status=='paid'"><img
+                                src="{{assetPath}}assets/images/paid_sticker.svg"></div>
+                          </div>
+                          <div class="col-md-6 col-xl-5 order-md-2 col-12 order-1">
+                            <div role="list" class="v-list v-sheet theme--light v-list--dense">
+                              <div tabindex="-1" role="listitem" class="fw-500 v-list-item theme--light">
+                                <div class="v-list-item__content">Sub Total
+                                  :</div>
+                                <div class="v-list-item__content align-end col-4 justify-end">
+                                  ${{innerOrder.subtotal.toFixed(2)}}</div>
+                              </div>
+                              <div tabindex="-1" role="listitem" class="fw-500 v-list-item theme--light">
+                                <div class="v-list-item__content">Tax
+                                  :</div>
+                                <div class="v-list-item__content align-end col-4 justify-end">
+                                  ${{innerOrder.tax.toFixed(2)}}</div>
+                              </div>
+                              <div tabindex="-1" role="listitem" class="fw-500 v-list-item theme--light">
+                                <div class="v-list-item__content">Shipping Charge
+                                  :</div>
+                                <div class="v-list-item__content align-end col-4 justify-end">
+                                  ${{innerOrder.shipping_cost.toFixed(2)}}</div>
+                              </div>
+                              <div tabindex="-1" role="listitem" class="fw-500 v-list-item theme--light">
+                                <div class="v-list-item__content">Coupon discount : <br
+                                    *ngIf="innerOrder.coupon_code" /> <span
+                                    *ngIf="innerOrder.coupon_code">({{innerOrder.coupon_code}})</span>
+                                </div>
+                                <div class="v-list-item__content align-end col-4 justify-end">
+                                  ${{innerOrder.coupon_discount.toFixed(2)}}</div>
+                              </div>
+                            </div>
+                            <div class="grey lighten-4 border border-gray-200 rounded">
+                              <div tabindex="-1" class="fw-500 v-list-item theme--light">
+                                <div class="v-list-item__content">Total
+                                  :</div>
+                                <div class="v-list-item__content align-end col-4 justify-end px-0">
+                                  ${{innerOrder.grand_total}}</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="py-md-5" *ngIf="innerOrder.topups && innerOrder.topups.length">
+                          <div
+                          class="grey lighten-4 border border-gray-200 p-3 rounded d-flex justify-space-between align-center">
+                            <span class="fs-16 fw-500 lh-1">Topups
+                            </span>
+                          </div>
+                          <div class="v-data-table theme--light">
+                            <div class="v-data-table__wrapper">
+                              <table class="table">
+                                <thead class="v-data-table-header">
+                                  <tr>
+                                    <th role="columnheader" scope="col" aria-label="Product" class="text-start">
+                                      <span>#
+                                      </span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Product" class="text-start">
+                                      <span>Product
+                                      </span>
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="Payable Amount" class="text-end"><span>Payable Amount
+                                      </span>
+                                    </th>
+                                    <th role="columnheader" scope="col"
+                                      aria-label="Status" class="text-end"><span>Status
+                                      </span></th>
+                                    <th role="columnheader" scope="col"
+                                        aria-label="Action" class="text-end"><span>Action
+                                        </span></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="" *ngFor="let topup of innerOrder.topups; let i = index">
+                                    <td class="text-start">
+                                      <div class="mobile-row-header">#</div><span class="d-block fw-600">{{i+1}}</span>
+                                    </td>
+                                    <td class="text-start">
+                                      <div class="mobile-row-header">Product</div>
+                                      <div class="d-flex align-center pb-1">
+                                        <div class="flex-grow-1 ms-4">
+                                          <div class="text-truncate-2">{{topup.product.name}}</div>
+                                          <div class="addons" *ngIf="topup && topup.booked_slots">
+                                            <div>Booking Date: {{topup.booked_slots?.booking_date}}</div>
+                                            <span class="addon-val">
+                                              <span class="addon-title" *ngFor="let bookedslot of topup.booked_slots?.items;let i=index">
+                                                <span *ngIf="i==0">{{bookedslot.slot_start_time}}</span><span *ngIf="i+1==topup.booked_slots?.items.length"> - {{bookedslot.slot_end_time}}</span></span>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td class="text-end">
+                                      <div class="mobile-row-header">Payable Amount</div><span
+                                        class="d-block fw-600">${{topup.pending_amount}}</span>
+                                    </td>
+                                    <td class="text-end">
+                                      <div class="mobile-row-header">Status</div><span
+                                        class="d-block fw-600">{{topup.payment_status=='1'?"Paid":'Unpaid'}}</span>
+                                    </td>
+                                    <td class="text-start">
+                                      <a href="{{topup.payment_link}}" *ngIf="topup.payment_status=='0'" target="_blank" class="d-block fw-600 ml-auto">Pay Now</a>
+                                      <span *ngIf="topup.payment_status=='1'">N/A</span>
+                                    </td>
+
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

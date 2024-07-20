@@ -1,0 +1,12 @@
+<div class="account_sidebar">
+  <ul>
+    <li><a routerLink="/my-account" routerLinkActive="active"><span><i class="fa fa-th-large"></i></span> Dashboard</a></li>
+    <li><a routerLink="/orders" routerLinkActive="active" [ngClass]="{'active': orderActive.isActive}"><span><i class="fa fa-file-invoice-dollar"></i></span> Orders</a></li>
+    <li><a routerLink="/bookings" routerLinkActive="active"><span><i class="fa fa-list"></i></span> Bookings</a></li>
+    <li><a routerLink="/shipping-address" routerLinkActive="active"><span><i class="fa fa-list"></i></span> Addresses</a></li>
+    <li><a routerLink="/account-details" routerLinkActive="active"><span><i class="fa fa-user"></i></span> Account details</a></li>
+    <li><a routerLink="/wishlist" routerLinkActive="active"><span><i class="fa fa-heart"></i></span> Wishlist</a></li>
+    <li><a href="javascript:;" (click)="logout()"><span><i class="fa fa-sign-out-alt"></i></span> Logout</a></li>
+    <a routerLink="/order" routerLinkActive #orderActive="routerLinkActive" style="display: none"></a>
+  </ul>
+</div>

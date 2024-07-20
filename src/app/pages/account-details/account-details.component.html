@@ -1,0 +1,356 @@
+<div class="main">
+  <section>
+    <molla-page-header title="Account Details"></molla-page-header>
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-4 d-none d-md-block">
+          <div class="page_title">
+            <h3>Account Detalis</h3>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <nav
+            class="d-flex flex-row-reverse align-items-center h-100"
+            aria-label="breadcrumb"
+          >
+            <ol class="breadcrumb kd_breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Account Detalis
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style></style>
+  <section class="bkg_img kd_section">
+    <div class="own_container">
+      <div style="background-color: #fff; padding: 20px">
+        <div class="row">
+          <div class="col-md-3">
+            <molla-user-sidebar></molla-user-sidebar>
+          </div>
+          <div class="col-md-9 pl50">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="account_detail_form">
+                  <div class="form">
+                    <form
+                      [formGroup]="formGroup"
+                      id="user-form"
+                      (ngSubmit)="submitForm()"
+                      novalidate
+                    >
+                      <div class="heading">
+                        <h2>Account Details</h2>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group kd-form-group">
+                            <label for="register-email">Full Name *</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="name"
+                              name="name"
+                              formControlName="name"
+                            />
+                            <span
+                              class="kd_error d-block m-0"
+                              *ngIf="
+                                submittingForm ||
+                                (formGroup.controls['name'].errors &&
+                                  formGroup.controls['name'].touched)
+                              "
+                            >
+                              <span
+                                *ngIf="
+                                  formGroup.controls['name'].errors?.required
+                                "
+                                >Please enter your name</span
+                              >
+                              <span
+                                *ngIf="
+                                  formGroup.controls['name']?.errors?.pattern;
+                                  else nameLength
+                                "
+                                >Please enter a valid name</span
+                              >
+                              <ng-template #nameLength>
+                                <span
+                                  *ngIf="
+                                    formGroup.controls['name']?.errors?.maxlength
+                                  "
+                                  >Name is too long</span
+                                >
+                              </ng-template>
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group kd-form-group">
+                            <label for="register-email">Email *</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="email"
+                              name="email"
+                              formControlName="email"
+                            />
+                            <span
+                              class="kd_error d-block m-0"
+                              *ngIf="
+                                formGroup.controls['email'] &&
+                                formGroup.controls['email'].invalid &&
+                                formGroup.controls['email'].touched
+                              "
+                              >Please enter your email</span
+                            >
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group kd-form-group">
+                            <label for="register-email">Phone</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="phone"
+                              name="phone"
+                              formControlName="phone"
+                              (keyup)="getvalue($event)"
+                              (keypress)="commonService.numberOnly($event)"
+                            />
+                            <span
+                              class="kd_error d-block m-0"
+                              *ngIf="
+                                submittingForm ||
+                                (formGroup.controls['phone'].errors &&
+                                  formGroup.controls['phone'].touched)
+                              "
+                            >
+                              <span
+                                *ngIf="
+                                  formGroup.controls['phone'].errors?.pattern ||
+                                    nullValidator;
+                                  else phone1Length
+                                "
+                                >Please enter a valid phone number</span
+                              >
+                              <ng-template #phone1Length>
+                                <span
+                                  *ngIf="
+                                    formGroup.controls['phone'].errors?.maxlength ||
+                                    formGroup.controls['phone'].errors?.minlength
+                                  "
+                                  >Phone number length should be 10</span
+                                >
+                              </ng-template>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="heading mt30">
+                        <h2>Password Change</h2>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group kd-form-group">
+                            <label for="register-email">Old Password</label>
+                            <div class="input-group">
+                              <input
+                              type="{{ passwordVisibility['oldPassword'] ? 'text' : 'password' }}"
+                              class="form-control"
+                              id="oldPassword"
+                              name="oldPassword"
+                              formControlName="oldPassword"
+                              aria-label="Password" aria-describedby="eye-icon">
+                              <button (click)="togglePasswordVisibility('oldPassword')" class="btn btn-outline-secondary eye-icon" type="button" style="border:1px solid #ebebeb">
+                                <i [class]="passwordVisibility['oldPassword'] ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                              </button>
+                            </div>
+                            <span
+                              class="kd_error d-block m-0"
+                              *ngIf="
+                                passError &&
+                                formGroup.controls['oldPassword'].touched
+                              "
+                              >Please enter your old password</span
+                            >
+                            <span
+                              class="kd_error d-block m-0"
+                              *ngIf="
+                                formGroup.controls['oldPassword'] &&
+                                formGroup.controls['oldPassword'].invalid &&
+                                formGroup.controls['oldPassword'].errors
+                                  .minlength
+                              "
+                              >Please enter a valid password minimum 8
+                              characters long.</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group kd-form-group">
+                            <label for="register-email">New Password</label>
+                            <div class="input-group">
+                              <input
+                              type="{{ passwordVisibility['password'] ? 'text' : 'password' }}"
+                              class="form-control"
+                              id="password"
+                              name="password"
+                              formControlName="password"
+                              aria-label="Password" aria-describedby="eye-icon">
+                              <button (click)="togglePasswordVisibility('password')" class="btn btn-outline-secondary eye-icon" type="button" style="border:1px solid #ebebeb">
+                                <i [class]="passwordVisibility['password'] ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                              </button>
+                            </div>
+                            <span
+                              class="kd_error d-block m-0"
+                              *ngIf="
+                                formGroup.controls['password'] &&
+                                  formGroup.controls['password'].invalid &&
+                                  (formGroup.controls['password'].errors?.minlength || formGroup.controls['password'].errors?.pattern);
+                                else samePassword
+                              "
+                              >Password must of 8 characters with atleast one uppercase
+                              alphabet and a numeric value</span
+                            >
+                            <ng-template #samePassword>
+                              <span
+                                class="kd_error d-block m-0"
+                                *ngIf="
+                                  samePassError &&
+                                  formGroup.controls['password'].touched
+                                "
+                                >New password can not be same as old
+                                password</span
+                              >
+                            </ng-template>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group kd-form-group">
+                            <label for="register-email"
+                              >Confirm New Password</label
+                            >
+                            <div class="input-group">
+                              <input
+                              type="{{ passwordVisibility['confirmPassword'] ? 'text' : 'password' }}"
+                              class="form-control"
+                              id="confirmPassword"
+                              name="confirmPassword"
+                              formControlName="confirmPassword"
+                              aria-label="Password" aria-describedby="eye-icon">
+                              <button (click)="togglePasswordVisibility('confirmPassword')" class="btn btn-outline-secondary eye-icon" type="button" style="border:1px solid #ebebeb">
+                                <i [class]="passwordVisibility['confirmPassword'] ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                              </button>
+                            </div>
+                            <span
+                              class="kd_error d-block m-0"
+                              *ngIf="
+                                formGroup.controls['confirmPassword'] &&
+                                formGroup.controls['confirmPassword'].invalid &&
+                                formGroup.controls['confirmPassword'].touched
+                              "
+                              >Please confirm new password</span
+                            >
+                            <span
+                              class="kd_error d-block m-0"
+                              *ngIf="passwordMatchError"
+                            >
+                              Password does not match
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="d-flex flex-column align-center justify-center border rounded p-4 mb-3"
+                      >
+                        <div class="avatar-upload" *ngIf="image">
+                          <div
+                            class="v-avatar"
+                            style="
+                              height: 160px;
+                              min-width: 160px;
+                              width: 160px;
+                            "
+                          >
+                            <img src="{{ image }}" />
+                          </div>
+                          <label>
+                            <input
+                              type="file"
+                              id="avatar-input"
+                              (change)="onFileChange($event)"
+                              accept="image/png, image/jpg, image/jpeg"
+                            />
+                            <i class="fa fa-image"></i>
+                          </label>
+                        </div>
+                        <div
+                          class="avatar-upload"
+                          *ngIf="!image"
+                          [ngClass]="!image ? 'avtarStyle' : ''"
+                        >
+                          <div
+                            class="v-avatar"
+                            style="
+                              height: 160px;
+                              min-width: 160px;
+                              width: 160px;
+                            "
+                          >
+                            <span>{{ userName }}</span>
+                          </div>
+                          <label>
+                            <input
+                              type="file"
+                              id="avatar-input"
+                              (change)="onFileChange($event)"
+                              accept="image/png, image/jpg, image/jpeg"
+                            />
+                            <i class="fa fa-image"></i>
+                          </label>
+                        </div>
+                        <label
+                          for="avatar-input"
+                          class="border border-gray-300 fs-14 fw-500 grey lighten-4 mt-3 opacity-50 px-4 py-1 rounded c-pointer"
+                          >Select Image
+                        </label>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="outer">
+                            <button
+                              type="submit"
+                              class="btn button"
+                              style="padding: 10px 40px"
+                            >
+                              <span class="color_w">Save</span>&nbsp;&nbsp;<i
+                                *ngIf="submittingForm"
+                                class="fa fa-spinner fa-spin"
+                                style="font-size: 20px"
+                              ></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,24 @@
+:host {
+  ::ng-deep {
+    .product-nav-thumbs a {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .kd_search_input_group {
+    flex-direction: column;
+    gap: 5px;
+    border: 0;
+  }
+  input.form-control {
+    width: 100% !important;
+    padding-left: 10px;
+  }
+  .input-group-prepend {
+    border: 1px solid #fff;
+    margin: 0 auto;
+  }
+}

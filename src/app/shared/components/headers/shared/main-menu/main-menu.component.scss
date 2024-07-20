@@ -1,0 +1,23 @@
+.show {
+  opacity: 1;
+  visibility: visible;
+  top: 100%;
+}
+.noData {
+  color: #999;
+  font-weight: 300;
+  font-size: 1.3rem;
+  letter-spacing: 0;
+}
+.openSubMenu {
+  display: flex !important;
+  flex-flow: row wrap;
+}
+
+.menu-title {
+  cursor: pointer;
+}
+
+.menu a {
+  cursor: pointer !important;
+}

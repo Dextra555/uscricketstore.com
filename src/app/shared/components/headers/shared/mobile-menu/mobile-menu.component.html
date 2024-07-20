@@ -1,0 +1,124 @@
+<div class="mobile-menu-container">
+    <div class="mobile-menu-wrapper">
+        <span class="mobile-menu-close" (click)="hideMobileMenu()"><i class="icon-close"></i></span>
+
+        <form action="#" method="get" class="mobile-search mob-s">
+            <label for="mobile-search" class="sr-only">Search</label>
+            <input type="search" class="form-control" name="mobile-search" (input)="searchProducts($event)" id="mobile-search" placeholder="Search in..."
+                required>
+            <button class="btn btn-primary" (click)="submitSearchForm($event)"><i class="icon-search"></i></button>
+        </form>
+
+        <nav class="mobile-nav">
+            <ul class="mobile-menu">
+                <li *ngFor="let item of header_menu_left">
+                    <a 
+                    [queryParams]="{'brand_ids':item?.brands,'min_price':item?.start_price,'max_price':item?.end_price}"
+                    [routerLink]="'/category/'+item?.slug_category?.slug">
+                        {{item.name}}
+                        <span *ngIf="item.children_menus.length>0" class="mmenu-btn" (click)="submenuToggle($event)"></span>
+                    </a>
+                    <ng-container *ngIf="item.children_menus.length>0">
+                        <ul>
+                            <li *ngFor="let subcat of item.children_menus"><a [queryParams]="{'brand_ids':subcat?.brands,'min_price':subcat?.start_price,'max_price':subcat?.end_price}" [routerLink]="'/category/'+subcat?.slug_category?.slug">{{subcat.name}} 
+                                <span *ngIf="subcat.children_menus.length>0" class="mmenu-btn" (click)="submenuToggle($event)"></span></a>
+                                <ng-container *ngIf="subcat.children_menus.length>0">
+                                <ul>
+                                    <li  *ngFor="let nestedcat of subcat.children_menus">
+                                        <a [queryParams]="{'brand_ids':nestedcat?.brands,'min_price':nestedcat?.start_price,'max_price':nestedcat?.end_price}" [routerLink]="'/category/'+nestedcat?.slug_category?.slug">{{nestedcat.name}}
+                                            <span *ngIf="nestedcat.children_menus.length>0" class="mmenu-btn" (click)="submenuToggle($event)"></span></a>
+                                        <ng-container *ngIf="nestedcat.children_menus.length>0">
+                                            <ul>
+                                                <li *ngFor="let nestedcatnew of nestedcat.children_menus">
+                                                    <a [queryParams]="{'brand_ids':nestedcatnew?.brands,'min_price':nestedcatnew?.start_price,'max_price':nestedcatnew?.end_price}"
+                                                    [routerLink]="'/category/'+nestedcatnew?.slug_category?.slug">{{nestedcatnew.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </ng-container>
+                                    </li>
+                                </ul>
+                                </ng-container>
+                            </li>
+                        </ul>
+                    </ng-container>
+                </li>
+                <li *ngFor="let item of header_menu_right">
+                    <a 
+                    [queryParams]="{'brand_ids':item?.brands,'min_price':item?.start_price,'max_price':item?.end_price}"
+                    [routerLink]="'/category/'+item?.slug_category?.slug">
+                        {{item.name}}
+                        <span *ngIf="item.children_menus.length>0" class="mmenu-btn" (click)="submenuToggle($event)"></span>
+                    </a>
+                    <ng-container *ngIf="item.children_menus.length>0">
+                        <ul>
+                            <li *ngFor="let subcat of item.children_menus"><a [queryParams]="{'brand_ids':subcat?.brands,'min_price':subcat?.start_price,'max_price':subcat?.end_price}" [routerLink]="'/category/'+subcat?.slug_category?.slug">{{subcat.name}}
+                                <span *ngIf="subcat.children_menus.length>0" class="mmenu-btn" (click)="submenuToggle($event)"></span></a>
+                                <ng-container *ngIf="subcat.children_menus.length>0">
+                                <ul>
+                                    <li  *ngFor="let nestedcat of subcat.children_menus">
+                                        <a [queryParams]="{'brand_ids':nestedcat?.brands,'min_price':nestedcat?.start_price,'max_price':nestedcat?.end_price}" [routerLink]="'/category/'+nestedcat?.slug_category?.slug">{{nestedcat.name}}
+                                            <span *ngIf="nestedcat.children_menus.length>0" class="mmenu-btn" (click)="submenuToggle($event)"></span>
+                                        </a>
+                                        <ng-container *ngIf="nestedcat.children_menus.length>0">
+                                            <ul>
+                                                <li *ngFor="let nestedcatnew of nestedcat.children_menus">
+                                                    <a [queryParams]="{'brand_ids':nestedcatnew?.brands,'min_price':nestedcatnew?.start_price,'max_price':nestedcatnew?.end_price}"
+                                                    [routerLink]="'/category/'+nestedcatnew?.slug_category?.slug">{{nestedcatnew.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </ng-container>
+                                    </li>
+                                </ul>
+                                </ng-container>
+                            </li>
+                        </ul>
+                    </ng-container>
+                </li>
+                <li><a routerLink="/book-a-lane">Book A Lane</a>
+                    <!-- <span class="newspan">New</span> -->
+                  </li>
+                <li>
+                    <a routerLink="/summercamp">
+                        <div class="text font1">Summer Camp</div>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/academy">
+                        <div class="text font1">Academy</div>
+                    </a>
+                </li>
+                
+                <!-- <li>
+                    <a routerLink="/elements">
+                        Elements
+                        <span class="mmenu-btn" (click)="submenuToggle($event)"></span>
+                    </a>
+                    <ul>
+                        <li><a routerLink="/elements/products">Products</a></li>
+                        <li><a routerLink="/elements/typography">Typography</a></li>
+                        <li><a routerLink="/elements/titles">Titles</a></li>
+                        <li><a routerLink="/elements/banners">Banners</a></li>
+                        <li><a routerLink="/elements/product-category">Product Category</a></li>
+                        <li><a routerLink="/elements/video-banners">Video Banners</a></li>
+                        <li><a routerLink="/elements/buttons">Buttons</a></li>
+                        <li><a routerLink="/elements/accordions">Accordions</a></li>
+                        <li><a routerLink="/elements/tabs">Tabs</a></li>
+                        <li><a routerLink="/elements/testimonials">Testimonials</a></li>
+                        <li><a routerLink="/elements/blog-posts">Blog Posts</a></li>
+                        <li><a routerLink="/elements/portfolio">Portfolio</a></li>
+                        <li><a routerLink="/elements/cta">Call to Action</a></li>
+                        <li><a routerLink="/elements/icon-boxes">Icon Boxes</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+        </nav>
+
+        <div class="social-icons" *ngIf="social_links">
+            <a *ngFor="let item of social_links | keyvalue" class="social-icon" href="{{item.value}}" target="_blank"><i class="fab fa-{{item.key}}"></i></a>
+            <!-- <a href="javascript:;" class="social-icon" title="Facebook"><i class="icon-facebook-f"></i></a>
+            <a href="javascript:;" class="social-icon" title="Twitter"><i class="icon-twitter"></i></a>
+            <a href="javascript:;" class="social-icon" title="Instagram"><i class="icon-instagram"></i></a>
+            <a href="javascript:;" class="social-icon" title="Youtube"><i class="icon-youtube"></i></a> -->
+        </div>
+    </div>
+</div>

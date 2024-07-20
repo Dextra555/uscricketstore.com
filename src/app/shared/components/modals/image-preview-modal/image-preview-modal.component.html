@@ -1,0 +1,88 @@
+<div class="modal-body">
+  <div class="form-box">
+    <button type="button" class="close" (click)="closeModal()">
+      <span aria-hidden="true"><i class="icon-close"></i></span>
+    </button>
+    <div class="form-footer">
+      <div
+        *ngIf="image.id; else otherImage"
+        id="myCarousel"
+        class="carousel slide carousel-fade w-100"
+        data-ride="carousel"
+      >
+        <div class="carousel-inner p-0">
+          <div class="carousel-item active">
+            <div class="mask flex-center">
+              <div
+                class="product-details-top product_detail_page_box skeleton-body horizontal"
+              >
+                <img
+                  src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{
+                    selectedImage
+                  }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+          *ngIf="id > 9"
+          class="carousel-control-prev"
+          href="#myCarousel"
+          role="button"
+          data-slide="prev"
+          (click)="prevClick(id)"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          *ngIf="id < 240"
+          class="carousel-control-next"
+          href="#myCarousel"
+          role="button"
+          (click)="nextClick(id)"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+        <div _ngcontent-vwa-c90="" class="outer carousalImg">
+          <a
+            _ngcontent-vwa-c90=""
+            class="btn button"
+            (click)="
+              downloadImg(
+                selectedImage,
+                '{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/'
+              )
+            "
+            ><div _ngcontent-vwa-c90="" class="text font1">Download</div></a
+          >
+        </div>
+      </div>
+      <ng-template #otherImage>
+        <div
+          class="product-details-top product_detail_page_box skeleton-body horizontal"
+        >
+          <img
+            src="{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/{{ image }}"
+          />
+        </div>
+        <div _ngcontent-vwa-c90="" class="outer singleImg">
+          <a
+            _ngcontent-vwa-c90=""
+            class="btn button"
+            (click)="
+              downloadImg(
+                image,
+                '{{assetPath}}assets/images/Rohit_Sharma_Event_Pictures/'
+              )
+            "
+            ><div _ngcontent-vwa-c90="" class="text font1">Download</div></a
+          >
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

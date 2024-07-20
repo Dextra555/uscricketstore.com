@@ -1,0 +1,269 @@
+<!-- <div class="heading text-center mt-4 mb-4" contentAnim aniName="blurIn">
+    <h3 class="text-secondary">Recent Arrivals</h3>
+    <h6>New Spring Styles</h6>
+</div> -->
+<!-- <owl-carousel carouselClasses="owl-theme carousel-with-shadow owl-products" *ngIf="!loaded else loadedBlock"
+    [options]="newSlider">
+    <div class="skel-pro" *ngFor="let item of [1,2,3,4,5,6]"></div>
+</owl-carousel> -->
+<!-- <ng-template #loadedBlock>
+    <owl-carousel carouselClasses="owl-theme carousel-with-shadow owl-products" [options]="newSlider">
+        <molla-product-twelve [product]="product" *ngFor="let product of products"></molla-product-twelve>
+    </owl-carousel>
+</ng-template> -->
+
+<!--
+<section class="kd_section">
+            <div class="own_container">
+                <div class="product_list">
+
+                </div>
+            </div>
+        </section> -->
+<div *ngIf="!loaded; else loadedBlock">
+  <div class="row">
+    <div
+      class="skel-single-post"
+      [ngClass]="'col-md-4'"
+      *ngFor="
+        let item of [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+          21
+        ]
+      "
+    ></div>
+  </div>
+</div>
+<ng-template #loadedBlock>
+  <div
+    class="card-product-header"
+    *ngIf="loaded && products.length == 0; else productsBlock"
+  >
+    <div class="text-center">
+      <i
+        class="icon-shopping-cart wishlist-empty d-block"
+        style="font-size: 15rem; line-height: 1"
+      ></i>
+      <span class="d-block mt-2">No products found</span>
+    </div>
+  </div>
+  <ng-template #productsBlock>
+    <div class="row"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="loadItems()">
+      <div
+        class="col-md-4 col-sm-6 custom-1200"
+        *ngFor="let product of products; let inx =index"
+      >
+        <div class="product product_1">
+          <div class="product_img">
+            <span
+              class="product-label label-custom relative px-2"
+              *ngIf="product && product.discount > 0"
+            >
+              <span *ngIf="product.discount_type == 'percent'"
+                >{{ product.discount?.toString().replace(".00", "") }}%
+                OFF</span
+              >
+              <span *ngIf="product.discount_type == 'flat'"
+                >Flat ${{
+                  product.discount?.toString().replace(".00", "")
+                }}
+                OFF</span
+              >
+            </span>
+            <img
+              (click)="navigate(product)"
+              [src]="
+                product.thumbnail_image
+                  ? product.thumbnail_image
+                  : assetPath+'assets/images/placeholder.jpg'
+              "
+            />
+            <!-- <ng-container
+              *ngIf="
+                !product.inventory || product.inventory <= 0;
+                else secondBlock3
+              "
+            >
+              <div class="sold_out">
+                <img src="{{assetPath}}assets/images/imgpsh_fullsize_anim.png" />
+              </div>
+            </ng-container> -->
+            <ng-template #secondBlock3>
+              <div
+                class="sold_out"
+                *ngIf="!product.stock || product.stock == 0"
+              >
+                <img src="{{assetPath}}assets/images/imgpsh_fullsize_anim.png" />
+              </div>
+            </ng-template>
+            <div class="wishlist_over_img" *ngIf="!product.wishlisted">
+              <a href="javascript:;" (click)="addToWish(product)"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </div>
+            <div class="wishlist_over_img" *ngIf="product.wishlisted">
+              <a href="javascript:;" (click)="removeFromWish(product)"
+                ><i class="fa fa-heart red-icon"></i
+              ></a>
+            </div>
+            <div class="product_button">
+              <div class="d-flex flex-row bd-highlight">
+                <ng-container
+                  *ngIf="
+                    !product.inventory || product.inventory <= 0;
+                    else secondBlock
+                  "
+                >
+                  <div class="bd-highlight w-50">
+                    <a
+                      class="btn btn-black"
+                      href="javascript:;"
+                      (click)="addToCart(product)"
+                      ><i class="fa fa-shopping-cart"></i> Add to cart
+                      <i
+                        *ngIf="product.loading"
+                        class="fa fa-spinner fa-spin ml-1"
+                        style="font-size: 16px"
+                      ></i
+                    ></a>
+                  </div>
+                </ng-container>
+                <ng-template #secondBlock>
+                  <div
+                    class="bd-highlight w-50"
+                    *ngIf="!product.stock || product.stock == 0"
+                  >
+                    <a
+                      class="btn btn-black"
+                      href="javascript:;"
+                      (click)="addToCart(product)"
+                      ><i class="fa fa-shopping-cart"></i> Add to cart
+                      <i
+                        *ngIf="product.loading"
+                        class="fa fa-spinner fa-spin ml-1"
+                        style="font-size: 16px"
+                      ></i
+                    ></a>
+                  </div>
+                  <div
+                    class="bd-highlight w-50"
+                    *ngIf="product.stock && product.stock != 0"
+                  >
+                    <a
+                      class="btn btn-black"
+                      href="javascript:;"
+                      (click)="addToCart(product)"
+                      ><i class="fa fa-shopping-cart"></i> Add to cart
+                      <i
+                        *ngIf="product.loading"
+                        class="fa fa-spinner fa-spin ml-1"
+                        style="font-size: 16px"
+                      ></i
+                    ></a>
+                  </div>
+                </ng-template>
+                <div class="bd-highlight w-50">
+                  <a
+                    class="btn btn-orange"
+                    (click)="quickView(product, loaded)"
+                    href="javascript:;"
+                    ><i class="fa fa-eye"></i> Quick View</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product_details" (click)="navigate(product)">
+            <h3>{{ product.name }} <span *ngIf="product.is_new" class="new-product-label">New</span></h3>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-6">
+              <div
+                *ngIf="
+                  product.base_discounted_price > 0 &&
+                  product.base_discounted_price != product.base_price
+                "
+                class="product_price"
+              >
+                <p>
+                  ${{ product.base_discounted_price.toFixed(2) }}
+                  <del>${{ product.base_price.toFixed(2) }}</del>
+                </p>
+              </div>
+              <div
+                *ngIf="
+                  !product.base_discounted_price ||
+                  product.base_discounted_price == product.base_price ||
+                  product.base_discounted_price == 0
+                "
+                class="product_price"
+              >
+                <p>${{ product.base_price.toFixed(2) }}</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-6">
+              <div class="product_cart_button text-right">
+                <ng-container
+                  *ngIf="
+                    !product.inventory || product.inventory <= 0;
+                    else secondBlock2
+                  "
+                >
+                  <a
+                    class="font1"
+                    href="javascript:;"
+                    (click)="addToCart(product)"
+                    ><img
+                      src="{{assetPath}}assets/images/shopping-cart-orange.svg"
+                      width="20" />
+                    Add to cart
+                    <i
+                      *ngIf="product.loading"
+                      class="fa fa-spinner fa-spin ml-1"
+                      style="font-size: 16px"
+                    ></i
+                  ></a>
+                </ng-container>
+                <ng-template #secondBlock2>
+                  <a
+                    class="font1"
+                    href="javascript:;"
+                    *ngIf="!product.stock || product.stock == 0"
+                    ><img
+                      src="{{assetPath}}assets/images/shopping-cart-orange.svg"
+                      width="20" />
+                    Add to cart
+                    <i
+                      *ngIf="product.loading"
+                      class="fa fa-spinner fa-spin ml-1"
+                      style="font-size: 16px"
+                    ></i
+                  ></a>
+                  <a
+                    class="font1"
+                    href="javascript:;"
+                    (click)="addToCart(product)"
+                    *ngIf="product.stock && product.stock != 0"
+                    ><img
+                      src="{{assetPath}}assets/images/shopping-cart-orange.svg"
+                      width="20" />
+                    Add to cart
+                    <i
+                      *ngIf="product.loading"
+                      class="fa fa-spinner fa-spin ml-1"
+                      style="font-size: 16px"
+                    ></i
+                  ></a>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ng-template>

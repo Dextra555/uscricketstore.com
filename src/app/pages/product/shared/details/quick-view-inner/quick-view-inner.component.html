@@ -1,0 +1,709 @@
+<div
+  class="product-details-top product_detail_page_box skeleton-body horizontal"
+>
+  <div
+    class="row skel-pro-single"
+    [class.loaded]="loaded1 ? loaded1 == 'yes' : loaded"
+  >
+    <div class="col-md-6">
+      <div class="gallery-box">
+        <div class="skel-product-gallery"></div>
+        <div [ngbNavOutlet]="nav"></div>
+        <ul
+          ngbNav
+          #nav="ngbNav"
+          [(activeId)]="active"
+          (navChange)="onNavChange($event)"
+          class="nav-tabs preview-thumbnail"
+        >
+          <li
+            *ngFor="let item of product?.photos; let i = index"
+            [ngbNavItem]="i"
+            class="mb-2"
+          >
+            <a ngbNavLink><img [src]="item" alt="{{product?.name ?? 'product'}}- Image {{i+1}}" (click)="setActiveIndex(i)" /></a>
+            <ng-template ngbNavContent>
+              <div class="preview-pic" *ngIf="product">
+                <img alt="{{product?.name ?? 'product'}}- Image {{i+1}}" [src]="item" />
+              </div>
+            </ng-template>
+          </li>
+        </ul>
+
+        <a
+          href="javascript:;"
+          class="btn-product-gallery"
+          (click)="openLightBox()"
+        >
+          <i class="icon-arrows"></i>
+        </a>
+      </div>
+      <!-- <div class="preview-pic tab-content" *ngIf="product">
+                <div class="tab-pane" *ngFor="let item of product?.photos; let i=index;" id="pic-{{i}}" [class.active]="i==0"><img [src]="item" /></div>
+              </div> -->
+      <!-- <ul class="preview-thumbnail nav nav-tabs">
+                <li *ngFor="let item of product?.photos; let i=index;"><a [class.active]="i==0" data-target="#pic-{{i}}" data-toggle="tab"><img [src]="item" /></a></li>
+              </ul> -->
+    </div>
+
+    <div class="col-md-6" *ngIf="product">
+      <div
+        class="product-dtl"
+        *ngIf="product.product_type != 'lane'; else laneBlock"
+      >
+        <div class="product-info">
+          <span class="product-name">{{ product.name }} <span *ngIf="product.is_new" class="new-product-label">New</span></span>
+          <!-- <div class="ratings-container">
+                        <div class="ratings">
+                            <div class="ratings-val" [style.width]="review.rating * 20 + '%'"></div>
+                            <span class="tooltip-text">{{ review.rating }}</span>
+                        </div>
+                    </div> -->
+          <div
+            class="reviews-counter"
+            *ngIf="
+              product &&
+              product.review_summary &&
+              product.review_summary.total_count > 0
+            "
+          >
+            <div class="rate disabled-reviews">
+              <input
+                type="radio"
+                id="star5"
+                name="rate"
+                value="5"
+                [checked]="product.review_summary.average == 5"
+              />
+              <label for="star5" title="text">5 stars</label>
+              <input
+                type="radio"
+                id="star4"
+                name="rate"
+                value="4"
+                [checked]="product.review_summary.average == 4"
+              />
+              <label for="star4" title="text">4 stars</label>
+              <input
+                type="radio"
+                id="star3"
+                name="rate"
+                value="3"
+                [checked]="product.review_summary.average == 3"
+              />
+              <label for="star3" title="text">3 stars</label>
+              <input
+                type="radio"
+                id="star2"
+                name="rate"
+                value="2"
+                [checked]="product.review_summary.average == 2"
+              />
+              <label for="star2" title="text">2 stars</label>
+              <input
+                type="radio"
+                id="star1"
+                name="rate"
+                value="1"
+                [checked]="product.review_summary.average == 1"
+              />
+              <label for="star1" title="text">1 star</label>
+            </div>
+            <span>{{ product.review_summary.total_count }} Reviews</span>
+          </div>
+          <div
+            class="product-price-discount"
+            *ngIf="
+              priceBeforeDiscountCalculate() &&
+                priceBeforeDiscountCalculate() > 0;
+              else elseBlock
+            "
+          >
+            <span>${{ selectedPrice.toFixed(2) }}</span>
+            <span class="line-through"
+              >${{ priceBeforeDiscountCalculate() }}</span
+            >
+
+            <span
+              class="product-label label-custom relative px-2"
+              *ngIf="product && product.discount > 0"
+            >
+              <span *ngIf="product.discount_type == 'percent'"
+                >{{ product.discount?.toString().replace(".00", "") }}%
+                OFF</span
+              >
+              <span *ngIf="product.discount_type == 'flat'"
+                >Flat ${{
+                  product.discount?.toString().replace(".00", "")
+                }}
+                OFF</span
+              >
+            </span>
+            <!-- <span class="line-through">${{maxPrice.toFixed(2)}}</span> -->
+          </div>
+          <ng-template #elseBlock>
+            <div class="product-price-discount">
+              <span>${{ selectedPrice.toFixed(2) }}</span>
+              <span
+                class="product-label label-new relative"
+                *ngIf="product && product.discount > 0"
+              >
+                <span *ngIf="product.discount_type == 'percent'"
+                  >{{ product.discount?.toString().replace(".00", "") }}%
+                  OFF</span
+                >
+                <span *ngIf="product.discount_type == 'flat'"
+                  >Flat ${{
+                    product.discount?.toString().replace(".00", "")
+                  }}
+                  OFF</span
+                >
+              </span>
+            </div>
+          </ng-template>
+
+          <!-- <span class="product-label label-sale" *ngIf="product.sale_price">Sale</span>
+                    <span class="product-label label-top" *ngIf="product.top">Top</span>
+                    <span class="product-label label-out" *ngIf="!product.stock || product.stock == 0">Out Of Stock</span> -->
+        </div>
+        <div class="wish-box d-flex">
+          <table class="product_table_info">
+            <tbody>
+              <tr *ngIf="!inventory || inventory <= 0; else secondBlock" class="d-flex justify-content-center align-items-center">
+                <th>Available</th>
+                <td class="text-danger p-2 px-3 ml-3" style="font-weight:bold; border:1px solid #dc3545;">Out of Stock</td>
+              </tr>
+              <ng-template #secondBlock>
+                <tr *ngIf="!stock || stock == 0; else elseBlock2" class="d-flex justify-content-center align-items-center">
+                  <th>Available</th>
+                  <td class="text-danger p-2 px-3 ml-3" style="font-weight:bold; border:1px solid #dc3545;">Out of Stock</td>
+                </tr>
+              </ng-template>
+              <ng-template #elseBlock2>
+                <tr class="d-flex justify-content-center align-items-center">
+                  <th>Available</th>
+                  <td class="text-success p-2 px-3 ml-3" style="font-weight:bold; border:1px solid #04d719;">In Stock</td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+          <div class="ml-2 ml-auto">
+            <button
+              type="button"
+              *ngIf="!product.wishlisted"
+              class="primary--text pa-1 lh-1 d-flex align-center"
+              (click)="addToWish()"
+            >
+              <i class="fa fa-heart ts-02 fs-14 mr-1"></i>
+              <span class="fw-500">Add to Wishlist </span>
+            </button>
+            <button
+              type="button"
+              *ngIf="product.wishlisted"
+              class="primary--text pa-1 lh-1 d-flex align-center"
+              (click)="removeFromWish()"
+            >
+              <i class="fa fa-heart red-icon ts-02 fs-14 mr-1"></i>
+              <span class="fw-500">Remove from Wishlist </span>
+            </button>
+          </div>
+        </div>
+        <p [innerHtml]="product.short_description"></p>
+        <!-- <div class="row">
+                    <div class="col-md-6">
+                        <label for="size">Size</label>
+                        <select id="size" name="size" class="form-control">
+                            <option>S</option>
+                            <option>M</option>
+                            <option>L</option>
+                            <option>XL</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="color">Color</label>
+                        <select id="color" name="color" class="form-control">
+                            <option>Blue</option>
+                            <option>Green</option>
+                            <option>Red</option>
+                        </select>
+                    </div>
+                </div> -->
+        <div
+          class="section"
+          style="padding-bottom: 5px"
+          *ngFor="let item of product.variation_options"
+        >
+          <h6 class="title-attr">
+            <b>{{ item.name }}</b>
+          </h6>
+          <div>
+            <div
+              class="attr2"
+              *ngFor="let itemvalues of item.values"
+              (click)="selectItem(item.id, itemvalues.id)"
+              [ngClass]="
+                selectedItems.includes(item.id + ':' + itemvalues.id)
+                  ? 'active'
+                  : ''
+              "
+            >
+              {{ itemvalues.name }}
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="sidebar-shop p-details-addon d-block mb-3"
+          *ngIf="
+            product &&
+            product.addons.length > 0 &&
+            addonInventory(product.addons) > 0
+          "
+        >
+          <div class="widget widget-collapsible">
+            <h3 class="widget-title mb-0">
+              <a
+                (click)="collapse.toggle()"
+                [attr.aria-expanded]="!gfg"
+                aria-controls="collapseExample"
+              >
+                Addons
+              </a>
+            </h3>
+
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="gfg">
+              <div
+                class="scrolldiv"
+                slimScroll
+                [options]="opts"
+                [scrollEvents]="scrollEvents"
+              >
+                <div class="widget-body pt-0">
+                  <div class="filter-items">
+                    <ng-container
+                      *ngFor="let item of product.addons; let id = index"
+                    >
+                      <div class="filter-item" *ngIf="item.inventorysum > 0">
+                        <div class="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            [id]="'brand-' + id"
+                            (click)="onChangeAddon($event, item)"
+                            [checked]="checkedAddon(item)"
+                          />
+                          <label
+                            class="custom-control-label w-100 d-flex"
+                            (click)="onChangeAddon($event, item)"
+                            >{{ item.name }}
+                            <span class="ml-auto"
+                              >$ {{ item.price }}</span
+                            ></label
+                          >
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="product_table_info">
+          <tbody>
+            <tr *ngIf="product?.brand">
+              <th>Brand</th>
+              <td>{{ product?.brand.name }}</td>
+            </tr>
+            <tr *ngIf="product?.tags && product?.tags.length > 0">
+              <th>Tags</th>
+              <td>
+                <span *ngFor="let tag of product?.tags; let i = index"
+                  >{{ tag }}{{ i < product?.tags.length - 1 ? ", " : "" }}</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <th>SHARE</th>
+              <td class="product_social_icon">
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/sharer/sharer.php?u={{
+                    encode(product.slug)
+                  }}&t={{ encodeText(product.name) }}"
+                  ><i class="fab fa-facebook"></i
+                ></a>
+                <a
+                  target="_blank"
+                  href="https://twitter.com/share?url={{
+                    encode(product.slug)
+                  }}&text={{ encodeText(product.name) }}"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a
+                  target="_blank"
+                  href="https://www.linkedin.com/share?url={{
+                    encode(product.slug)
+                  }}"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+                <a
+                  target="_blank"
+                  href="https://www.instagram.com/sharer.php?u={{
+                    encode(product.slug)
+                  }}"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="product-count display-flex qty-wrapper">
+          <!-- <label for="size">Quantity</label> -->
+          <form action="#" class="display-flex">
+            <div class="qtyminus" (click)="updateQty('dec')">-</div>
+            <input
+              type="text"
+              name="quantity"
+              readonly
+              value="{{ qty }}"
+              class="qty"
+            />
+            <div class="qtyplus" (click)="updateQty('inc')">+</div>
+          </form>
+          <div *ngIf="!inventory || inventory <= 0; else secondBlock2">
+            <button type="button" class="btn btn-orange ml10" disabled>
+              <img src="{{assetPath}}assets/images/shopping-cart-.svg" style="width: 24px" />
+              Add to Cart
+              <i
+                *ngIf="product.loading"
+                class="fa fa-spinner fa-spin ml-1"
+                style="font-size: 16px"
+              ></i>
+            </button>
+          </div>
+          <ng-template #secondBlock2>
+            <button
+              type="button"
+              class="btn btn-orange ml10"
+              disabled
+              *ngIf="!stock || stock == 0"
+            >
+              <img src="{{assetPath}}assets/images/shopping-cart-.svg" style="width: 24px" />
+              Add to Cart
+              <i
+                *ngIf="product.loading"
+                class="fa fa-spinner fa-spin ml-1"
+                style="font-size: 16px"
+              ></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-orange ml10"
+              (click)="addToCart()"
+              *ngIf="stock && stock == 1"
+            >
+              <img src="{{assetPath}}assets/images/shopping-cart-.svg" style="width: 24px" />
+              Add to Cart
+              <i
+                *ngIf="product.loading"
+                class="fa fa-spinner fa-spin ml-1"
+                style="font-size: 16px"
+              ></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-green ml10"
+              (click)="addToCart(true, 2)"
+              *ngIf="stock && stock == 1"
+            >
+              <img src="{{assetPath}}assets/images/shopping-cart-.svg" style="width: 24px" />
+              Checkout
+              <i
+                *ngIf="product.loading_new"
+                class="fa fa-spinner fa-spin ml-1"
+                style="font-size: 16px"
+              ></i>
+            </button>
+          </ng-template>
+        </div>
+
+        <div class="product-price-discount">
+          Total:
+          <span>${{ ((selectedPrice + addOnTotal()) * qty).toFixed(2) }}</span>
+        </div>
+      </div>
+      <ng-template #laneBlock>
+        <div>
+          <div class="product-info">
+            <div class="product-name">{{ product.name }}</div>
+            <!-- <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" [style.width]="review.rating * 20 + '%'"></div>
+                                <span class="tooltip-text">{{ review.rating }}</span>
+                            </div>
+                        </div> -->
+            <div
+              class="reviews-counter"
+              *ngIf="
+                product &&
+                product.review_summary &&
+                product.review_summary.total_count > 0
+              "
+            >
+              <div class="rate disabled-reviews">
+                <input
+                  type="radio"
+                  id="star5"
+                  name="rate"
+                  value="5"
+                  [checked]="product.review_summary.average == 5"
+                />
+                <label for="star5" title="text">5 stars</label>
+                <input
+                  type="radio"
+                  id="star4"
+                  name="rate"
+                  value="4"
+                  [checked]="product.review_summary.average == 4"
+                />
+                <label for="star4" title="text">4 stars</label>
+                <input
+                  type="radio"
+                  id="star3"
+                  name="rate"
+                  value="3"
+                  [checked]="product.review_summary.average == 3"
+                />
+                <label for="star3" title="text">3 stars</label>
+                <input
+                  type="radio"
+                  id="star2"
+                  name="rate"
+                  value="2"
+                  [checked]="product.review_summary.average == 2"
+                />
+                <label for="star2" title="text">2 stars</label>
+                <input
+                  type="radio"
+                  id="star1"
+                  name="rate"
+                  value="1"
+                  [checked]="product.review_summary.average == 1"
+                />
+                <label for="star1" title="text">1 star</label>
+              </div>
+              <span>{{ product.review_summary.total_count }} Reviews</span>
+            </div>
+            <div class="product-price-discount">
+              <span>{{ product.lane_price }}</span>
+            </div>
+            <!-- <div class="product-price-discount" *ngIf="priceBeforeDiscountCalculate() && priceBeforeDiscountCalculate() > 0 && priceBeforeDiscountCalculate() < selectedPrice else elseBlock">
+                            <span>${{selectedPrice.toFixed(2)}}</span>
+                            <span class="line-through">${{(priceBeforeDiscountCalculate())}}</span>
+
+                            <span class="product-label label-custom relative px-2" *ngIf="product && product.discount > 0">
+                                <span *ngIf="product.discount_type=='percent'">{{product.discount?.toString().replace('.00','')}}% OFF</span>
+                                <span *ngIf="product.discount_type=='flat'">Flat ${{product.discount?.toString().replace('.00','')}} OFF</span>
+                            </span>
+                        </div>
+                        <ng-template #elseBlock>
+                            <div class="product-price-discount">
+                                <span>${{selectedPrice.toFixed(2)}}</span>
+                                <span class="product-label label-new relative" *ngIf="product && product.discount > 0">
+                                    <span *ngIf="product.discount_type=='percent'">{{product.discount?.toString().replace('.00','')}}% OFF</span>
+                                    <span *ngIf="product.discount_type=='flat'">Flat ${{product.discount?.toString().replace('.00','')}} OFF</span>
+                                </span>
+                            </div>
+                        </ng-template> -->
+
+            <!-- <span class="product-label label-sale" *ngIf="product.sale_price">Sale</span>
+                        <span class="product-label label-top" *ngIf="product.top">Top</span>
+                        <span class="product-label label-out" *ngIf="!product.stock || product.stock == 0">Out Of Stock</span> -->
+          </div>
+          <div class="wish-box d-flex">
+            <table class="product_table_info">
+              <tbody>
+                <!-- <tr *ngIf="(inventory!==null && inventory <= 0)  else secondBlock">
+                                    <th>Available</th>
+                                    <td>Out of Stock</td>
+                                </tr>
+                                <ng-template #secondBlock> -->
+                <tr *ngIf="!stock || stock == 0; else elseBlock2" class="d-flex justify-content-center align-items-center">
+                  <th>Available</th>
+                  <td class="text-danger p-2 px-3 ml-3" style="font-weight:bold; border:1px solid #dc3545;">Out of Stock</td>
+                </tr>
+                <ng-template #elseBlock2>
+                  <tr class="d-flex justify-content-center align-items-center">
+                    <th>Available</th>
+                    <td class="text-success p-2 px-3 ml-3" style="font-weight:bold; border:1px solid #04d719;">In Stock</td>
+                  </tr>
+                </ng-template>
+                <!-- </ng-template> -->
+              </tbody>
+            </table>
+          </div>
+          <p [innerHtml]="product.short_description"></p>
+          <table class="product_table_info">
+            <tbody>
+              <tr>
+                <th>SHARE</th>
+                <td class="product_social_icon">
+                  <a
+                    target="_blank"
+                    href="https://www.facebook.com/sharer/sharer.php?u={{
+                      encode(product.slug)
+                    }}&t={{ encodeText(product.name) }}"
+                    ><i class="fab fa-facebook"></i
+                  ></a>
+                  <a
+                    target="_blank"
+                    href="https://twitter.com/share?url={{
+                      encode(product.slug)
+                    }}&text={{ encodeText(product.name) }}"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/share?url={{
+                      encode(product.slug)
+                    }}"
+                    ><i class="fab fa-linkedin"></i
+                  ></a>
+                  <a
+                    target="_blank"
+                    href="https://www.instagram.com/sharer.php?u={{
+                      encode(product.slug)
+                    }}"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <ejs-calendar [min]='minDate' (change)="changeDate($event)"></ejs-calendar> -->
+          <ngb-datepicker
+            #dp
+            [(ngModel)]="selectedDate"
+            *ngIf="stock && stock == 1"
+            (ngModelChange)="changeDate($event)"
+            [minDate]="minDate"
+            (navigate)="date = $event.next"
+          ></ngb-datepicker>
+          <div class="slots-wrap" *ngIf="loadingslots">
+            <i class="fa fa-spinner fa-spin ml-1" style="font-size: 16px"></i>
+          </div>
+          <div class="slots-wrap" *ngIf="slotsmsg">
+            <div class="slot-msg">
+              {{ slotsmsg }}
+            </div>
+          </div>
+          <div class="slots-wrap" *ngIf="slots && slots.length">
+            <ng-container *ngFor="let slot of slots">
+              <div
+                class="slot"
+                (click)="selectSlot(slot.id)"
+                [ngClass]="
+                  slot.is_available == 1
+                    ? 'available-slot ' + selectedClass(slot.id)
+                    : 'unavailable-slot'
+                "
+              >
+                {{ slot.slot_start_time }}
+                <div *ngIf="slot.is_available != '0'">
+                  {{ slot.total_lanes - slot.booked_lanes }} left
+                </div>
+                <div *ngIf="slot.is_available == '0'">0 left</div>
+              </div>
+            </ng-container>
+          </div>
+          <!-- <pre>Month: {{ date.month }}.{{ date.year }}</pre>
+                    <pre>Model: {{ selectedDate | json }}</pre> -->
+
+          <div
+            class="booking-date"
+            *ngIf="selectedSlots && selectedSlots.length > 0"
+          >
+            <div>
+              <strong>Booking</strong>:
+              <span
+                >{{
+                  dateConvert(
+                    selectedDate.year +
+                      "/" +
+                      pad(selectedDate.month) +
+                      "/" +
+                      selectedDate.day
+                  ) | date : "d MMM, y"
+                }}
+                ({{ selectedSlots[0].slot_start_time }} -
+                {{
+                  selectedSlots[selectedSlots.length - 1].slot_end_time
+                }})</span
+              >
+              <div *ngIf="slotsprice && slotsprice > 0">
+                <strong>Booking Cost</strong>:
+                <span *ngIf="laneslottotal"
+                  >${{ laneslottotal.toFixed(2) }}</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <label style="margin-top: 20px; width: 100%">
+            <input type="checkbox" id="" [(ngModel)]="terms" /> Please agree our
+            <a routerLink="/terms-and-conditions">Terms and Conditions</a> for
+            lane booking.
+          </label>
+
+          <div class="product-count display-flex qty-wrapper">
+            <!-- <label for="size">Quantity</label> -->
+            <form action="#" class="display-flex">
+              <div class="qtyminus" (click)="updateQty('dec')">-</div>
+              <input
+                type="text"
+                name="quantity"
+                readonly
+                value="{{ qty }}"
+                class="qty"
+              />
+              <div class="qtyplus" (click)="updateQty('inc')">+</div>
+            </form>
+            <button
+              type="button"
+              class="btn btn-orange ml10"
+              (click)="addToCart()"
+            >
+              <img src="{{assetPath}}assets/images/shopping-cart-.svg" style="width: 24px" />
+              Add to Cart
+              <i
+                *ngIf="product.loading"
+                class="fa fa-spinner fa-spin ml-1"
+                style="font-size: 16px"
+              ></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-orange ml30"
+              href="javascript:;"
+              (click)="instantPlaceOrder()"
+            >
+              Instant Checkout &nbsp;&nbsp;
+              <i
+                *ngIf="instantOrder"
+                class="fa fa-spinner fa-spin"
+                style="font-size: 20px"
+              ></i>
+            </button>
+          </div>
+
+          <div class="slots-wrap" *ngIf="qtymsg">
+            <div class="slot-msg">
+              {{ qtymsg }}
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="col-md-6">
+    <div class="kd_top kd_top_left">
+      <ul>
+        <li *ngIf="contactEmail">
+          <img src="{{assetPath}}assets/images/email-golden.svg" />
+          <span>
+            <a href="mailto:{{ contactEmail }}"> {{ contactEmail }}</a></span
+          >
+        </li>
+        <li *ngIf="mobile">
+          <img src="{{assetPath}}assets/images/call-golden.svg" />
+          <span>
+            <a href="tel:{{ mobile }}">{{ mobile }}</a></span
+          >
+        </li>
+      </ul>
+      <div class="clear_fix"></div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="kd_top kd_top_right">
+      <ul>
+        <li>
+          <!-- <molla-header-search></molla-header-search> -->
+          <!-- <a routerLink="#" class="wishlist-link"> -->
+          <!-- <img src="{{assetPath}}assets/images/search.svg"> -->
+          <!-- <i class="fas fa-search"></i>
+                    </a> -->
+        </li>
+        <!-- <li>
+                	<a routerLink="#" class="wishlist-link"> -->
+        <!-- <img src="{{assetPath}}assets/images/call.svg"> -->
+        <!-- <i class="fas fa-phone"></i>
+	                </a>
+                </li> -->
+        <li>
+          <molla-wishlist-menu></molla-wishlist-menu>
+          <!-- <a href="">
+	                    <img src="{{assetPath}}assets/images/love.svg">
+	                </a> -->
+        </li>
+        <li>
+          <molla-cart-menu></molla-cart-menu>
+          <!-- <a href="">
+	                    <img src="{{assetPath}}assets/images/shopping-cart-.svg">
+	                </a> -->
+        </li>
+        <li *ngIf="!loggedin">
+          <a
+            href="javascript:;"
+            (click)="showLoginModal($event)"
+            class="wishlist-link"
+          >
+            <!-- <img src="{{assetPath}}assets/images/user.svg"> -->
+            <i class="far fa-user"></i>
+          </a>
+        </li>
+        <li *ngIf="loggedin">
+          <molla-account-menu></molla-account-menu>
+        </li>
+      </ul>
+      <div class="clear_fix"></div>
+    </div>
+    <div class="clear_fix"></div>
+  </div>
+</div>

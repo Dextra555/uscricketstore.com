@@ -1,0 +1,308 @@
+<div class="container laneSection">
+  <div class="row hide-for-mobile">
+    <div class="col-md-6 p-0 img1">
+      <img src="{{assetPath}}assets/images/logo/LaneBanner5.png" alt="" />
+    </div>
+    <div class="col-md-6 p-0">
+      <div class="row">
+        <div class="col-md-6 p-0 img2">
+          <img src="{{assetPath}}assets/images/logo/LaneBanner4.png" alt="" />
+        </div>
+        <div class="col-md-6 p-0 img2">
+          <img src="{{assetPath}}assets/images/logo/LaneBanner2.png" alt="" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 p-0 img2">
+          <img src="{{assetPath}}assets/images/logo/LaneBanner3.png" alt="" />
+        </div>
+        <div class="col-md-6 p-0 img2">
+          <img src="{{assetPath}}assets/images/logo/LaneBanner1.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="width-left">
+      <div class="amentiesList">
+        <ul>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/icon5.png" alt="" />
+            <p>Stumps</p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/icon4.png" alt="" />
+            <p>Balls</p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/icon3.png" alt="" />
+            <p>Real Grass</p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/icon2.png" alt="" />
+            <p>Net</p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/icon1.png" alt="" />
+            <p>Guards</p>
+          </li>
+        </ul>
+      </div>
+      <div class="tipsSection">
+        <h3>MANDATORY</h3>
+        <ul>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/Ellipse 6.png" alt="" />
+            <p>
+              The most crucial factors to consider while purchasing cricket
+              shoes are comfort and grip.
+            </p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/Ellipse 6.png" alt="" />
+            <p>A helmet is a necessity for both batters and wicketkeepers.</p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/Ellipse 6.png" alt="" />
+            <p>A quality pair of pads will keep your legs safe from injury.</p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/Ellipse 6.png" alt="" />
+            <p>
+              The most critical piece of equipment in a cricketer's gear is a
+              bat.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tipsSection">
+        <h3>GOOD TO HAVE</h3>
+        <ul>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/Ellipse 6.png" alt="" />
+            <p>
+              Collared shirt (white in tests and domestic; as per team kit in
+              one-day formats) with short or long sleeves depending on the
+              climate or personal preference.
+            </p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/Ellipse 6.png" alt="" />
+            <p>
+              Long trousers (White in tests and domestic; as per team kit in one
+              day formats).
+            </p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/Ellipse 6.png" alt="" />
+            <p>
+              Jumper (a knitted pullover, if necessary). This may be
+              long-sleeved or sleeveless.
+            </p>
+          </li>
+          <li>
+            <img src="{{assetPath}}assets/images/logo/Ellipse 6.png" alt="" />
+            <p>
+              Thigh guards, arm guards, chest guards, and elbow guards protect
+              the body of the batters. Some batters use these and others do not,
+              since they reduce mobility.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="width-right">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="plan complete-plan" for="machine" style="margin-top: 30px">
+            <!-- <label class="customcontainer">
+              <input type="radio" id="machine" name="lane" />
+              <span class="checkmark"></span>
+            </label> -->
+
+            <div class="plan-content" [ngClass]="activeMachineClass ? 'active' : ''" (click)="
+                chooseLane(
+                  booklane?.section_one?.product_1_btn_link.split('/')[1],
+                  'machine'
+                )
+              ">
+              <img src="{{assetPath}}assets/images/imgpsh_fullsize_anim (2).jpg" />
+              <div class="plan-details">
+                <span>{{ booklane?.section_one?.product_1_title }}</span>
+                <p>Weekdays Starting Price $24.75</p>
+                <p>Weekend Starting Price $30.25</p>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-md-12">
+          <label class="plan complete-plan" for="regular">
+            <!-- <label class="customcontainer">
+              <input type="radio" checked id="regular" name="lane" />
+              <span class="checkmark"></span>
+            </label> -->
+
+            <div class="plan-content" [ngClass]="activeRegularClass ? 'active' : ''" (click)="
+                chooseLane(
+                  booklane?.section_one?.product_2_btn_link.split('/')[1],
+                  'regular'
+                )
+              ">
+              <img src="{{assetPath}}assets/images/imgpsh_fullsize_anim (1).jpg" />
+              <div class="plan-details">
+                <span>{{ booklane?.section_one?.product_2_title }}</span>
+                <p>Weekdays Starting Price $22</p>
+                <p>Weekend Starting Price $27.50</p>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="row lane-calender">
+        <div class="col-md-6 pl-0">
+          <h1 *ngIf="
+              activeMachineClass && (day_of_week == 6 || day_of_week == 7);
+              else weekdaysMachine
+            ">
+            $30.25 / 30 mins
+          </h1>
+          <ng-template #weekdaysMachine>
+            <h1 *ngIf="activeMachineClass">$24.75 / 30 mins</h1>
+          </ng-template>
+
+          <h1 *ngIf="
+              activeRegularClass && (day_of_week == 6 || day_of_week == 7);
+              else weekdaysRegular
+            ">
+            $27.50 / 30 mins
+          </h1>
+          <ng-template #weekdaysRegular>
+            <h1 *ngIf="activeRegularClass">$22 / 30 mins</h1>
+          </ng-template>
+
+          <p>30 mins. minimum</p>
+        </div>
+        <div class="col-md-6 text-right calendar-input">
+          <input readonly class="input-calender" [(ngModel)]="selectedDate" (ngModelChange)="changeDate($event)"
+            [minDate]="{
+              year: minDate.getFullYear(),
+              month: minDate.getMonth() + 1,
+              day: minDate.getDate(),
+            }" (navigate)="date = $event.next" ngbDatepicker placeholder="Pick a date"
+            (click)="dp.toggle()" #dp="ngbDatepicker" />
+          <i class="fa fa-calendar"></i>
+        </div>
+        <div class="col-md-12"></div>
+        <div class="slots-wrap col-md-12 d-flex justify-content-center" *ngIf="loadingslots">
+          <i class="fa fa-spinner fa-spin ml-1" style="font-size: 16px"></i>
+        </div>
+        <div class="slots">
+          <div class="slots-wrap col-md-12" *ngIf="slotsmsg">
+            <div class="slot-msg">
+              {{ slotsmsg }}
+            </div>
+          </div>
+          <div class="col-md-12 slots_div">
+            <div class="slots-wrap">
+              <ng-container *ngFor="let slot of slots">
+                <div class="slot" (click)="selectSlot(slot.index)" [ngClass]="
+                    (slot.is_available == 1 && isSlotNotStarted(slot.slot_start_time))
+                      ? 'available-slot ' + selectedClass(slot.index)
+                      : 'unavailable-slot'
+                  ">
+                  {{ slot.slot_start_time }}
+                  <div *ngIf="slot.is_available != '0' && isSlotNotStarted(slot.slot_start_time)">
+                    {{ slot.total_lanes - slot.booked_lanes }} left
+                  </div>
+                  <div *ngIf="slot.is_available == '0' && isSlotNotStarted(slot.slot_start_time)">0 left</div>
+                  <div class="text-danger" *ngIf="!isSlotNotStarted(slot.slot_start_time)">Elapsed</div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="product-count display-flex qty-wrapper">
+          <form action="#" class="display-flex">
+            <div class="qtyminus" (click)="updateQty('dec')">-</div>
+            <input type="text" name="quantity" readonly value="{{ qty }}" class="qty" />
+            <div class="qtyplus" (click)="updateQty('inc')">+</div>
+          </form>
+        </div>
+        <div class="booking-text">
+          <div class="slots-wrap pb-0" *ngIf="qtymsg && qtymsg != 'Please agree to our terms'">
+            <div class="slot-msg">
+              {{ qtymsg }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row lane-summary" *ngIf="selectedSlots && selectedSlots.length > 0">
+        <div class="booking-date w-100 mt-0">
+          <div>
+            <div class="d-flex justify-content-between">
+              <strong>Booking:</strong>
+              <span>{{
+                dateConvert(
+                selectedDate.year +
+                "/" +
+                pad(selectedDate.month) +
+                "/" +
+                selectedDate.day
+                ) | date : "d MMM, y"
+                }}
+                ({{ selectedSlots[0].slot_start_time }} -
+                {{
+                selectedSlots[selectedSlots.length - 1].slot_end_time
+                }})</span>
+            </div>
+            <div *ngIf="slotsprice && slotsprice > 0" class="d-flex justify-content-between">
+              <strong>Booking Cost:</strong>
+              <span *ngIf="laneslottotal">${{ laneslottotal.toFixed(2) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row termslink mx-0">
+        <div class="col-md-12 pl-0" style="margin: 0 30px">
+          <label style="
+              margin-top: 10px;
+              width: 100%;
+              display: flex;
+              align-items: flex-start;
+            " class="mb-0">
+            <input type="checkbox" id="term" [(ngModel)]="terms" style="margin: 6px 10px 0 0px" />
+            <span>
+              Please agree our
+              <a routerLink="/terms-and-conditions" class="mx-2">Terms and Conditions
+              </a>
+              for lane booking.
+            </span>
+          </label>
+          <div class="booking-text">
+            <div class="mb-2" *ngIf="qtymsg && qtymsg == 'Please agree to our terms'">
+              <div class="slot-msg">
+                {{ qtymsg }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mobile-btn" style="margin: 0 30px">
+          <button style="
+              width: 80%;
+              padding: 10px;
+              font-size: 20px;
+              margin: 0 25px 30px;
+            " type="button" class="btn btn-orange" href="javascript:;" (click)="confirmSlots($event)">
+            Reserve
+            <i *ngIf="instantOrder" class="fa fa-spinner fa-spin" style="font-size: 20px"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

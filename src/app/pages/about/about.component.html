@@ -1,0 +1,132 @@
+<style>
+
+    </style>
+<section style="min-height:500px;background: url('{{assetPath}}assets/images/istockphoto-1276613883-170667a.jpg') no-repeat;background-size: cover;">
+           <div class="bkg_overlay" style="background-color: rgba(0,0,0,.6);">
+                <div class="page_name">
+                    <h2>{{page?.title}}</h2>
+                    <div>
+                        <nav class="d-flex justify-content-center" aria-label="breadcrumb">
+                            <ol class="breadcrumb kd_breadcrumb_red">
+                              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">{{page?.title}}</li>
+                            </ol>
+                          </nav>
+                    </div>
+                </div>
+
+           </div>
+        </section>
+        <section class="bkg_img kd_section">
+            <div class="own_container">
+               <div class="" *ngIf="about?.section_one?.top_title">
+                    <p class="font1 text-center font_s25 mobile_mb_30">{{about?.section_one?.top_title}}</p>
+               </div>
+               <div class="kd_design">
+                    <div class="kd_design_img">
+                        <img src="{{assetPath}}assets/images/cricket.jpg">
+                    </div>
+                    <div class="kd_design_content_box">
+                        <div class="section_box">
+                            <div class="section_heading">
+                                <h6 class="color_orange font1" *ngIf="about?.section_one?.title">{{about?.section_one?.title}}</h6>
+                                <h2 class="font_s35" *ngIf="about?.section_one?.sub_title">{{about?.section_one?.sub_title}}</h2>
+                            </div>
+                            <div class="section_description" *ngIf="about?.section_one?.description">
+                                <p class="text-justify" style="line-height: 25px;">{{about?.section_one?.description}}</p>
+                            </div>
+                            <div class="kd_design_content_info">
+                                <ul>
+                                    <li *ngIf="about?.section_one?.phone"><img src="{{assetPath}}assets/images/envelope-orange.svg" width="20px">&nbsp;&nbsp; <span><b>Phone:</b>&nbsp;&nbsp; {{ about?.section_one?.phone }}</span></li>
+                                    <li *ngIf="about?.section_one?.email"><img src="{{assetPath}}assets/images/calling-orange.svg" width="20px">&nbsp;&nbsp; <span><b>Email:</b>&nbsp;&nbsp; {{ about?.section_one?.email }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+        </section>
+        <section class="about_us_categories">
+            <div class="about_categoty about_categoty1">
+                <div class="about_category_count">
+                    <h3>01</h3>
+                </div>
+                <h2 class="color_red" *ngIf="about?.section_two?.block_1_title">{{about?.section_two?.block_1_title}}</h2>
+                <p class="color_black" *ngIf="about?.section_two?.block_1_sub_title">{{about?.section_two?.block_1_sub_title}}</p>
+                <a class="color_black" *ngIf="about?.section_two?.block_1_button_title || about?.section_two?.block_1_button_link" href="{{about?.section_two?.block_1_button_link}}">{{about?.section_two?.block_1_button_title}} &nbsp;&nbsp;<i class="fa fa-long-arrow-alt-right" aria-hidden="true"></i></a>
+            </div>
+            <div class="about_categoty about_categoty2">
+                <div class="about_category_count">
+                    <h3>02</h3>
+                </div>
+                <h2 *ngIf="about?.section_two?.block_2_title">{{about?.section_two?.block_2_title}}</h2>
+                <p *ngIf="about?.section_two?.block_2_sub_title">{{about?.section_two?.block_2_sub_title}}</p>
+                <a *ngIf="about?.section_two?.block_2_button_title || about?.section_two?.block_2_button_title" href="{{about?.section_two?.block_2_button_link}}">{{about?.section_two?.block_2_button_title}} &nbsp;&nbsp;<i class="fa fa-long-arrow-alt-right" aria-hidden="true"></i></a>
+            </div>
+            <div class="about_categoty about_categoty3">
+                <div class="about_category_count">
+                    <h3>03</h3>
+                </div>
+                <h2 *ngIf="about?.section_two?.block_3_title">{{about?.section_two?.block_3_title}}</h2>
+                <p *ngIf="about?.section_two?.block_3_sub_title">{{about?.section_two?.block_3_sub_title}}</p>
+                <a *ngIf="about?.section_two?.block_3_button_title || about?.section_two?.block_3_button_link" href="{{about?.section_two?.block_3_button_link}}">{{about?.section_two?.block_3_button_title}} &nbsp;&nbsp;<i class="fa fa-long-arrow-alt-right" aria-hidden="true"></i></a>
+            </div>
+            <div></div>
+            <div></div>
+        </section>
+        <section class="kd_section">
+            <div class="own_container">
+                <div class="row">
+                    <div class="col-md-5 d-flex align-items-center">
+                        <div class="section_box">
+                            <div class="section_heading">
+                                <h6 *ngIf="about?.section_three?.title">{{about?.section_three?.title}}</h6>
+                                <h2 class="font_s35 mobile_mb_0" *ngIf="about?.section_three?.sub_title">{{about?.section_three?.sub_title}}</h2>
+                            </div>
+                            <div class="section_description" *ngIf="about?.section_three?.description">
+                                <p>{{about?.section_three?.description}}</p>
+                            </div>
+                            <div class="mt30" >
+                                <!-- <a href="#" class="btn btn_round btn_black mt30">SHOP NOW</a> -->
+                                <div class="outer">
+                                  <a *ngIf="about?.section_three?.button_title || about?.section_three?.button_link" href="{{about?.section_three?.button_link}}" class="btn button">
+                                    <div class="text font2 font_cap">{{about?.section_three?.button_title}}</div>
+                                  </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-lg-flex d-md-flex align-items-center only_desktop_view" *ngIf="about?.section_three?.image_1">
+                        <div class="video_list mob_mb50">
+                            <img src="{{about?.section_three?.image_1}}">
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-lg-flex d-md-flex align-items-center only_desktop_view" *ngIf="about?.section_three?.image_2">
+
+                        <div class="video_list">
+                            <img src="{{about?.section_three?.image_2}}">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="video_section about" style="--about-video-bg-image:url({{about?.section_four?.image}})">
+            <div class="text-center">
+                <a href="javascript:;" (click)="showModal($event,about?.section_four?.video_url)"><img src="{{assetPath}}assets/images/play-button-red.svg" width="80px"></a>
+            </div>
+        </div>
+        <!-- <section class="kd_section">
+            <div class="own_container">
+                <div class="customer-logos slider">
+                	<owl-carousel carouselClasses="icon-box mt-2 mb-2" [options]="iconboxSlider">
+                    <div class="slide"><img src="https://image.freepik.com/free-vector/luxury-letter-e-logo-design_1017-8903.jpg"></div>
+                    <div class="slide"><img src="https://image.freepik.com/free-vector/3d-box-logo_1103-876.jpg"></div>
+                    <div class="slide"><img src="https://image.freepik.com/free-vector/blue-tech-logo_1103-822.jpg"></div>
+                    <div class="slide"><img src="https://image.freepik.com/free-vector/colors-curl-logo-template_23-2147536125.jpg"></div>
+                    <div class="slide"><img src="https://image.freepik.com/free-vector/abstract-cross-logo_23-2147536124.jpg"></div>
+                    <div class="slide"><img src="https://image.freepik.com/free-vector/football-logo-background_1195-244.jpg"></div>
+                    <div class="slide"><img src="https://image.freepik.com/free-vector/background-of-spots-halftone_1035-3847.jpg"></div>
+                </div>
+            </div>
+        </section> -->

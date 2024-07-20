@@ -1,0 +1,100 @@
+<div class="main">
+<section>
+  
+  <molla-page-header title="pageTitle" subtitle="Shop" ></molla-page-header>
+  <div class="own_container">
+    <div class="row">
+      <div class="col-md-4  d-none d-md-block">
+        <div class="page_title">
+          <h3>My Account</h3>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <nav class="d-flex flex-row-reverse align-items-center h-100" aria-label="breadcrumb">
+          <ol class="breadcrumb kd_breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Addresses</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+
+
+</style>
+<section class="bkg_img kd_section">
+  <div class="own_container">
+    <div style="background-color: #fff; padding: 30px;">
+      <div class="row">
+        <div class="col-md-3">
+          <molla-user-sidebar></molla-user-sidebar>
+        </div>
+        <div class="col-md-9 pl50">
+          <!-- <div class="row">
+            <div class="col-md-12">
+              <p>The following address will be used on the checkout page by default</p>
+            </div>
+          </div> -->
+
+          <div class="row mt30">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-md-6" *ngFor="let item of addresses">
+
+                  <div class="account_detail_form mb-4">
+                    <div class="form">
+                      <div class="heading">
+                        <h2 class="address-heading d-flex align-items-center dropdown"><span class="mr-auto">{{item.firstname}} {{item.lastname}}</span>
+                          <span class="label-address account-page default-shipping d-inline-block ml-auto" *ngIf="item.default_shipping>0">Default</span>
+                          <a href="javascript:;" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" data-display="static" style="float: right; color: #000;">
+                            <i class="fas fa-ellipsis-v"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem (click)="setChangeAddress($event,item)">Edit</button>
+                            <button ngbDropdownItem (click)="defaultShippingAddress($event,item)">Mark as default
+                              shipping address</button>
+                            <!-- <button ngbDropdownItem (click)="defaultBillingAddress($event,item)">Mark as default billing address</button> -->
+                            <button ngbDropdownItem (click)="deleteAddress($event,item)">Delete&nbsp;&nbsp;<i
+                                *ngIf="deletingItem" class="fa fa-spinner fa-spin" style="font-size:20px"></i></button>
+                          </div>
+                        </h2>
+                      </div>
+                      <div class="shipping_address">
+                        <p>
+                          <span class="label-address">Address:</span>{{item.address}}, {{item.city}}, {{item.state}},
+                          {{item.country}}, {{item.postal_code}}
+                        </p>
+                        <p><span class="label-address">Phone:</span>{{item.phone}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="address-end">
+                                      <button type="button" class="btn button"
+                                          (click)="setChangeAddress($event,item)">
+                                          <div class=""><i class="far fa-edit"></i></div>
+                                      </button>
+                                  </div> -->
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn button"
+                    (click)="addAddress($event)">
+                    Add new address
+                </button>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

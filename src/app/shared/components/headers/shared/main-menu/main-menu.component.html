@@ -1,0 +1,112 @@
+<nav class="main-nav">
+  <ul class="menu sf-arrows">
+    <li *ngFor="let item of items">
+      <a
+        (click)="openMenu(item.name)"
+        [ngClass]="item.children_menus.length > 0 ? 'sf-with-ul' : ''"
+        >{{ item.name }}</a
+      >
+      <ng-container
+        *ngIf="item.children_menus.length > 0 && item.name === parentName"
+      >
+        <div
+          (mouseleave)="hideMenu()"
+          [hidden]="hidetab"
+          id="megamenu"
+          class="megamenu megamenu-md megamenu-left"
+          [ngClass]="item.name === parentName ? 'show' : ''"
+        >
+          <div class="row no-gutters">
+            <div class="col-md-12">
+              <div class="menu-col">
+                <div class="d-flex menu-nesting">
+                  <div
+                    class=""
+                    *ngFor="let subcat of item.children_menus; let a = index"
+                    [ngClass]="
+                      a == index || subParentName == subcat.name ? 'opened' : ''
+                    "
+                    (click)="openSubMenu(subcat.name, a)"
+                  >
+                    <div class="menu-title">{{ subcat.name }} </div>
+                    <ng-container *ngIf="subcat.children_menus.length > 0">
+                      <ul>
+                        <li class="mid-{{nestedcat.id}}"
+                          *ngFor="let nestedcat of subcat.children_menus"
+                          [class.active]="
+                            current.includes(
+                              createLink(
+                                'category/' + nestedcat?.slug_category?.slug,
+                                nestedcat?.brands,
+                                nestedcat?.start_price,
+                                nestedcat?.end_price,
+                                nestedcat?.attributes
+                              )
+                            )
+                          "
+                        >
+                          <a
+                            [queryParams]="{
+                              brand_ids: nestedcat?.brands,
+                              min_price: nestedcat?.start_price,
+                              max_price: nestedcat?.end_price,
+                              attribute_values: nestedcat?.attributes
+                            }"
+                            [routerLink]="
+                              '/category/' + nestedcat?.slug_category?.slug
+                            "
+                          >
+                            <b>{{ nestedcat.name }} <span *ngIf="out_of_stock.includes(nestedcat.id)" class="new-product-label font-x-small">Out of stock</span></b>
+                          </a>
+
+                          <ng-container
+                            *ngIf="nestedcat.children_menus.length > 0"
+                          >
+                            <ul class="third-menu">
+                              <li class="mid-{{nestedcatnew.id}}"
+                                *ngFor="
+                                  let nestedcatnew of nestedcat.children_menus
+                                "
+                                [class.active]="
+                                  current.includes(
+                                    createLink(
+                                      'category/' +
+                                        nestedcatnew?.slug_category?.slug,
+                                      nestedcatnew?.brands,
+                                      nestedcatnew?.start_price,
+                                      nestedcatnew?.end_price,
+                                      nestedcatnew?.attributes
+                                    )
+                                  )
+                                "
+                              >
+                                <a
+                                  (click)="hideMenu()"
+                                  [queryParams]="{
+                                    brand_ids: nestedcatnew?.brands,
+                                    min_price: nestedcatnew?.start_price,
+                                    max_price: nestedcatnew?.end_price,
+                                    attribute_values: nestedcatnew?.attributes
+                                  }"
+                                  [routerLink]="
+                                    '/category/' +
+                                    nestedcatnew?.slug_category?.slug
+                                  "
+                                  >{{ nestedcatnew.name }} <span *ngIf="out_of_stock.includes(nestedcatnew.id)" class="new-product-label font-x-small">Out of stock</span></a
+                                >
+                              </li>
+                            </ul>
+                          </ng-container>
+                        </li>
+                      </ul>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </li>
+  </ul>
+</nav>

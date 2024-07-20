@@ -1,0 +1,27 @@
+<router-outlet></router-outlet>
+<ngx-ui-loader></ngx-ui-loader>
+
+<div class="mobile-menu-overlay" (click)="hideMobileMenu()"></div>
+
+<a
+  class="whatsapp-link"
+  href="https://api.whatsapp.com/send?phone=+15105980288&text=Hi%20there,%20I%20have%20some%20queries%20related%20to%20US%20Cricket%20Store.%20Can%20you%20please%20help%20me%20out?"
+>
+  <img src="{{assetPath}}assets/images/whatsapp-icon.png" width="50px" />
+  <!--  <i class="fab fa-whatsapp"></i> -->
+</a>
+
+<molla-mobile-menu
+  [header_menu_left]="header_menu_left"
+  [header_menu_right]="header_menu_right"
+  [social_links]="social_links"
+></molla-mobile-menu>
+
+<button
+  id="scroll-top"
+  title="Back to Top"
+  [ngClass]="{ show: utilsService.isSticky }"
+  (click)="utilsService.scrollTop($event)"
+>
+  <i class="icon-arrow-up"></i>
+</button>

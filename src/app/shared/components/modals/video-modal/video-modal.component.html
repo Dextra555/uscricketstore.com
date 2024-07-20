@@ -1,0 +1,10 @@
+<div class="video-modal">
+    <iframe *ngIf="link && link.includes('vimeo')" class="mfp-iframe" [src]="safeUrl" frameBorder="0" allow="autoplay; fullscreen" allowfullscreen="" title="Vimeo"></iframe>
+    
+    <iframe *ngIf="link && !link.includes('vimeo')" class="mfp-iframe" [src]="safeUrl"  title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+    <!-- <iframe *ngIf="!link" class="mfp-iframe" src="//www.youtube.com/embed/vBPgmASQ1A0?autoplay=1" frameBorder="0" allowFullScreen=""
+    title="youtube"></iframe> -->
+    <button type="button" class="close" (click)="closeModal()" autofocus=false><span><i
+                class="icon-close"></i></span></button>
+</div>

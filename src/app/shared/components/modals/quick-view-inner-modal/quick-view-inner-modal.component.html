@@ -1,0 +1,21 @@
+<div
+  class="container quickView-container"
+  style="padding-left: 0; padding-right: 0"
+>
+  <button
+    title="Close (Esc)"
+    type="button"
+    class="mfp-close"
+    (click)="closeQuickView()"
+  >
+    ×
+  </button>
+
+  <div class="quickView-content horizontal skeleton-body">
+    <quick-view-inner
+      [product1]="product1"
+      [loaded]="loaded"
+      [loaded1]="loaded1"
+    ></quick-view-inner>
+  </div>
+</div>

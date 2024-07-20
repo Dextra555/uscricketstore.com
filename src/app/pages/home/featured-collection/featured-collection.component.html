@@ -1,0 +1,13 @@
+<div class="heading text-center mt-4 mb-4" contentAnim aniName="blurIn">
+    <h3 class="text-secondary">Featured Products</h3>
+    <h6>Find Something New To Love</h6>
+</div>
+<owl-carousel-o carouselClasses="carousel-with-shadow owl-products" *ngIf="!loaded else loadedBlock"
+    [options]="featuredSlider">
+    <div class="skel-pro" *ngFor="let item of [1,2,3,4,5,6]"></div>
+</owl-carousel-o>
+<ng-template #loadedBlock>
+    <owl-carousel-o carouselClasses="carousel-with-shadow owl-products" [options]="featuredSlider">
+        <molla-product-twelve [product]="product" *ngFor="let product of products"></molla-product-twelve>
+    </owl-carousel-o>
+</ng-template>

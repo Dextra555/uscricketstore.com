@@ -1,0 +1,289 @@
+<section
+  style="
+    min-height: 500px;
+    background: url('{{assetPath}}assets/images/istockphoto-1276613883-170667a.jpg')
+      no-repeat;
+    background-size: cover;
+  "
+>
+  <div class="bkg_overlay" style="background-color: rgba(0, 0, 0, 0.6)">
+    <div class="page_name">
+      <h2>{{ page?.title }}</h2>
+      <div>
+        <nav class="d-flex justify-content-center" aria-label="breadcrumb">
+          <ol class="breadcrumb kd_breadcrumb_red">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ page?.title }}
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bkg_img kd_section">
+  <div class="own_container">
+    <div class="contact_section">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="section_box">
+            <div class="section_heading" *ngIf="contact?.title">
+              <h2 class="font_s35 font_cap mb0">
+                <b>{{ contact.title }}</b>
+              </h2>
+            </div>
+            <div class="section_description" *ngIf="contact?.sub_title">
+              <p>{{ contact.sub_title }}</p>
+            </div>
+          </div>
+          <div class="kd_media" *ngIf="contact?.email">
+            <div class="pull-left" href="#">
+              <img src="{{assetPath}}assets/images/email-transfer.svg" width="60px" />
+            </div>
+
+            <div class="media-body">
+              <h5 class="media-heading"><strong>Email</strong></h5>
+              <p>{{ contact.email }}</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="kd_media" *ngIf="contact?.phone">
+            <div class="">
+              <img src="{{assetPath}}assets/images/headphones.svg" width="60px" />
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading"><strong>Phone</strong></h5>
+              <p>{{ contact.phone }}</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="kd_media" *ngIf="contact?.address">
+            <div class="pull-left" href="#">
+              <img src="{{assetPath}}assets/images/location.svg" width="60px" />
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading"><strong>Location</strong></h5>
+              <p>{{ contact.address }}</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="contact_form_div">
+            <h2 class="font_s25 mb30">Leave Your Message Here</h2>
+            <form
+              id="contact-form"
+              [formGroup]="formGroup"
+              (ngSubmit)="submitForm()"
+              novalidate
+            >
+              <!--Grid row-->
+              <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6">
+                  <div class="md-form">
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      class="form-control kd_form_control"
+                      formControlName="name"
+                      placeholder="Your Name*"
+                    />
+                    <span
+                      class="kd_error"
+                      *ngIf="
+                        formGroup.controls['name'] &&
+                        formGroup.controls['name'].invalid &&
+                        formGroup.controls['name'].touched &&
+                        formGroup.controls['name'].errors.required
+                      "
+                      >Please enter your name</span
+                    >
+                    <span
+                      class="kd_error"
+                      *ngIf="
+                        formGroup.controls['name'] &&
+                        formGroup.controls['name'].invalid &&
+                        formGroup.controls['name'].touched &&
+                        formGroup.controls['name'].errors.maxlength
+                      "
+                      >Name should not greater than 30</span
+                    >
+                  </div>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6">
+                  <div class="md-form">
+                    <input
+                      type="text"
+                      id="email"
+                      name="email"
+                      formControlName="email"
+                      class="form-control kd_form_control"
+                      placeholder="Your Email*"
+                    />
+                    <span
+                      class="kd_error"
+                      *ngIf="
+                        formGroup.controls['email'] &&
+                        formGroup.controls['email'].invalid &&
+                        formGroup.controls['email'].touched
+                      "
+                      >Please enter a valid email</span
+                    >
+                  </div>
+                </div>
+                <!--Grid column-->
+              </div>
+              <!--Grid row-->
+
+              <!--Grid row-->
+              <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6">
+                  <div class="md-form">
+                    <input
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      formControlName="phone"
+                      class="form-control kd_form_control"
+                      placeholder="Your Phone*"
+                      (keyup)="getvalue($event)"
+                      (keypress)="commonService.numberOnly($event)"
+                    />
+                    <span
+                      class="kd_error d-block"
+                      *ngIf="
+                        submittingForm ||
+                        (formGroup.controls['phone'].errors &&
+                          formGroup.controls['phone'].touched)
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          formGroup.controls['phone'].errors.pattern ||
+                            nullValidator;
+                          else phone1Length
+                        "
+                        >Please enter a valid phone number</span
+                      >
+                      <ng-template #phone1Length>
+                        <span
+                          *ngIf="
+                            formGroup.controls['phone'].errors.maxlength ||
+                            formGroup.controls['phone'].errors.minlength
+                          "
+                          >Phone number length should be 10</span
+                        >
+                      </ng-template>
+                    </span>
+                    <!-- <span
+                      class="kd_error"
+                      *ngIf="
+                        formGroup.controls['phone'] &&
+                        formGroup.controls['phone'].invalid &&
+                        formGroup.controls['phone'].touched &&
+                        formGroup.controls['phone'].errors?.pattern
+                      "
+                      >Please enter a valid phone number</span
+                    > -->
+                  </div>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6">
+                  <div class="md-form">
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      formControlName="subject"
+                      class="form-control kd_form_control"
+                      placeholder="Your Subject*"
+                    />
+                    <span
+                      class="kd_error"
+                      *ngIf="
+                        formGroup.controls['subject'] &&
+                        formGroup.controls['subject'].invalid &&
+                        formGroup.controls['subject'].touched
+                      "
+                      >Please enter a subject</span
+                    >
+                  </div>
+                </div>
+                <!--Grid column-->
+              </div>
+              <!--Grid row-->
+
+              <!--Grid row-->
+              <div class="row">
+                <!--Grid column-->
+                <div class="col-md-12">
+                  <div class="md-form">
+                    <textarea
+                      type="text"
+                      id="message"
+                      name="message"
+                      formControlName="message"
+                      rows="7"
+                      class="form-control md-textarea"
+                      placeholder="Write Message"
+                    ></textarea>
+                    <span
+                      class="kd_error"
+                      *ngIf="
+                        formGroup.controls['message'] &&
+                        formGroup.controls['message'].invalid &&
+                        formGroup.controls['message'].touched
+                      "
+                      >Please enter a message</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <!--Grid row-->
+              <div class="center-on-small-only">
+                <div class="outer">
+                  <button type="submit" class="btn button">
+                    <div class="text font2 font_cap">
+                      Send &nbsp;&nbsp;<i
+                        *ngIf="submittingForm"
+                        class="fa fa-spinner fa-spin"
+                        style="font-size: 20px"
+                      ></i
+                      ><i
+                        *ngIf="!submittingForm"
+                        class="fa fa-paper-plane"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section *ngIf="safeUrl">
+  <iframe
+    [src]="safeUrl"
+    width="100%"
+    height="450"
+    style="border: 0"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</section>

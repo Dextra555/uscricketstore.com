@@ -1,0 +1,90 @@
+<div class="main">
+<section>
+  
+  <molla-page-header title="pageTitle" subtitle="Shop" ></molla-page-header>
+  <div class="own_container">
+      <div class="row">
+          <div class="col-md-4  d-none d-md-block">
+              <div class="page_title">
+                  <h3>Bookings</h3>
+              </div>
+          </div>
+          <div class="col-md-8">
+              <nav class="d-flex flex-row-reverse align-items-center h-100" aria-label="breadcrumb">
+                  <ol class="breadcrumb kd_breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+                  </ol>
+                </nav>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="bkg_img kd_section">
+  <div class="own_container">
+     <div style="background-color: #fff; padding: 20px;">
+
+       <div class="row">
+         <div class="col-md-3">
+           <molla-user-sidebar></molla-user-sidebar>
+         </div>
+         <div class="col-md-9 pl50">
+           <div class="row">
+             <div class="col-md-12">
+              <div class="account_detail_form">
+                <div class="form">
+                  <form>
+                    <div class="heading">
+                      <h2>Bookings</h2>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <table class="table orders-table" *ngIf="orders">
+                <thead style="background-color: #efefef; padding: 0 10px;">
+                  <tr>
+                    <th scope="col">Order</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Booking Date</th>
+                    <!-- <th scope="col">Status</th> -->
+                    <th scope="col">People</th>
+                    <th scope="col">Timings</th>
+                  </tr>
+                </thead>
+                <tbody style="padding: 0 10px;">
+                  <ng-container *ngFor="let order of orders">
+                    <tr *ngFor="let detail of order.order_details">
+                      <td><div class="mobile-row-header">Order</div><a class="v-list-item__content justify-end" routerLink="/order/{{order.order_combined.code}}">{{order.order_combined.code}}</a></td>
+                      <td>
+                        <div class="mobile-row-header">Product</div> {{detail?.product?.name}}
+                      </td>
+                      <td><div class="mobile-row-header">Booking Date</div> <span class="v-list-item__content justify-end">{{detail.booked_date}}</span></td>
+                      <!-- <td>{{order.orders.delivery_status}}</td> -->
+                      <td><div class="mobile-row-header">People</div><span class="v-list-item__content justify-end">{{detail.qty}}</span></td>
+                      
+                      <td>
+                        <div class="mobile-row-header">Timings</div>
+                        <span class="addon-val" *ngFor="let bookedslot of detail.slots">
+                          <span class="addon-title">
+                            {{bookedslot.slot_start_time}} - {{bookedslot.slot_end_time}}</span>
+                        </span>
+
+                      </td>
+                    </tr>
+                  </ng-container>
+                  
+                </tbody>
+              </table>
+              <div class="loadmore-btn text-center mt-3" *ngIf="totalBookings > orders.length">
+                <div class="btn button" (click)="loadmore()">
+                    <div class="text font1">Load more <i *ngIf="loadingBookings" class="fa fa-spinner fa-spin" style="font-size:20px"></i></div>
+                </div>
+              </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+  </div>
+</section>
+</div>

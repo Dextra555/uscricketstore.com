@@ -1,0 +1,25 @@
+<div class="modal-body">
+
+    <div class="form-box">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+        <form action="#" [formGroup]='formGroup' (ngSubmit)="walletRecharge()">
+            <div class="form-group kd-form-group">
+                <label for="rechargeAmount">Amount ($)*</label>
+                <input type="text" class="form-control" id="rechargeAmount" name="rechargeAmount"  formControlName='rechargeAmount' >
+                <span class="kd_error" *ngIf="formGroup.controls['rechargeAmount'] && formGroup.controls['rechargeAmount'].invalid && formGroup.controls['rechargeAmount'].touched ">Please enter a valid recharge amount</span>
+            </div>
+            <div class="form-footer">
+                <div class="outer">
+                    <button type="submit" class="btn button" style="padding: 10px 0;">
+                        <span class="color_w">Recharge</span> &nbsp;
+                        <i *ngIf="recharging" class="fa fa-spinner fa-spin" style="font-size:20px"></i>
+                        <i *ngIf="!recharging" class="icon-long-arrow-right color_w"></i>
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

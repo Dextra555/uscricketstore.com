@@ -1,0 +1,306 @@
+<div class="modal-body">
+  <div class="form-box">
+    <button type="button" class="close" (click)="closeModal()">
+      <span aria-hidden="true"><i class="icon-close"></i></span>
+    </button>
+    <h2 class="checkout-title">{{ title }}</h2>
+
+    <form
+      action="#"
+      [formGroup]="formGroup"
+      id="form-shipping"
+      (ngSubmit)="submitForm()"
+      novalidate
+    >
+      <div class="row">
+        <div class="col-sm-6">
+          <label>First Name *</label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstname"
+            formControlName="firstname"
+            required
+          />
+          <span
+            class="position-relative kd_error d-block"
+            *ngIf="
+              submittingForm ||
+              (formGroup.controls['firstname'].errors &&
+                formGroup.controls['firstname'].touched)
+            "
+          >
+            <span *ngIf="formGroup.controls['firstname'].errors?.required"
+              >Please enter your first name</span
+            >
+            <span
+              *ngIf="
+                formGroup.controls['firstname']?.errors?.pattern;
+                else firstnameLength
+              "
+              >Please enter a valid first name</span
+            >
+            <ng-template #firstnameLength>
+              <span *ngIf="formGroup.controls['firstname']?.errors?.maxlength"
+                >First name is too long</span
+              >
+            </ng-template>
+          </span>
+        </div>
+
+        <div class="col-sm-6">
+          <label>Last Name *</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastname"
+            formControlName="lastname"
+            required
+          />
+          <span
+            class="position-relative kd_error d-block"
+            *ngIf="
+              submittingForm ||
+              (formGroup.controls['lastname'].errors &&
+                formGroup.controls['lastname'].touched)
+            "
+          >
+            <span *ngIf="formGroup.controls['lastname'].errors?.required"
+              >Please enter your last name</span
+            >
+            <span
+              *ngIf="
+                formGroup.controls['lastname']?.errors?.pattern;
+                else lastnameLength
+              "
+              >Please enter a valid last name</span
+            >
+            <ng-template #lastnameLength>
+              <span *ngIf="formGroup.controls['lastname']?.errors?.maxlength"
+                >Last name is too long</span
+              >
+            </ng-template>
+          </span>
+        </div>
+      </div>
+
+      <label>Address</label>
+      <textarea
+        class="form-control textarea"
+        cols="20"
+        rows="2"
+        formControlName="address"
+        placeholder=""
+      ></textarea>
+      <span
+        class="position-relative kd_error d-block"
+        *ngIf="
+          submittingForm ||
+          (formGroup.controls['address'].errors &&
+            formGroup.controls['address'].touched)
+        "
+      >
+        <span *ngIf="formGroup.controls['address'].errors?.required"
+          >Please enter your address</span
+        >
+        <span *ngIf="formGroup.controls['address']?.errors?.pattern"
+          >Please enter a valid address</span
+        >
+      </span>
+
+      <label>Zip Code *</label>
+      <input
+        type="text"
+        name="postcode"
+        class="form-control"
+        formControlName="postal_code"
+        required
+      />
+      <span
+        class="position-relative kd_error d-block"
+        *ngIf="
+          submittingForm ||
+          (formGroup.controls['postal_code'].errors &&
+            formGroup.controls['postal_code'].touched)
+        "
+      >
+        <span *ngIf="formGroup.controls['postal_code'].errors?.required"
+          >Please enter your zip code</span
+        >
+        <span
+          *ngIf="
+            formGroup.controls['postal_code'].errors?.pattern;
+            else postal_codeLength
+          "
+          >Please enter a valid zip code</span
+        >
+        <ng-template #postal_codeLength>
+          <span *ngIf="formGroup.controls['postal_code'].errors?.maxlength"
+            >Zip Code length should be 12</span
+          >
+          <span *ngIf="formGroup.controls['postal_code'].errors?.minlength"
+            >Zip Code length should be 4</span
+          >
+        </ng-template>
+      </span>
+
+      <label>Country *</label>
+      <ng-select
+        style="margin-bottom: 2rem"
+        formControlName="country"
+        required
+        (change)="getStates()"
+        [items]="countries"
+        bindLabel="name"
+        bindValue="id"
+        placeholder="Select Country"
+        appendTo="body"
+        [searchable]="true"
+      >
+      </ng-select>
+      <span
+        class="position-relative kd_error d-block"
+        *ngIf="
+          submittingForm ||
+          (formGroup.controls['country'].errors &&
+            formGroup.controls['country'].touched)
+        "
+      >
+        <span *ngIf="formGroup.controls['country'].errors?.required"
+          >Please select your country</span
+        >
+      </span>
+
+      <label>State *</label>
+      <!-- <select name="state" class="form-control" formControlName='state' required (change)="getCities()">
+            <option [value]="">
+              Select State
+            </option>
+            <option *ngFor="let op of states" [value]="op.id">
+              {{ op.name }}
+            </option>
+          </select> -->
+      <ng-select
+        style="margin-bottom: 2rem"
+        formControlName="state"
+        required
+        (change)="getCities()"
+        [items]="states"
+        bindLabel="name"
+        bindValue="id"
+        placeholder="Select State"
+        [searchable]="true"
+      >
+      </ng-select>
+      <span
+        class="position-relative kd_error d-block"
+        *ngIf="
+          submittingForm ||
+          (formGroup.controls['state'].errors &&
+            formGroup.controls['state'].touched)
+        "
+      >
+        <span *ngIf="formGroup.controls['state'].errors?.required"
+          >Please select your state</span
+        >
+      </span>
+
+      <label>City *</label>
+      <ng-select
+        style="margin-bottom: 2rem"
+        formControlName="city"
+        required
+        [items]="cities"
+        bindLabel="name"
+        bindValue="id"
+        placeholder="Select City"
+        appendTo="body"
+        [searchable]="true"
+      >
+      </ng-select>
+      <span
+        class="position-relative kd_error d-block"
+        *ngIf="
+          submittingForm ||
+          (formGroup.controls['city'].errors &&
+            formGroup.controls['city'].touched)
+        "
+      >
+        <span *ngIf="formGroup.controls['city'].errors?.required"
+          >Please select your city</span
+        >
+      </span>
+
+      <label>Phone *</label>
+      <input
+        type="tel"
+        name="phone"
+        class="form-control"
+        formControlName="phone"
+        (keyup)="getvalue($event)"
+        (keypress)="commonService.numberOnly($event)"
+        required
+      />
+      <span
+        class="position-relative kd_error d-block"
+        *ngIf="
+          submittingForm ||
+          (formGroup.controls['phone'].errors &&
+            formGroup.controls['phone'].touched)
+        "
+      >
+        <span *ngIf="formGroup.controls['phone'].errors?.required"
+          >Please enter your phone number</span
+        >
+        <span
+          *ngIf="
+            formGroup.controls['phone'].errors?.pattern || nullValidator;
+            else phone1Length
+          "
+          >Please enter a valid phone number</span
+        >
+        <ng-template #phone1Length>
+          <span
+            *ngIf="
+              formGroup.controls['phone'].errors?.maxlength ||
+              formGroup.controls['phone'].errors?.minlength
+            "
+            >Phone number length should be 10</span
+          >
+        </ng-template>
+      </span>
+
+      <!--Grid row-->
+      <div>
+        <div class="outer d-flex justify-content-between">
+          <button type="submit" class="btn button mt-1">
+            <div *ngIf="!address" class="text font2 font_cap">
+              Save &nbsp;&nbsp;<i
+                *ngIf="submittingForm"
+                class="fa fa-spinner fa-spin"
+                style="font-size: 20px"
+              ></i
+              ><i
+                *ngIf="!submittingForm"
+                class="fa fa-paper-plane"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div *ngIf="address" class="text font2 font_cap">
+              Update &nbsp;&nbsp;<i
+                *ngIf="submittingForm"
+                class="fa fa-spinner fa-spin"
+                style="font-size: 20px"
+              ></i
+              ><i
+                *ngIf="!submittingForm"
+                class="fa fa-paper-plane"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

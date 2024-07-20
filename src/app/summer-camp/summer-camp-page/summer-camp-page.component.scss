@@ -1,0 +1,767 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+// button.btn-link {
+//     float: right !important;
+// }
+
+
+
+  
+
+  
+
+
+
+
+.pagenamecontent h5 {
+    color: #fff;
+    padding-top: 20px;
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+// .page_name .row{
+    
+//         padding-top: 319px;
+    
+// }
+.page_name {
+    padding-top: 313px;
+}
+.accordion-item {
+    background-color: #fff;
+     border: none;
+}
+
+.accordionsec h2 {
+    font-size: 27px;
+    margin-bottom: 30px;
+
+}
+
+.accordionsec h3 {
+    font-weight: 500;
+}
+
+
+
+.accordionsec p {
+    font-size: 15px;
+    padding: 0px 24px;
+    text-align: justify;
+
+}
+
+.accordionsec {
+    margin: 70px 41px 60px 35px;
+}
+
+.pagenamecontent {
+    margin-left: 30px;
+    margin-top: 62px;
+    margin-bottom: 50px;
+}
+
+.pagenamecontent h2 {
+    text-transform: capitalize !important;
+    font-family: Roboto, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+    letter-spacing: 0.5px;
+    padding-bottom: 11px;
+    margin-top: -14px;
+
+}
+
+.pagenamecontent p {
+    color: #FFFFFF;
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0.5px;
+    padding-top: 20px;
+    padding-bottom: 14px;
+}
+
+.pagenamecontent h5 {
+    color: #FFFFFF;
+    padding-top: 0px;
+ padding-bottom: 20px;
+}
+
+a.pagea {
+    color: #fff !important;
+    text-align: center !important;
+    margin-top: -500px;
+    margin-left: 120px;
+}
+
+.page_namespan {
+    color: red;
+    
+}
+
+.campsec1 img
+{
+    float:right;
+}
+.campsec1 h2 {
+    text-transform: capitalize !important;
+    font-family: Roboto;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 51px;
+    letter-spacing: -1px;
+        padding-bottom: 20px;
+}
+
+.campsec1 h5 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.campsec p {
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    color: #000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: justify;
+    display: flex
+}
+
+.campsec1 {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    text-align: justify;
+    width: 100%;
+    padding-right: 50px;
+    padding-left: 50px;
+
+}
+
+.campsec1 p {
+    text-align: justify;
+    width: 100%;
+    padding-right: 20px;
+    margin-top: 29px;
+    font-size: 15px;
+    display: flex;
+
+}
+
+
+
+.campsec1 h2,
+h5 {
+    font-family: Roboto;
+
+}
+
+
+
+
+.campsec2 {
+    margin-left: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.campsec3 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+
+
+}
+
+.enrollcontent {
+    padding: 30px;
+}
+
+.campsec3 h2 {
+    text-transform: capitalize !important;
+    font-family: Roboto;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+    letter-spacing: 0.5px;
+    padding-bottom: 20px;
+
+}
+
+.campsec3 a {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.campsec3 h5 {
+    font-family: Roboto;
+    font-size: 18px;
+}
+
+.row {
+    display: flex;
+}
+
+.campsec4content {
+    display: flex;
+    float:right;
+}
+
+.campsec4content i {
+    border-radius: 39px;
+
+    font-size: 23px;
+    color: red;
+    background: #fff;
+    padding-top: 14px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+}
+
+.campsec4 h2 {
+    text-transform: capitalize !important;
+    font-family: Roboto;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+    letter-spacing: 0.5px;
+    padding-bottom: 20px;
+    text-align: center
+}
+
+.campsec4 {
+  
+    padding: 20px 40px;
+}
+
+.col-md-2 {
+    gap: 5px;
+}
+
+.campsec4content span {
+    padding-left: 20px;
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+}
+
+p.campsec4contentp {
+    text-align: center;
+    font-size: 15px;
+    margin-top: 15px;
+    justify-content: center;
+    padding: 20px;
+
+}
+
+.col-md-4 h2 {
+    text-transform: capitalize !important;
+    font-family: Roboto;
+ font-size: 29px;
+    padding-bottom: 20px;
+    color: #ffff;
+    padding-left: 10px;
+    
+}
+
+.col-md-7 h4 {
+    font-family: Roboto;
+    color: #fff;
+    font-size: 20px;
+   
+    width: 100%;
+    line-height: 1.6 !important;
+    letter-spacing: -0.1px;
+    padding-bottom: 27px;
+    
+    
+
+}
+
+.col-md-8 h4 {
+    font-family: Roboto;
+    color: #fff;
+   font-size: 18px;
+  
+    width: 100%;
+    line-height: 1.6;
+    letter-spacing: -0.1px;
+}
+.col-md-8 h3 {
+    font-family: Roboto;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 400;
+    width: 100%;
+    line-height: 1.3;
+    letter-spacing: -.1px;
+}
+
+.packagebox h4{
+    font-size: 18px;
+}
+
+
+
+
+.sect {
+    background: #000;
+    color: #ffff;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.campsec5 {
+    margin: 0px;
+    width: 100%;
+    text-align: justify;
+}
+.col-md-6 .sectp{
+    font-size: 12px;
+    font-weight: 500;
+    padding-top: 0px;
+    padding-left: 5px;
+
+}
+.col-md-8 .sectp{
+    font-size: 13px;
+    font-weight: 400;
+    padding-top: 30px;
+    
+
+}
+
+.col-md-8 .sectp1{
+    font-size: 12px;
+    font-weight: 500;
+    padding-top: 0px;
+   
+
+}
+
+.campsec5box {
+
+    border: 2px solid grey;
+    padding: 40px;
+    border-radius: 16px;
+    margin-right: 0px;
+
+}
+
+.rowbox {
+    display: flex;
+    margin-top: 20px;
+}
+
+.campsec5h4con {
+    font-family: Roboto;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 400;
+    width: 100%;
+    line-height: 1.3;
+    letter-spacing: -.1px;
+}
+
+img.ban2img {
+    width: 100%;
+    margin: 35px;
+}
+
+.rowcontent i {
+    font-size: 22px;
+    color: red;
+    padding-right: 10px;
+}
+
+.sect p {
+    color: #fff;
+    margin-top: 19px;
+    padding-top: 26px;
+    display: flex;
+    text-align: justify;
+    font-size: 13px;
+
+}
+
+p.sectp {
+    margin-top: -13px !important;
+    /* margin-left: 15px; */
+}
+
+.custom-row {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.left-col {
+    padding-right: 0px;
+    /* Adjust as needed */
+}
+
+.right-col {
+    text-align: right;
+    padding-left: 0px;
+    /* Adjust as needed */
+}
+
+
+
+
+.col-md-5 .sectp{
+    margin-top: 0px;
+
+}
+.col-1 img{
+    margin-left: 45px;
+  }
+
+
+.smallbox {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-left: 20px;
+   
+
+}
+
+.smallu10box,
+.smallu14box {
+    background-color: #212529; /* Initial background color */
+    color: #fff;
+    cursor: pointer;
+    padding: 3px 13px;
+    width: 100%;
+    text-align: center;
+   
+}
+
+.smallu10box.active-tab {
+    background-color: red; /* Background color when u10 is active */
+}
+
+.smallu14box.active-tab {
+    background-color: red; /* Background color when u14 is active */
+}
+
+
+
+.smallbox h4 {
+    color: #fff !important
+}
+
+.desktopview {
+    display: block;
+    
+}
+
+.mobileview {
+    display: none;
+}
+
+.campsec5box i {
+    color: #fff;
+    font-size: 22px;
+    padding-right: 10px;
+
+}
+
+.campsec4content .col-md-4 {
+    padding-right: 40px;
+    width: 100%;
+
+}
+
+.campsec3content {
+    padding: 30px;
+}
+
+.left-col,
+.right-col {
+    padding: 0px !important;
+}
+.join {
+    padding: 5px 15px;
+    line-height: 30px;
+    color: #fff;
+    margin-bottom: 26px;
+}
+.phonecon,.emailcon
+{
+   color: #777 !important;
+} 
+#mobile-only {
+    display: none;
+}
+#desktop-only {
+    display: block;
+}
+// Media Queries
+
+@media (max-width: 768px) {
+    .campsec1 {
+        padding-left: 25px;
+        padding-right: 25px;
+        margin-bottom: 246px;
+    }
+    #desktop-only {
+        display: none;
+    }
+    #mobile-only {
+        display: block;
+    }
+    
+    .campsec1 h5 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: -18px;
+    }
+    a.pagea {
+        padding-top: 31px;
+        display: none;
+    }
+    .campsec1 h2 {
+        font-size: 19px;
+        line-height: 34px;
+        letter-spacing: -.4px;
+        font-family: Roboto;
+        margin-top: -22px;
+    }
+    .campsec4content {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        gap: 39px;
+    }
+    .campsec5h4 {
+        font-family: Roboto;
+        color: #fff;
+        font-size: 14px !important;
+        margin-top: -14px !important;
+    }
+
+
+    .page_name {
+        padding: 353px 0 50px;
+        text-align: center;
+    }
+
+    p.campsec4contentp {
+
+        margin-left: 39px;
+        color: #000;
+        font-weight: 400;
+        text-align: -webkit-center;
+        justify-content: center;
+
+    }
+
+    .campsec3content {
+        padding: 25px;
+    }
+
+    .campsec3 h5 {
+        font-family: Roboto;
+        font-size: 13px;
+        line-height: 24px;
+    }
+
+    .campsec3 {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 100%;
+        display: block;
+    }
+
+    .campsec3 h2 {
+        text-transform: capitalize !important;
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 40px;
+        letter-spacing: .5px;
+        padding-bottom: 20px;
+    }
+    
+    .sect p {
+        color: #fff;
+        margin: 26px 10px;
+        padding: 0px;
+        font-size: 14px;
+        letter-spacing: 0.10px;
+    }
+    .col-md-4 h2{
+        padding: 0px;
+       
+    }
+    .col-md-4 h4{
+        padding: 0px;
+        text-align: center;
+    }
+.smallbox {
+    text-align: center;
+    padding-left: 0px;
+}
+    .smallbox h4 {
+        color: #fff !important;
+        margin: 0px;
+        text-align: center;
+        justify-content: center;
+    }
+    .sect { 
+        margin-top: 360px;
+    }
+
+    .campsec5h2 {
+        text-transform: capitalize !important;
+        font-family: Roboto;
+        font-size: 25px;
+        font-weight: 600;
+        padding-bottom: 7px;
+        color: #fff;
+    }
+
+    .pagenamecontent {
+        margin-left: 10px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .campsec1 p {
+        text-align: justify;
+        width: 100%;
+        margin-top: 29px;
+        font-size: 15px;
+        padding: 0px;
+        margin-bottom: 29px;
+
+
+    }
+
+    .campsec4content .col-md-4 {
+        width: 100%;
+
+        text-align: center;
+        justify-content: center;
+
+    }
+
+    .pagenamecontent h2 {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .pagenamecontent p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .pagenamecontent h5 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    a.pagea {
+        margin-left: 0;
+    }
+
+    .col-md-4 {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .smallu10box,
+    .smallu14box {
+        padding-left: 0px;
+        padding: 0px;
+        /* Adjust padding for smaller screens */
+    }
+
+    .row {
+        display: block;
+    }
+
+    img.campsecimg {
+        width: 100%;
+    }
+
+    .custom-row {
+        gap: 50px;
+        margin: 0 !important;
+        padding: 0px !important;
+    }
+
+    .left-col,
+    .right-col {
+        padding: 0px;
+        /* Adjust padding for smaller screens */
+    }
+
+    .right-col {
+        text-align: left;
+    }
+
+    .desktopview {
+        display: none;
+    }
+
+    .mobileview {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+
+    .smallu10box,
+    .smallu14box {
+        padding: 10px 83px 0px 70px;
+        /* Adjust padding for larger screens */
+        text-align: left;
+        /* Align text to the left on larger screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .pagenamecontent {
+        margin-left: 5px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .pagenamecontent h2 {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .pagenamecontent p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .pagenamecontent h5 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    a.pagea {
+        margin-left: 0;
+    }
+}

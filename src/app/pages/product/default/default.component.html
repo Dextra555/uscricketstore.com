@@ -1,0 +1,657 @@
+<main class="main">
+  <molla-page-header
+    title="{{product?.name}}"
+    subtitle=""
+  ></molla-page-header>
+  <section>
+    <div class="own_container">
+      <div class="row">
+        <div class="col-md-4 d-none d-md-block">
+          <div class="page_title">
+            <h3>Product</h3>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <nav
+            class="d-flex flex-row-reverse align-items-center h-100"
+            aria-label="breadcrumb"
+          >
+            <ol class="breadcrumb kd_breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <!-- <li class="breadcrumb-item active" aria-current="page">
+                <a routerLink="/">Shop</a>
+              </li> -->
+              @if (product && product.categories && product.categories.length) {
+                <li class="breadcrumb-item active"
+                *ngFor="let cat of product.categories; let i = index" aria-current="page" >
+                  @if (product.categories.length == (i + 1)) {
+                    <a routerLink="/category/{{ cat.slug }}">{{
+                      cat.name
+                    }}</a>
+                  }
+                  @else {
+                    {{ cat.name }}
+                  }
+                </li>
+              }
+              <li
+                class="breadcrumb-item active"
+                *ngIf="product"
+                aria-current="page"
+              >
+                {{ product.name }}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-content default-page bkg_img">
+    <div class="own_container skeleton-body horizontal pt-sm-80 pt-40">
+      <quick-view-inner
+        [product1]="product"
+        [loaded]="loaded"
+      ></quick-view-inner>
+
+      <div class="skel-pro-tabs" *ngIf="!loaded; else infoBlock"></div>
+      <ng-template #infoBlock>
+        <div
+          class="row align-center justify-center"
+          *ngIf="
+            product?.review_summary?.total_count &&
+            product?.review_summary?.total_count > 0
+          "
+        >
+          <div class="text-center col-md-6 col-12">
+            <div class="display-2 opacity-60">
+              {{ product?.review_summary?.average }}
+            </div>
+            <div>Out of 5</div>
+            <div class="rating-box v-rating lh-1-5 v-rating--readonly">
+              <button
+                type="button"
+                aria-label="Rating 1 of 5"
+                class="v-icon notranslate v-icon--link fa fa-star {{
+                  ratingClass(0, 5)
+                }}"
+                style="font-size: 15px"
+              ></button
+              ><button
+                type="button"
+                aria-label="Rating 2 of 5"
+                class="v-icon notranslate v-icon--link fa fa-star {{
+                  ratingClass(1.5, 5)
+                }}"
+                style="font-size: 15px"
+              ></button
+              ><button
+                type="button"
+                aria-label="Rating 3 of 5"
+                class="v-icon notranslate v-icon--link fa fa-star {{
+                  ratingClass(2.5, 5)
+                }}"
+                style="font-size: 15px"
+              ></button
+              ><button
+                type="button"
+                aria-label="Rating 4 of 5"
+                class="v-icon notranslate v-icon--link fa fa-star {{
+                  ratingClass(3.5, 5)
+                }}"
+                style="font-size: 15px"
+              ></button
+              ><button
+                type="button"
+                aria-label="Rating 5 of 5"
+                class="v-icon notranslate v-icon--link fa fa-star {{
+                  ratingClass(4.5, 5)
+                }}"
+                style="font-size: 15px"
+              ></button>
+            </div>
+            <div class="fs-12 opacity-70 mt-1">
+              {{ product?.review_summary?.total_count }} Ratings
+            </div>
+          </div>
+          <div
+            class="rating-box text-center border-md-start d-flex col-md-6 col-12"
+          >
+            <div class="w-260px mx-auto">
+              <div class="d-flex align-center">
+                <div class="v-rating lh-1-5 v-rating--readonly">
+                  <button
+                    type="button"
+                    aria-label="Rating 1 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 2 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 3 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 4 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 5 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button>
+                </div>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    [style.width]="
+                      ratingPercent(
+                        product.review_summary.count_5,
+                        product.review_summary.total_count
+                      ) + '%'
+                    "
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <span class="w-60px text-right fs-12 opacity-60">{{
+                  product?.review_summary?.count_5
+                }}</span>
+              </div>
+              <div class="d-flex align-center">
+                <div class="v-rating lh-1-5 v-rating--readonly">
+                  <button
+                    type="button"
+                    aria-label="Rating 1 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 2 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 3 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 4 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 5 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button>
+                </div>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    [style.width]="
+                      ratingPercent(
+                        product.review_summary.count_4,
+                        product.review_summary.total_count
+                      ) + '%'
+                    "
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <span class="w-60px text-right fs-12 opacity-60">{{
+                  product?.review_summary?.count_4
+                }}</span>
+              </div>
+              <div class="d-flex align-center">
+                <div class="v-rating lh-1-5 v-rating--readonly">
+                  <button
+                    type="button"
+                    aria-label="Rating 1 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 2 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 3 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 4 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 5 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button>
+                </div>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    [style.width]="
+                      ratingPercent(
+                        product.review_summary.count_3,
+                        product.review_summary.total_count
+                      ) + '%'
+                    "
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <span class="w-60px text-right fs-12 opacity-60">{{
+                  product?.review_summary?.count_3
+                }}</span>
+              </div>
+              <div class="d-flex align-center">
+                <div class="v-rating lh-1-5 v-rating--readonly">
+                  <button
+                    type="button"
+                    aria-label="Rating 1 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 2 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 3 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 4 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 5 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button>
+                </div>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    [style.width]="
+                      ratingPercent(
+                        product.review_summary.count_2,
+                        product.review_summary.total_count
+                      ) + '%'
+                    "
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <span class="w-60px text-right fs-12 opacity-60">{{
+                  product?.review_summary?.count_2
+                }}</span>
+              </div>
+              <div class="d-flex align-center">
+                <div class="v-rating lh-1-5 v-rating--readonly">
+                  <button
+                    type="button"
+                    aria-label="Rating 1 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star active"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 2 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 3 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 4 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button
+                  ><button
+                    type="button"
+                    aria-label="Rating 5 of 5"
+                    class="v-icon notranslate v-icon--link fa fa-star theme--light"
+                    style="font-size: 12px"
+                  ></button>
+                </div>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    [style.width]="
+                      ratingPercent(
+                        product.review_summary.count_1,
+                        product.review_summary.total_count
+                      ) + '%'
+                    "
+                    aria-valuenow="25"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <span class="w-60px text-right fs-12 opacity-60">{{
+                  product?.review_summary?.count_1
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-info-tabs">
+          <ul
+            class="nav nav-tabs justify-content-center"
+            id="myTab"
+            role="tablist"
+          >
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                id="description-tab"
+                data-toggle="tab"
+                href="#description"
+                role="tab"
+                aria-controls="description"
+                aria-selected="true"
+                >Description</a
+              >
+            </li>
+
+            <li
+              *ngIf="product.size_chart && product.size_chart != ''"
+              class="nav-item"
+            >
+              <a
+                class="nav-link"
+                id="features-tab"
+                data-toggle="tab"
+                href="#features"
+                role="tab"
+                aria-controls="features"
+                aria-selected="false"
+                >Features</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="review-tab"
+                data-toggle="tab"
+                href="#review"
+                role="tab"
+                aria-controls="review"
+                aria-selected="false"
+                >Reviews ({{ totalreviews }})</a
+              >
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="description"
+              role="tabpanel"
+              aria-labelledby="description-tab"
+            >
+              <div class="description" [innerHtml]="product.description"></div>
+              <div class="video-modal mt-3" *ngIf="product.video_link">
+                <iframe
+                  *ngIf="
+                    product.video_link && product.video_link.includes('vimeo')
+                  "
+                  class="mfp-iframe"
+                  [src]="safeUrl"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen"
+                  allowfullscreen=""
+                  title="Vimeo"
+                ></iframe>
+
+                <iframe
+                  *ngIf="
+                    product.video_link && !product.video_link.includes('vimeo')
+                  "
+                  class="mfp-iframe"
+                  [src]="safeUrl"
+                  title="YouTube"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+            <div
+              *ngIf="product.size_chart && product.size_chart != ''"
+              class="tab-pane fade"
+              id="features"
+              role="tabpanel"
+              aria-labelledby="features-tab"
+            >
+              <div class="features">
+                <img src="{{ product.size_chart }}" />
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="review"
+              role="tabpanel"
+              aria-labelledby="review-tab"
+            >
+              <div class="review-heading">REVIEWS</div>
+              <p class="mb-20" *ngIf="!totalreviews || totalreviews == 0">
+                There are no reviews yet.
+              </p>
+              <div class="reviews mt-2" *ngIf="reviews && reviews.length > 0">
+                <div class="review" *ngFor="let review of reviews">
+                  <div class="row no-gutters">
+                    <div class="col-auto col-md-3 col-lg-2">
+                      <h4>
+                        <img
+                          [src]="
+                            review?.user?.avatar
+                              ? review?.user?.avatar
+                              : assetPath+'assets/images/user.png'
+                          "
+                          style="width: 20px"
+                        />
+                        {{ review.user.name }}
+                      </h4>
+                      <div class="ratings-container">
+                        <div class="ratings">
+                          <div
+                            class="ratings-val"
+                            [style.width]="review.rating * 20 + '%'"
+                          ></div>
+                          <span class="tooltip-text">{{ review.rating }}</span>
+                        </div>
+                      </div>
+                      <span class="review-date">{{ review.time }}</span>
+                    </div>
+                    <div class="col">
+                      <div class="review-content">
+                        <p>{{ review.comment }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="loadmore-btn text-center mt-3"
+                *ngIf="totalreviews > reviews.length"
+              >
+                <div class="btn button" (click)="loadmore()">
+                  <div class="text font1">
+                    Load more
+                    <i
+                      *ngIf="loadingreviews"
+                      class="fa fa-spinner fa-spin"
+                      style="font-size: 20px"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+              <form
+                class="review-form"
+                *ngIf="currentUser"
+                [formGroup]="formGroup"
+                id="review-form"
+                (ngSubmit)="submitReview()"
+                novalidate
+              >
+                <div class="form-group">
+                  <label>Your rating</label>
+                  <div class="reviews-counter">
+                    <div class="rate">
+                      <input
+                        type="radio"
+                        formControlName="rating"
+                        id="star5"
+                        [checked]="selectedRating == 5"
+                        name="rating"
+                        value="5"
+                      />
+                      <label (click)="changeRating(5)" title="Rating 5"
+                        >5 stars</label
+                      >
+                      <input
+                        type="radio"
+                        id="star4"
+                        name="rating"
+                        formControlName="rating"
+                        value="4"
+                        [checked]="selectedRating == 4"
+                      />
+                      <label (click)="changeRating(4)" title="Rating 4"
+                        >4 stars</label
+                      >
+                      <input
+                        type="radio"
+                        id="star3"
+                        name="rating"
+                        formControlName="rating"
+                        value="3"
+                        [checked]="selectedRating == 3"
+                      />
+                      <label (click)="changeRating(3)" title="Rating 3"
+                        >3 stars</label
+                      >
+                      <input
+                        type="radio"
+                        id="star2"
+                        name="rating"
+                        formControlName="rating"
+                        value="2"
+                        [checked]="selectedRating == 2"
+                      />
+                      <label (click)="changeRating(2)" title="Rating 2"
+                        >2 stars</label
+                      >
+                      <input
+                        type="radio"
+                        id="star1"
+                        name="rating"
+                        formControlName="rating"
+                        value="1"
+                        [checked]="selectedRating == 1"
+                      />
+                      <label (click)="changeRating(1)" title="Rating 1"
+                        >1 star</label
+                      >
+                    </div>
+                    <span
+                      class="kd_error d-block"
+                      *ngIf="f.rating && f.rating.invalid && f.rating.touched"
+                      >Please select rating</span
+                    >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Your message</label>
+                  <textarea
+                    class="form-control"
+                    rows="10"
+                    formControlName="comment"
+                  ></textarea>
+                  <span
+                    class="kd_error d-block"
+                    *ngIf="f.comment && f.comment.invalid && f.comment.touched"
+                    >Please write a comment</span
+                  >
+                </div>
+                <!-- <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" name="" class="form-control" placeholder="Name*">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" name="" class="form-control" placeholder="Email Id*">
+                                        </div>
+                                    </div>
+                                </div> -->
+                <button class="round-black-btn" type="submit">
+                  Submit Review &nbsp;&nbsp;<i
+                    *ngIf="submittingForm"
+                    class="fa fa-spinner fa-spin"
+                    style="font-size: 20px"
+                  ></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-container *ngIf="product && product.product_type != 'lane'">
+        <related-products-one
+          [products]="relatedProducts"
+          [loaded]="relatedloaded"
+        ></related-products-one>
+      </ng-container>
+    </div>
+  </div>
+</main>

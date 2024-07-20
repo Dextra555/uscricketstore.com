@@ -1,0 +1,35 @@
+<div class="modal-body">
+  <button type="button" class="close" (click)="closeModal()">
+    <span aria-hidden="true"><i class="icon-close"></i></span>
+  </button>
+
+  <div class="form-box">
+    <div class="form-tab nav-fill">
+      <ul ngbNav #nav="ngbNav" class="justify-content-center nav nav-pills">
+        <li ngbNavItem>
+          <!-- <a class="font1" ngbNavLink>Huge Sale!</a> -->
+          <ng-template ngbNavContent>
+            <div>
+              <div class="form-group kd-form-group" role="button" (click)="goToOffer()">
+                <img style="cursor: pointer" src="{{assetPath}}assets/images/sale.png" alt="Sale logo" />
+              </div>
+
+              <!-- <div class="form-footer">
+                <div class="outer">
+                  <button
+                    type="submit"
+                    class="btn button"
+                    style="padding: 10px 0"
+                  >
+                    <span class="color_w">VIEW SALE</span> &nbsp;
+                  </button>
+                </div>
+              </div> -->
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+@media screen and (min-width: 992px) {
+    .sidebar {
+        position: sticky;
+        top: 70px;
+    }
+}
+
+.filter-section {
+  margin-bottom: 7.5px; /* Add spacing between buttons if needed */
+}
+
+.clear-filter-btn {
+  background-color: #fff; /* Set your background color */
+  border: 1px solid #c72f2f; /* Set your border color */
+  color: #ff3c3c; /* Set your text color */
+  padding: 5px 10px; /* Adjust padding as needed */
+  cursor: pointer;
+}
+
+.clear-filter-btn:hover {
+  background-color: #eee; /* Set hover background color */
+}

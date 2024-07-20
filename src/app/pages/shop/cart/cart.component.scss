@@ -1,0 +1,452 @@
+.qtyChange {
+  font-size: 28px;
+  position: absolute;
+  right: 256px;
+}
+
+// yugendran
+.cart-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 1px solid #ccc;
+}
+
+.cart-img-new {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  object-fit: contain;
+}
+
+.cart-discount-new {
+  max-width: 100%;
+}
+
+.summary-new-cart {
+  padding: 1rem 1rem 1rem;
+  margin-bottom: 1.44rem;
+  border-radius: 0.25rem;
+  background: #FFF;
+  height: auto !important;
+  position:sticky;
+  top:14.25rem;
+  box-shadow: 0px 2px 4px 0px rgba(157, 157, 157, 0.10), 0px 7px 7px 0px rgba(157, 157, 157, 0.09), 0px 15px 9px 0px rgba(157, 157, 157, 0.05), 0px 27px 11px 0px rgba(157, 157, 157, 0.01), 0px 42px 12px 0px rgba(157, 157, 157, 0.00);
+}
+
+.summary-new-cart span {
+  font-size: 1.187rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.summary-title{
+  font-weight: 600;
+}
+
+.product-new {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background: #FFF;
+  box-shadow: 0px 2px 4px 0px rgba(157, 157, 157, 0.10), 0px 7px 7px 0px rgba(157, 157, 157, 0.09), 0px 15px 9px 0px rgba(157, 157, 157, 0.05), 0px 27px 11px 0px rgba(157, 157, 157, 0.01), 0px 42px 12px 0px rgba(157, 157, 157, 0.00);
+  position: relative;
+}
+
+.grand-total {
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+
+
+.item-counter {
+  border-radius: 0.25rem;
+  border: 1px solid #FF3C3C;
+  background: rgba(249, 249, 249, 0.50);
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .product-new {
+    padding: 1rem 0rem;
+  }
+
+  .item-counter {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .item-counter .qty {
+    width: 33.3% !important;
+  }
+
+  .item-counter .qtyminus,
+  .item-counter .qtyplus {
+    width: 33.3% !important;
+  }
+
+  .large-text {
+    top: -4rem !important;
+    right: 1rem !important;
+  }
+
+  .paypal-btn-div{
+    display: block !important;
+    text-align: center;
+  }
+
+  .paypal-btn ,.paypal-btn-2{
+    margin-bottom: 1rem;
+  }
+
+
+}
+
+.item-counter .qty {
+  width: 35%;
+  margin: 0.5rem;
+  border: none;
+}
+
+.item-counter input {
+  text-align: center;
+}
+
+.item-counter .qtyplus,
+.item-counter .qtyminus {
+  padding: 6px 15px;
+  color: #FF3C3C;
+  font-weight:500;
+  margin: 0.5rem;
+  background-color: #ECEFF1;
+  cursor: pointer;
+}
+
+.item-counter .qtyplus:hover {
+  background-color: #FF3C3C;
+  transition: background-color 0.5s ease-out 100ms;
+  color: #fff !important;
+}
+
+.item-counter .qtyminus:hover {
+  background-color: #FF3C3C;
+  color: #fff !important;
+  transition: background-color 0.5s ease-out 100ms;
+}
+
+.combinations {
+  margin-top: 1rem;
+}
+
+.product-new .product-title {
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.large-text {
+  color: #333;
+  font-family: Poppins;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.04125rem;
+  position: absolute;
+  top: -5.2rem;
+  right: 5rem;
+
+}
+
+.img-container{
+  display:block;
+  height: 180px;
+}
+
+.clear-btn {
+  position: absolute;
+  top: -6.3rem;
+  right: 1.3rem;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  z-index: 2;
+}
+
+
+
+.accordion-box {
+  border: 1px solid #d9d9d9;
+  border-radius: 1.5rem;
+  padding: 1.5rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.accordion-title {
+  min-height: 4rem !important;
+  border-bottom: 1px solid #D3D7DA;
+  border-width: 2px;
+}
+
+.accordion-title h5 {
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  padding-bottom: 0.5rem;
+}
+
+.accordion-body-title {
+  color: #333;
+  font-family: Poppins;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.0275rem;
+}
+
+.accordion-btn {
+  width: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  border: 1px solid #FF3C3C;
+  background: #F9F9F9;
+  color: #333333 !important;
+  cursor: pointer;
+}
+
+.accordion-btn:hover {
+  background-color: #FF3C3C;
+  color: #fff !important;
+}
+
+.custom-btn {
+  width: 25rem !important;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.cs-hr {
+  height: 1px;
+  border: 1px solid #D9D9D9;
+  width: 50%;
+  margin: 2rem;
+}
+
+.accordion-link {
+  font-family: Poppins;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: underline !important;
+  color: #FF3C3C !important;
+  line-height: normal;
+  letter-spacing: 0.0275rem;
+  cursor: pointer;
+}
+
+.options-new,
+.add-address-new {
+  cursor: pointer;
+}
+
+.address-options {
+  margin-left: 4rem;
+}
+
+.accordion-address-card-active {
+  color: #333;
+  border-radius: 0.5rem;
+  background-color: #FFECEC;
+  font-family: Poppins;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.0275rem;
+  margin: 1rem;
+}
+
+.accordion-address-card {
+  color: #333;
+  border-radius: 0.5rem;
+  background-color: #F9f9f9;
+  font-family: Poppins;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.0275rem;
+  margin: 1rem;
+}
+
+.button-hr-top {
+  border-top: 2px solid #D9D9D9;
+  border-width: 2px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.input-text {
+  color: #333;
+  font-family: Poppins;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.textarea-new.form-control {
+  min-height: 6.5rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+
+
+/* Style the switch container */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* Hide the default checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Style the slider (thumb) */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #F7D0D0;
+  /* Default background color of the switch */
+  transition: .4s;
+  border-radius: 34px;
+  /* Rounded corners */
+}
+
+/* Style the slider when it's checked (on) */
+.slider::before {
+  position: absolute;
+  content: 'No';
+  padding-left: 1rem;
+  height: 24px;
+  width: 24px;
+  left: 0px;
+  top: 0px;
+  background-color: #fff;
+  transition: .4s;
+  border-radius: 50%;
+  /* Rounded corners for the thumb */
+}
+
+/* Style the switch when it's checked (on) */
+.switch input:checked+.slider {
+  background-color: #FF3C3C;
+  /* Change background color when checked */
+  content: 'Yes';
+  text-align: left;
+}
+
+/* Move the thumb to the right when the switch is checked (on) */
+.switch input:checked+.slider::before {
+  transform: translateX(26px);
+  text-align: left;
+  content: 'Yes';
+}
+
+.guest-shipping-address {
+  color: #333;
+
+  font-family: Poppins;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.delivery-option-card {
+  margin: 1rem 0rem;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0.5px solid #D9D9D9;
+  background: #FFF;
+  box-shadow: 0px 1px 3px 0px rgba(217, 217, 217, 0.10), 0px 6px 6px 0px rgba(217, 217, 217, 0.09), 0px 13px 8px 0px rgba(217, 217, 217, 0.05), 0px 24px 10px 0px rgba(217, 217, 217, 0.01), 0px 37px 10px 0px rgba(217, 217, 217, 0.00);
+}
+
+
+.delivery-option-card p {
+  color: #333;
+  font-family: Poppins;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.p-red {
+  color: #FF3C3C !important;
+  padding-top: 1rem;
+}
+
+.paypal-btn {
+  width: 25rem !important;
+  border-radius: 0.25rem;
+  border: 2px solid #002F84;
+  background: rgba(249, 249, 249, 0.98);
+}
+
+.paypal-btn:hover {
+  border: 2px solid #FF3C3C;
+  background-color: #f9f9f9 !important;
+}
+
+.paypal-btn-2 {
+  width: 25rem !important;
+  border-radius: 0.25rem;
+  border: 0.5px solid #000;
+  background: #000;
+}
+
+.paypal-btn-2:hover {
+  border: 2px solid #FF3C3C;
+}
+
+.btn.button.text-white:focus{
+  color: #fff !important;
+}
+
+@media only screen and (max-width: 600px){
+  .item-counter .qtyplus,
+  .item-counter .qtyminus {
+    padding: 2px 6px;
+    text-align: center;
+  }
+  .item-counter .qty{
+    margin: 0rem;
+    text-align: center;
+  }
+}

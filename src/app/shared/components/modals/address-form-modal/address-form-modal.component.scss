@@ -1,0 +1,9 @@
+.ng-touched.ng-invalid {
+  border-color: #ff3c3c;
+}
+
+ng-select.ng-touched.ng-invalid {
+  border-color: #ff3c3c;
+  border-style: solid;
+  border-width: 1px;
+}
