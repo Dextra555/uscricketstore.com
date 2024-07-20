@@ -1,9 +1,8 @@
 import { Component, AfterViewInit, OnInit, HostListener } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { environment } from './../../environments/environment';
+import { environment } from '../../environments/environment';
 import { StyleLoaderService } from '../core/store/mdb.service';
 import { Router, NavigationEnd } from '@angular/router';
-import {  ViewChild, ElementRef } from '@angular/core';
 
 declare var jQuery: any; // Use 'jQuery' instead of '$'
 
@@ -14,8 +13,6 @@ declare var jQuery: any; // Use 'jQuery' instead of '$'
 })
 export class AcademyComponent implements AfterViewInit, OnInit {
   
-  
- 
   assetPath = environment.ASSET_PATH;
   items = [
     { title: 'School-like Cricket Curriculum', text: 'Endorsed by Rohit Sharma and based on the curriculum followed by BCCI, ECB, Cricket Australia, and Cricket South Africa.' },
@@ -30,7 +27,7 @@ export class AcademyComponent implements AfterViewInit, OnInit {
   itemsToShow = 3;
 
   constructor(
-    private title: Title,
+    private titleService: Title,
     private metaService: Meta,
     private router: Router,
     private styleLoader: StyleLoaderService
@@ -44,6 +41,7 @@ export class AcademyComponent implements AfterViewInit, OnInit {
       }
     });
     this.updateItemsToShow();
+    this.addMetaTags(); // Assuming you want to add meta tags when the component initializes
   }
 
   ngAfterViewInit(): void {
@@ -61,8 +59,13 @@ export class AcademyComponent implements AfterViewInit, OnInit {
   }
 
   updateItemsToShow(): void {
-    this.itemsToShow = window.innerWidth < 768 ? 1 : 3; // Show 1 item on screens < 768px, otherwise show 3 items
-
+    if (window.innerWidth < 768) {
+      this.itemsToShow = 1;
+    } else if (window.innerWidth < 992) {
+      this.itemsToShow = 2;
+    } else {
+      this.itemsToShow = 3;
+    }
   }
 
   nextSlide(): void {
@@ -76,14 +79,19 @@ export class AcademyComponent implements AfterViewInit, OnInit {
   }
 
   updateVisibleItems(): void {
-    this.visibleItems = this.items.slice(this.currentIndex, this.currentIndex + this.itemsToShow);
-    if (this.visibleItems.length < this.itemsToShow) {
-      this.visibleItems = this.visibleItems.concat(this.items.slice(0, this.itemsToShow - this.visibleItems.length));
+    this.visibleItems = [];
+    let start = this.currentIndex;
+    for (let i = 0; i < this.itemsToShow; i++) {
+      if (start >= this.items.length) {
+        start = 0;
+      }
+      this.visibleItems.push(this.items[start]);
+      start++;
     }
   }
 
   addMetaTags(): void {
-    this.title.setTitle('ACADEMY | US CRICKET STORE | CRICKINGDOM');
+    this.titleService.setTitle('ACADEMY | US CRICKET STORE | CRICKINGDOM');
     this.metaService.updateTag({ name: 'title', content: 'ACADEMY | US CRICKET STORE | CRICKINGDOM' });
     this.metaService.updateTag({ name: 'description', content: 'LEARN & GET TRAINED FROM THE BEST' });
     this.metaService.updateTag({ property: 'og:title', content: 'ACADEMY | US CRICKET STORE | CRICKINGDOM' });
